@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Moral philosophy hub</title>
+    <style>
+        :root {
+            --bg-color: #f8fafc;
+            --card-bg: #ffffff;
+            --card-border: #94a3b8;
+            --text-main: #0f172a;
+            --text-muted: #475569;
+            --accent-primary: #0369a1;
+            --accent-header: #075985;
+            --hover-bg: #f1f5f9;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: auto;
+        }
+
+        header {
+            padding: 2.5rem 1rem 2rem;
+            text-align: center;
+            border-bottom: 1px solid #cbd5e1;
+            background: #ffffff;
+            position: relative;
+        }
+
+        .nav-container {
+            position: absolute;
+            top: 1.5rem;
+            left: 2rem;
+            display: flex;
+            gap: 10px;
+        }
+
+        .nav-btn {
+            background-color: #ffffff;
+            color: var(--accent-header);
+            border: 1px solid var(--card-border);
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            font-weight: 600;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: background-color 0.2s ease, border-color 0.2s ease;
+        }
+
+        .nav-btn:hover {
+            background-color: var(--hover-bg);
+            border-color: var(--accent-primary);
+        }
+
+        header h1 {
+            font-size: 2.4rem;
+            color: var(--accent-header);
+            font-weight: 700;
+        }
+
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            flex: 1;
+            width: 100%;
+        }
+
+        .hub-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2.5rem;
+            width: 100%;
+            max-width: 1000px;
+        }
+
+        /* Make Unit 3 span full width if desired, or keep as grid */
+        .hub-card {
+            background-color: var(--card-bg);
+            border: 2px solid var(--card-border);
+            border-top: 6px solid var(--accent-primary);
+            border-radius: 12px;
+            padding: 2.5rem 2rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            text-align: center;
+            gap: 2rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+        }
+
+        .hub-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--accent-primary);
+            box-shadow: 0 10px 20px -3px rgba(3, 105, 161, 0.15);
+        }
+
+        .hub-card h2 {
+            font-size: 1.4rem;
+            color: var(--accent-header);
+            font-weight: 700;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--accent-primary);
+            color: #ffffff;
+            text-decoration: none;
+            text-align: center;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: background-color 0.2s ease;
+            width: 100%;
+        }
+
+        .btn:hover {
+            background-color: var(--accent-header);
+        }
+
+        footer {
+            text-align: center;
+            padding: 1.5rem;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            border-top: 1px solid #cbd5e1;
+            background: #ffffff;
+            margin-top: 3rem;
+        }
+
+        @media (max-width: 768px) {
+            .hub-grid {
+                grid-template-columns: 1fr;
+                max-width: 600px;
+            }
+            .nav-container {
+                position: static;
+                justify-content: center;
+                margin-bottom: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="nav-container">
+            <a href="index.html" class="nav-btn">🏠 Home</a>
+            <a href="index.html" class="nav-btn">← Back</a>
+        </div>
+        <h1>Moral Philosophy</h1>
+    </header>
+
+    <div class="container">
+        <div class="hub-grid">
+
+            <!-- Unit 1 Card -->
+            <div class="hub-card">
+                <h2>Unit 1: Meta-ethics</h2>
+                <a href="moral philosophy-unit1.html" class="btn">View detailed mind map</a>
+            </div>
+
+            <!-- Unit 2 Card -->
+            <div class="hub-card">
+                <h2>Unit 2: Normative ethical theories</h2>
+                <a href="moral philosophy-unit 2-overview.html" class="btn">View detailed mind map</a>
+            </div>
+
+            <!-- Unit 3 Card -->
+            <div class="hub-card" style="grid-column: 1 / -1; max-width: 500px; margin: 0 auto; width: 100%;">
+                <h2>Unit 3: Applied ethics</h2>
+                <a href="moral philosophy-unit3.html" class="btn">View detailed mind map</a>
+            </div>
+
+        </div>
+    </div>
+
+    <footer>
+        Moral philosophy hub &bull; Designed for teaching and revision
+    </footer>
+
+</body>
+</html>
