@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Moral philosophy unit 2: utilitarianism</title>
+    <style>
+        :root {
+            --bg-color: #f8fafc;
+            --card-bg: #ffffff;
+            --card-border: #94a3b8;
+            --text-main: #0f172a;
+            --text-muted: #475569;
+            --accent-primary: #0369a1;
+            --accent-header: #075985;
+            --hover-bg: #f1f5f9;
+            --line-color: #0369a1;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: auto;
+        }
+
+        header {
+            padding: 1.5rem 1rem 1rem;
+            text-align: center;
+            border-bottom: 1px solid #cbd5e1;
+            background: #ffffff;
+            position: relative;
+        }
+
+        .nav-container {
+            position: absolute;
+            top: 1.5rem;
+            left: 2rem;
+            display: flex;
+            gap: 10px;
+        }
+
+        .nav-btn {
+            background-color: #ffffff;
+            color: var(--accent-header);
+            border: 1px solid var(--card-border);
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            font-weight: 600;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: background-color 0.2s ease, border-color 0.2s ease;
+        }
+
+        .nav-btn:hover {
+            background-color: var(--hover-bg);
+            border-color: var(--accent-primary);
+        }
+
+        header h1 {
+            font-size: 2.2rem;
+            color: var(--accent-header);
+            font-weight: 700;
+        }
+
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            flex: 1;
+            width: 100%;
+        }
+
+        .mindmap {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            position: relative;
+        }
+
+        .root-node {
+            background-color: var(--accent-header);
+            color: #ffffff;
+            padding: 1.2rem 3rem;
+            border-radius: 12px;
+            font-weight: bold;
+            font-size: 1.5rem;
+            box-shadow: 0 10px 15px -3px rgba(3, 105, 161, 0.2);
+            z-index: 2;
+            text-align: center;
+            margin-bottom: 4rem;
+            letter-spacing: 0.5px;
+        }
+
+        .branches-wrapper {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2.5rem;
+            width: 100%;
+            max-width: 1400px;
+            position: relative;
+        }
+
+        .branch-column {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            position: relative;
+        }
+
+        .branch-group-header {
+            background-color: #e0f2fe;
+            border: 2px solid var(--accent-primary);
+            color: var(--accent-header);
+            padding: 1rem 1.5rem;
+            border-radius: 10px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            text-align: center;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        }
+
+        .node-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-left: 5px solid var(--accent-primary);
+            border-radius: 8px;
+            padding: 1.25rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.04);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .node-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 12px -3px rgba(3, 105, 161, 0.15);
+        }
+
+        .node-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #e2e8f0;
+            padding-bottom: 0.5rem;
+        }
+
+        .node-header h3 {
+            font-size: 1.05rem;
+            color: var(--accent-header);
+            font-weight: 700;
+        }
+
+        .badge {
+            background-color: rgba(3, 105, 161, 0.1);
+            color: var(--accent-primary);
+            font-size: 0.7rem;
+            padding: 0.2rem 0.5rem;
+            border-radius: 9999px;
+            font-weight: 600;
+        }
+
+        .sub-nodes-container {
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+        }
+
+        .sub-node {
+            background-color: #f8fafc;
+            border: 1px solid #cbd5e1;
+            border-left: 3px solid var(--accent-primary);
+            padding: 0.75rem;
+            border-radius: 0 6px 6px 0;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+
+        .sub-node:hover {
+            background-color: #f1f5f9;
+        }
+
+        .sub-node h4 {
+            font-size: 0.95rem;
+            color: var(--text-main);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+        }
+
+        .sub-node h4::after {
+            content: '+';
+            color: var(--accent-primary);
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        .sub-node.active h4::after {
+            content: '-';
+        }
+
+        .sub-content {
+            display: none;
+            margin-top: 0.5rem;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            line-height: 1.5;
+            border-top: 1px dashed #cbd5e1;
+            padding-top: 0.5rem;
+        }
+
+        .sub-node.active .sub-content {
+            display: block;
+        }
+
+        ul {
+            margin-left: 1.2rem;
+            margin-top: 0.3rem;
+            list-style-type: disc;
+        }
+
+        ul li {
+            margin-bottom: 0.4rem;
+        }
+
+        footer {
+            text-align: center;
+            padding: 1.5rem;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            border-top: 1px solid #cbd5e1;
+            background: #ffffff;
+            margin-top: 3rem;
+        }
+
+        @media (max-width: 1024px) {
+            .branches-wrapper {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-container {
+                position: static;
+                justify-content: center;
+                margin-bottom: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="nav-container">
+            <a href="index.html" class="nav-btn">🏠 Home</a>
+            <a href="moral philosophy-hub.html" class="nav-btn">← Back</a>
+        </div>
+        <h1>Moral philosophy unit 2: utilitarianism</h1>
+    </header>
+
+    <div class="container">
+        <div class="mindmap">
+            <div class="root-node">Utilitarianism</div>
+            
+            <div class="branches-wrapper">
+
+                <!-- Column 1: Core Theory & Variations -->
+                <div class="branch-column">
+                    <div class="branch-group-header">Core concepts and variations</div>
+
+                    <!-- Meaning of terms -->
+                    <div class="node-card">
+                        <div class="node-header">
+                            <h3>Meaning of normative terms</h3>
+                            <span class="badge">Definitions</span>
+                        </div>
+                        <div class="sub-nodes-container">
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>Good, bad, right, wrong in utilitarianism <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>Right actions:</strong> Actions are morally right if and only if they maximise utility, defined as net happiness, pleasure, or preference-satisfaction.</li>
+                                        <li><strong>Wrong actions:</strong> Actions are wrong if they fail to maximise utility or result in a net surplus of pain and suffering.</li>
+                                        <li><strong>Good:</strong> The intrinsic value sought, identified variously as conscious hedonistic pleasure or the fulfilment of individual preferences.</li>
+                                        <li><strong>Bad:</strong> Disvalues such as physical pain, emotional distress, or the frustration of valid desires.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Utility & Maximising -->
+                    <div class="node-card">
+                        <div class="node-header">
+                            <h3>Utility and maximising utility</h3>
+                            <span class="badge">Foundations</span>
+                        </div>
+                        <div class="sub-nodes-container">
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>Jeremy Bentham's quantitative hedonistic utilitarianism <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>Sovereign masters:</strong> Nature has placed humanity under the governance of two sovereign masters: pain and pleasure.</li>
+                                        <li><strong>Utility calculus:</strong> A strictly quantitative method measuring pleasure across seven criteria: intensity, duration, certainty, propinquity (proximity in time), fecundity (likelihood of being followed by similar sensations), purity (likelihood of not being followed by pain), and extent (the number of people affected). Every individual's pleasure counts equally, and only the quantity of pleasure matters.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>John Stuart Mill's qualitative utilitarianism & proof <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>Higher and lower pleasures:</strong> Mill introduced quality alongside quantity, dividing pleasures into lower physical sensations (shared with non-human animals) and higher intellectual, aesthetic, and moral pursuits. Competent judges who have experienced both types consistently prefer higher pleasures, declaring it "better to be a human being dissatisfied than a pig satisfied."</li>
+                                        <li><strong>Mill's proof:</strong> Mill argued that people desire happiness, proving that happiness is desirable; since general happiness is the only thing desired as an end-in-itself, it is the sole criterion of morality. Critics frequently challenge this with accusations of equivocation on the word "desirable" and committing the fallacy of composition.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>Non-hedonistic and preference utilitarianism <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>Preference utilitarianism:</strong> Championed by thinkers like Peter Singer, actions are judged right if they maximise the satisfaction of the actual preferences or desires of those affected, rather than strictly maximizing conscious mental states of pleasure. This avoids certain counter-intuitive hedonistic traps, though it introduces complications regarding bad, antisocial, or irrational preferences.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Act vs Rule -->
+                    <div class="node-card">
+                        <div class="node-header">
+                            <h3>Act and rule utilitarianism</h3>
+                            <span class="badge">Structures</span>
+                        </div>
+                        <div class="sub-nodes-container">
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>Act utilitarianism <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>Definition:</strong> Judges each individual action on a case-by-case basis by direct, unmediated appeal to the principle of utility (defended by Bentham and J.J.C. Smart). Common-sense rules are treated strictly as provisional rules of thumb that can be overridden whenever consequences favour doing otherwise.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>Rule utilitarianism <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>Definition:</strong> Judges acts based on whether they accord with general secondary rules (e.g., "do not lie" or "keep promises") that, if universally accepted and internalised across society, would maximise utility over time (defended by Brad Hooker and Richard Hare's two-level model).</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Column 2: Issues and Responses -->
+                <div class="branch-column">
+                    <div class="branch-group-header">Challenges, issues & responses</div>
+
+                    <!-- Issue 1 -->
+                    <div class="node-card">
+                        <div class="node-header">
+                            <h3>Issue: Nozick's experience machine</h3>
+                            <span class="badge">Pleasure criticism</span>
+                        </div>
+                        <div class="sub-nodes-container">
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>Whether pleasure is the only good <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>The criticism:</strong> Robert Nozick designed a thought experiment featuring a virtual machine that can feed any desired stream of simulated pleasure directly into the brain. Because rational people refuse to plug in permanently, Nozick argues that we value active reality, genuine agency, and true moral character above mere internal sensations, proving hedonism is false.</li>
+                                        <li><strong>Utilitarian response:</strong> Preference utilitarians bypass this challenge entirely by moving away from internal conscious mental states of pleasure, redefining utility instead as the active satisfaction of real-world desires and tangible life goals.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Issue 2 -->
+                    <div class="node-card">
+                        <div class="node-header">
+                            <h3>Issue: Fairness, rights & liberty</h3>
+                            <span class="badge">Justice criticism</span>
+                        </div>
+                        <div class="sub-nodes-container">
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>Tyranny of the majority and individual rights <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>The criticism:</strong> Maximising aggregate utility can demand actions that severely violate individual moral rights and personal liberty, such as framing an innocent person to appease a violent riot or trampling minority freedoms (the "tyranny of the majority").</li>
+                                        <li><strong>Utilitarian response:</strong> Rule utilitarians and Mill (via his Harm Principle) argue that maintaining strict, inviolable legal protections for individual rights and personal liberty ultimately produces the highest long-term stability and utility for society.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Issue 3 -->
+                    <div class="node-card">
+                        <div class="node-header">
+                            <h3>Issue: Problems with calculation</h3>
+                            <span class="badge">Practicality criticism</span>
+                        </div>
+                        <div class="sub-nodes-container">
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>Predicting consequences and who to include <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>The criticism:</strong> It is practically impossible to compute all complex, ripple-effect future consequences of an action, quantify or weigh higher versus lower pleasures mathematically, or establish clear boundaries on which non-human sentient beings should be factored into calculations.</li>
+                                        <li><strong>Utilitarian response:</strong> J.J.C. Smart and Richard Hare argue that agents should rely on intuitive, common-sense moral rules of thumb for day-to-day choices, reserving explicit and exhaustive utility calculations exclusively for rare, high-stakes moral dilemmas.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Issue 4 -->
+                    <div class="node-card">
+                        <div class="node-header">
+                            <h3>Issue: Issues around partiality</h3>
+                            <span class="badge">Obligation criticism</span>
+                        </div>
+                        <div class="sub-nodes-container">
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>Conflict with special obligations <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>The criticism:</strong> Utilitarianism insists on strict impartiality, requiring that each person's happiness counts equally ("each to count for one, none for more than one"). This directly conflicts with ordinary human morality, which recognises deep, legitimate special obligations and preferential love toward family, friends, and local communities.</li>
+                                        <li><strong>Utilitarian response:</strong> Rule utilitarians and two-level utilitarians argue that society functions far more efficiently and general happiness is best maximised when individuals care preferentially for their own families and friends rather than attempting to act as cold, universal spectators.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Issue 5 -->
+                    <div class="node-card">
+                        <div class="node-header">
+                            <h3>Issue: Moral integrity and intentions</h3>
+                            <span class="badge">Agency criticism</span>
+                        </div>
+                        <div class="sub-nodes-container">
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>Alienation of personal projects and motives <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>The criticism:</strong> Bernard Williams argues that act utilitarianism completely ignores individual intentions and aggressively attacks personal moral integrity by demanding that agents abandon their deepest life projects and personal convictions whenever global utility calculations dictate.</li>
+                                        <li><strong>Utilitarian response:</strong> Adopting a rule-utilitarian framework allows individuals to structure their lives around personal projects, career choices, and deep moral commitments, because encouraging individuals to protect their integrity generally fosters better long-term psychological and social outcomes.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        Moral philosophy unit 2: utilitarianism &bull; Interactive specification mind map
+    </footer>
+
+    <script>
+        function toggleNode(element) {
+            element.classList.toggle('active');
+        }
+    </script>
+</body>
+</html>
