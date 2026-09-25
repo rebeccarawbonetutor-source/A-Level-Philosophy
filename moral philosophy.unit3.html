@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Moral philosophy unit 3: applied ethics</title>
+    <style>
+        :root {
+            --bg-color: #f8fafc;
+            --card-bg: #ffffff;
+            --card-border: #94a3b8;
+            --text-main: #0f172a;
+            --text-muted: #475569;
+            --accent-primary: #0369a1;
+            --accent-header: #075985;
+            --hover-bg: #f1f5f9;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: auto;
+        }
+
+        header {
+            padding: 1.5rem 1rem 1rem;
+            text-align: center;
+            border-bottom: 1px solid #cbd5e1;
+            background: #ffffff;
+            position: relative;
+        }
+
+        .nav-container {
+            position: absolute;
+            top: 1.5rem;
+            left: 2rem;
+            display: flex;
+            gap: 10px;
+        }
+
+        .nav-btn {
+            background-color: #ffffff;
+            color: var(--accent-header);
+            border: 1px solid var(--card-border);
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            font-weight: 600;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: background-color 0.2s ease, border-color 0.2s ease;
+        }
+
+        .nav-btn:hover {
+            background-color: var(--hover-bg);
+            border-color: var(--accent-primary);
+        }
+
+        header h1 {
+            font-size: 2.2rem;
+            color: var(--accent-header);
+            font-weight: 700;
+        }
+
+        .container {
+            max-width: 1800px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            flex: 1;
+            width: 100%;
+        }
+
+        .mindmap {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            position: relative;
+        }
+
+        .root-node {
+            background-color: var(--accent-header);
+            color: #ffffff;
+            padding: 1.2rem 3rem;
+            border-radius: 12px;
+            font-weight: bold;
+            font-size: 1.5rem;
+            box-shadow: 0 10px 15px -3px rgba(3, 105, 161, 0.2);
+            z-index: 2;
+            text-align: center;
+            margin-bottom: 4rem;
+            letter-spacing: 0.5px;
+        }
+
+        .branches-wrapper {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            width: 100%;
+            max-width: 1750px;
+            position: relative;
+        }
+
+        .branch-column {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            position: relative;
+        }
+
+        .branch-group-header {
+            background-color: #e0f2fe;
+            border: 2px solid var(--accent-primary);
+            color: var(--accent-header);
+            padding: 1rem 1.2rem;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            text-align: center;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        }
+
+        .node-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-left: 5px solid var(--accent-primary);
+            border-radius: 8px;
+            padding: 1.25rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.04);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .node-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 12px -3px rgba(3, 105, 161, 0.15);
+        }
+
+        .node-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #e2e8f0;
+            padding-bottom: 0.5rem;
+        }
+
+        .node-header h3 {
+            font-size: 1rem;
+            color: var(--accent-header);
+            font-weight: 700;
+        }
+
+        .badge {
+            background-color: rgba(3, 105, 161, 0.1);
+            color: var(--accent-primary);
+            font-size: 0.65rem;
+            padding: 0.2rem 0.4rem;
+            border-radius: 9999px;
+            font-weight: 600;
+        }
+
+        .sub-nodes-container {
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+        }
+
+        .sub-node {
+            background-color: #f8fafc;
+            border: 1px solid #cbd5e1;
+            border-left: 3px solid var(--accent-primary);
+            padding: 0.75rem;
+            border-radius: 0 6px 6px 0;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+
+        .sub-node:hover {
+            background-color: #f1f5f9;
+        }
+
+        .sub-node h4 {
+            font-size: 0.9rem;
+            color: var(--text-main);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+        }
+
+        .sub-node h4::after {
+            content: '+';
+            color: var(--accent-primary);
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        .sub-node.active h4::after {
+            content: '-';
+        }
+
+        .sub-content {
+            display: none;
+            margin-top: 0.5rem;
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            line-height: 1.5;
+            border-top: 1px dashed #cbd5e1;
+            padding-top: 0.5rem;
+        }
+
+        .sub-node.active .sub-content {
+            display: block;
+        }
+
+        ul {
+            margin-left: 1.2rem;
+            margin-top: 0.3rem;
+            list-style-type: disc;
+        }
+
+        ul li {
+            margin-bottom: 0.4rem;
+        }
+
+        footer {
+            text-align: center;
+            padding: 1.5rem;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            border-top: 1px solid #cbd5e1;
+            background: #ffffff;
+            margin-top: 3rem;
+        }
+
+        @media (max-width: 1400px) {
+            .branches-wrapper {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .branches-wrapper {
+                grid-template-columns: 1fr;
+            }
+            .nav-container {
+                position: static;
+                justify-content: center;
+                margin-bottom: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="nav-container">
+            <a href="index.html" class="nav-btn">🏠 Home</a>
+            <a href="moral philosophy-hub.html" class="nav-btn">← Back</a>
+        </div>
+        <h1>Moral philosophy unit 3: applied ethics</h1>
+    </header>
+
+    <div class="container">
+        <div class="mindmap">
+            <div class="root-node">Applied ethics: normative & meta-ethical application</div>
+            
+            <div class="branches-wrapper">
+
+                <!-- Column 1: Stealing -->
+                <div class="branch-column">
+                    <div class="branch-group-header">Issue 1: Stealing</div>
+
+                    <div class="node-card">
+                        <div class="node-header">
+                            <h3>Utilitarianism & stealing</h3>
+                            <span class="badge">Consequentialism</span>
+                        </div>
+                        <div class="sub-nodes-container">
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>Hedonistic and preference calculations <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>Act hedonism:</strong> Weighing immediate physical or psychological pleasure gained by the thief against the acute pain, property loss, and distress suffered by the victim.</li>
+                                        <li><strong>Preference utilitarianism:</strong> Analysing how theft frustrates the long-term rational preferences of owners for security, contrasting this with rare scenarios where stealing food satisfies a vital survival preference.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="node-card">
+                        <div class="node-header">
+                            <h3>Kantian ethics & stealing</h3>
+                            <span class="badge">Deontology</span>
+                        </div>
+                        <div class="sub-nodes-container">
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>Contradictions and autonomy violations <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>Universal law breakdown:</strong> The maxim of theft generates a contradiction in conception; if everyone stole at will, the institution of private property would logically self-destruct, making the act of stealing conceptually impossible.</li>
+                                        <li><strong>Humanity formulation:</strong> Stealing bypasses consent, treating the victim merely as an instrument to satisfy personal desires.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="node-card">
+                        <div class="node-header">
+                            <h3>Virtue ethics & stealing</h3>
+                            <span class="badge">Character</span>
+                        </div>
+                        <div class="sub-nodes-container">
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>Injustice, greed and practical wisdom <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>Vicious dispositions:</strong> Stealing stems directly from the vices of injustice, greed, and deficiency in self-restraint (enkrateia).</li>
+                                        <li><strong>Flourishing distortion:</strong> A person governed by practical wisdom recognises that acts of theft warp the agent's character soul, preventing genuine eudaimonia.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="node-card">
+                        <div class="node-header">
+                            <h3>Meta-ethics & stealing</h3>
+                            <span class="badge">Meta-ethics</span>
+                        </div>
+                        <div class="sub-nodes-container">
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>Emotivism and prescriptivism <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>Non-cognitive expressions:</strong> Declaring that stealing is wrong registers an emotional attitude of revulsion (Emotivism) or issues an imperative command against the act (Prescriptivism).</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Column 2: Simulated Killing -->
+                <div class="branch-column">
+                    <div class="branch-group-header">Issue 2: Simulated killing</div>
+
+                    <div class="node-card">
+                        <div class="node-header">
+                            <h3>Utilitarianism & simulation</h3>
+                            <span class="badge">Consequentialism</span>
+                        </div>
+                        <div class="sub-nodes-container">
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>Utility of art versus psychological harm <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>Mill's higher pleasures:</strong> Engaging with dramatic tragedies or artistic simulations of war (such as Shakespearean plays) provides profound intellectual and aesthetic utility.</li>
+                                        <li><strong>Calculus of desensitisation:</strong> Conversely, mindless violent video games might increase societal aggression and reduce empathetic utility, creating a net negative outcome.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="node-card">
+                        <div class="node-header">
+                            <h3>Kantian ethics & simulation</h3>
+                            <span class="badge">Deontology</span>
+                        </div>
+                        <div class="sub-nodes-container">
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>Duties to self and aesthetic boundaries <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>No violation of rational agents:</strong> Fictional simulations involve no actual victims or autonomous rights violations, meaning the universal law test does not automatically trigger a contradiction.</li>
+                                        <li><strong>Self-regarding duties:</strong> Kantian ethics cautions that brutal simulations might degrade the moral imagination and weaken internal duties to cultivate sympathetic feelings toward humanity.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="node-card">
+                        <div class="node-header">
+                            <h3>Virtue ethics & simulation</h3>
+                            <span class="badge">Character</span>
+                        </div>
+                        <div class="sub-nodes-container">
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>Catharsis versus vice habituation <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>Habituation impact:</strong> Aristotle examined how tragedy provides emotional catharsis, but excessive immersion in graphic simulated violence risks habituating callous emotional responses, counteracting the development of virtues like compassion and gentleness.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="node-card">
+                        <div class="node-header">
+                            <h3>Meta-ethics & simulation</h3>
+                            <span class="badge">Meta-ethics</span>
+                        </div>
+                        <div class="sub-nodes-container">
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>Cultural relativism and subjectivism <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>Subjective variance:</strong> Ethical subjectivism highlights how judgments on violent media shift across generations and cultures, showing that moral statements about games reflect social tastes rather than objective facts.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Column 3: Eating Animals -->
+                <div class="branch-column">
+                    <div class="branch-group-header">Issue 3: Eating animals</div>
+
+                    <div class="node-card">
+                        <div class="node-header">
+                            <h3>Utilitarianism & eating animals</h3>
+                            <span class="badge">Consequentialism</span>
+                        </div>
+                        <div class="sub-nodes-container">
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>Sentience calculus and speciesism <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>Singer's critique of speciesism:</strong> Failing to count animal suffering equally in the utilitarian calculation is arbitrary discrimination akin to racism or sexism.</li>
+                                        <li><strong>Net pain calculation:</strong> The aggregate suffering inflicted by industrial farming heavily outweighs human dietary pleasure, rendering meat consumption morally impermissible.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="node-card">
+                        <div class="node-header">
+                            <h3>Kantian ethics & eating animals</h3>
+                            <span class="badge">Deontology</span>
+                        </div>
+                        <div class="sub-nodes-container">
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>Direct status vs indirect duties <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>Exclusion from the moral community:</strong> Because animals lack self-consciousness and rational autonomy, they cannot participate in the kingdom of ends, meaning we owe them no direct moral duties.</li>
+                                        <li><strong>Duty to humanity:</strong> Cruelty to animals is nevertheless prohibited indirectly because it coarsens human moral sensibilities, risking cruelty toward fellow humans.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="node-card">
+                        <div class="node-header">
+                            <h3>Virtue ethics & eating animals</h3>
+                            <span class="badge">Character</span>
+                        </div>
+                        <div class="sub-nodes-container">
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>Temperance, gluttony and empathy <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>Excess and vice:</strong> Overconsumption of meat driven by factory farming reflects the vice of gluttony and a lack of proper temperance.</li>
+                                        <li><strong>Cultivating empathy:</strong> A flourishing agent exhibits gentleness and care, questioning industrial cruelty rather than blindly participating in systemic harm.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="node-card">
+                        <div class="node-header">
+                            <h3>Meta-ethics & eating animals</h3>
+                            <span class="badge">Meta-ethics</span>
+                        </div>
+                        <div class="sub-nodes-container">
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>Intuitionism and moral realism <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>Self-evident wrongs:</strong> Moral intuitionism suggests that causing extreme, unnecessary suffering to living creatures is an immediately cognisable, objective moral truth.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Column 4: Telling Lies -->
+                <div class="branch-column">
+                    <div class="branch-group-header">Issue 4: Telling lies</div>
+
+                    <div class="node-card">
+                        <div class="node-header">
+                            <h3>Utilitarianism & telling lies</h3>
+                            <span class="badge">Consequentialism</span>
+                        </div>
+                        <div class="sub-nodes-container">
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>Act flexibility versus rule stability <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>Act utilitarian allowance:</strong> A deceptive white lie told to save someone from deep emotional distress can generate a net surplus of positive utility in specific circumstances.</li>
+                                        <li><strong>Rule utilitarian prohibition:</strong> Hooker's rule utilitarianism insists that maintaining an absolute social rule against lying protects long-term communication channels and maximises general trust.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="node-card">
+                        <div class="node-header">
+                            <h3>Kantian ethics & telling lies</h3>
+                            <span class="badge">Deontology</span>
+                        </div>
+                        <div class="sub-nodes-container">
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>Strict duty and autonomy destruction <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>Universal law failure:</strong> Lying cannot be universalised because it destroys the linguistic preconditions of promising and truth-telling, generating a strict contradiction in conception.</li>
+                                        <li><strong>Assault on agency:</strong> Deception robs the hearer of informed consent, treating their rational capacity merely as a tool for the liar's convenience.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="node-card">
+                        <div class="node-header">
+                            <h3>Virtue ethics & telling lies</h3>
+                            <span class="badge">Character</span>
+                        </div>
+                        <div class="sub-nodes-container">
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>Truthfulness as a golden mean <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>The virtuous disposition:</strong> Truthfulness is an essential character trait located between boastfulness (excess) and mock modesty (deficiency).</li>
+                                        <li><strong>Phronesis in disclosure:</strong> Practical wisdom guides the virtuous agent to balance honesty with tact, knowing when discretion is required without resorting to vicious deceit.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="node-card">
+                        <div class="node-header">
+                            <h3>Meta-ethics & telling lies</h3>
+                            <span class="badge">Meta-ethics</span>
+                        </div>
+                        <div class="sub-nodes-container">
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>Ethical naturalism <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>Empirical properties:</strong> Ethical naturalists argue that wrongness in lying can be reduced to measurable psychological harm, fractured relationships, and the breakdown of social cohesion.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        Moral philosophy unit 3: applied ethics &bull; Interactive specification mind map
+    </footer>
+
+    <script>
+        function toggleNode(element) {
+            element.classList.toggle('active');
+        }
+    </script>
+</body>
+</html>
