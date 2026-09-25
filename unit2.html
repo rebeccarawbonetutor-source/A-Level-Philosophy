@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MoM Unit 2: Problems with substance dualism</title>
+    <style>
+        :root {
+            --bg-color: #f8fafc;
+            --card-bg: #ffffff;
+            --card-border: #94a3b8;
+            --text-main: #0f172a;
+            --text-muted: #475569;
+            --accent-primary: #0369a1;
+            --accent-header: #075985;
+            --hover-bg: #f1f5f9;
+            --line-color: #0369a1;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: auto;
+        }
+
+        header {
+            padding: 1.5rem 1rem 1rem;
+            text-align: center;
+            border-bottom: 1px solid #cbd5e1;
+            background: #ffffff;
+        }
+
+        header h1 {
+            font-size: 2.2rem;
+            color: var(--accent-header);
+            font-weight: 700;
+        }
+
+        .container {
+            max-width: 1800px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            flex: 1;
+            width: 100%;
+        }
+
+        .mindmap {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            position: relative;
+        }
+
+        .root-node {
+            background-color: var(--accent-header);
+            color: #ffffff;
+            padding: 1.2rem 3rem;
+            border-radius: 12px;
+            font-weight: bold;
+            font-size: 1.5rem;
+            box-shadow: 0 10px 15px -3px rgba(3, 105, 161, 0.2);
+            z-index: 2;
+            text-align: center;
+            margin-bottom: 4rem;
+            letter-spacing: 0.5px;
+        }
+
+        .branches-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            width: 100%;
+            max-width: 1600px;
+            position: relative;
+        }
+
+        .branches-wrapper::before {
+            content: '';
+            position: absolute;
+            top: -40px;
+            left: 50%;
+            width: 3px;
+            height: 40px;
+            background-color: var(--line-color);
+            transform: translateX(-50%);
+        }
+
+        .branch-column {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            position: relative;
+        }
+
+        .branch-group-header {
+            background-color: #e0f2fe;
+            border: 2px solid var(--accent-primary);
+            color: var(--accent-header);
+            padding: 1rem 1.5rem;
+            border-radius: 10px;
+            font-size: 1.25rem;
+            font-weight: bold;
+            text-align: center;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        }
+
+        .node-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-left: 5px solid var(--accent-primary);
+            border-radius: 8px;
+            padding: 1.25rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.04);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .node-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 12px -3px rgba(3, 105, 161, 0.15);
+        }
+
+        .node-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #e2e8f0;
+            padding-bottom: 0.5rem;
+        }
+
+        .node-header h3 {
+            font-size: 1.1rem;
+            color: var(--accent-header);
+            font-weight: 700;
+        }
+
+        .badge {
+            background-color: rgba(3, 105, 161, 0.1);
+            color: var(--accent-primary);
+            font-size: 0.75rem;
+            padding: 0.25rem 0.6rem;
+            border-radius: 9999px;
+            font-weight: 600;
+        }
+
+        .sub-nodes-container {
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+        }
+
+        .sub-node {
+            background-color: #f8fafc;
+            border: 1px solid #cbd5e1;
+            border-left: 3px solid var(--accent-primary);
+            padding: 0.75rem;
+            border-radius: 0 6px 6px 0;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+
+        .sub-node:hover {
+            background-color: var(--hover-bg);
+        }
+
+        .sub-node h4 {
+            font-size: 1rem;
+            color: var(--text-main);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+        }
+
+        .sub-node h4::after {
+            content: '+';
+            color: var(--accent-primary);
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        .sub-node.active h4::after {
+            content: '-';
+        }
+
+        .sub-content {
+            display: none;
+            margin-top: 0.5rem;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            line-height: 1.5;
+            border-top: 1px dashed #cbd5e1;
+            padding-top: 0.5rem;
+            padding-left: 1rem;
+        }
+
+        .sub-node.active .sub-content {
+            display: block;
+        }
+
+        ul {
+            margin-left: 1.5rem;
+            margin-top: 0.3rem;
+            list-style-type: disc;
+        }
+
+        ul li {
+            margin-bottom: 0.4rem;
+        }
+
+        ol {
+            margin-left: 1.5rem;
+            margin-top: 0.3rem;
+        }
+
+        ol li {
+            margin-bottom: 0.4rem;
+        }
+
+        footer {
+            text-align: center;
+            padding: 1.5rem;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            border-top: 1px solid #cbd5e1;
+            background: #ffffff;
+            margin-top: 3rem;
+        }
+
+        @media (max-width: 1024px) {
+            .branches-wrapper {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            .branches-wrapper::before {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>MoM Unit 2: Problems with substance dualism</h1>
+    </header>
+
+    <div class="container">
+        <div class="mindmap">
+            <div class="root-node">Problems with substance dualism</div>
+            
+            <div class="branches-wrapper">
+
+                <!-- Left Branch: The Problem of Other Minds & Category Mistake -->
+                <div class="branch-column">
+                    <div class="branch-group-header">Epistemological and logical challenges</div>
+
+                    <!-- The Problem of Other Minds -->
+                    <div class="node-card">
+                        <div class="node-header">
+                            <h3>The problem of other minds</h3>
+                            <span class="badge">Epistemology</span>
+                        </div>
+                        <div class="sub-nodes-container">
+                            <p style="font-size: 0.95rem; color: var(--text-muted); line-height: 1.4;">
+                                Dualism prioritises first-person introspective knowledge of the mind, creating a severe epistemological problem. Because we have direct access only to our own private minds, how can we know, or have good reason to believe, that other minds exist when our conclusions about others must be inferred entirely from observation of their physical bodies and external behaviour?
+                            </p>
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>The argument from analogy <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>Core premise:</strong> Formulated as a first-person response, I am certain that I have a mind, and my internal mental states are causally connected to my outer behavioural states.</li>
+                                        <li><strong>The inference:</strong> Because the behavioural states of other people are similar to my own when subject to similar stimuli, I infer by analogy that they too possess inner minds (e.g. clapping and cheering at a performance manifests my enjoyment, so when others do the same, I infer they feel enjoyment too).</li>
+                                        <li><strong>Underpinning intuition:</strong> The principle that like effects have like causes.</li>
+                                        <li><strong>Formal deductive formulation:</strong>
+                                            <ol>
+                                                <li>I have direct introspective access to my own mind, and I know that my internal mental states are the direct causes of my outward physical behaviours.</li>
+                                                <li>I observe that other human bodies exhibit the exact same outward behaviours and physical conditions that correspond to mental states in my own case.</li>
+                                                <li>Similar effects imply similar causes.</li>
+                                                <li>Therefore, by analogy, those other bodies must also possess hidden internal mental states.</li>
+                                            </ol>
+                                        </li>
+                                        <li><strong>Criticisms (Anita Avramides):</strong> Avramides argues the argument from analogy is a weak induction because it generalises from a single known case (one's own mind). Furthermore, there is no independent way to verify the conclusion, since attempting to check whether others have minds assumes precisely what the argument seeks to prove. She also highlights the conceptual problem: if minds are completely private, forming a coherent concept of another mind from isolated introspection becomes logically impossible (drawing on Wittgenstein's private language argument and the beetle-in-the-box analogy).</li>
+                                        <li><strong>Defence (A.J. Ayer):</strong> Ayer defended the analogy by pointing out that we do not argue from a single case, but rather from a vast, rich web of correlations between behaviours and mental states experienced across our lives. Because other minds are verifiable in principle (if we could hypothetically occupy another's perspective), inferring that identical external behaviours imply similar internal states functions as a highly probable hypothesis.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>The existence of other minds is the best hypothesis <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>Core premise:</strong> Unlike the introspective analogy, this is an objective, third-person inductive or abductive response. Of all candidate explanations for the behaviour observed in human beings and animals, the best hypothesis to account for that behaviour is the existence of conscious minds in beings other than ourselves.</li>
+                                        <li><strong>Comparison of options:</strong> This can be compared with rival philosophical views, such as the philosophical zombie thesis—the supposition that a human body could show all outward signs of intelligence and responsiveness through physical mechanics while completely lacking conscious mental states.</li>
+                                        <li><strong>Formal deductive formulation:</strong>
+                                            <ol>
+                                                <li>We observe complex, purposeful, and expressive human behaviours in others.</li>
+                                                <li>The hypothesis that these human beings possess internal mental states (beliefs, desires, and sensations) is the simplest, most coherent, and best explanation for their behaviour.</li>
+                                                <li>Rival hypotheses, such as the philosophical zombie thesis, fail to successfully account for or predict these patterns of behaviour.</li>
+                                                <li>Therefore, it is rational to infer that other minds exist as the best available explanation.</li>
+                                            </ol>
+                                        </li>
+                                        <li><strong>Criticisms (Alvin Plantinga & Bertrand Russell):</strong> In *God and Other Minds*, Plantinga attacks the idea that other minds can be treated as a scientific hypothesis, showing that science tracks only objective, physical data and can never empirically observe or measure qualia in another person. Russell noted that to inject real qualia into the hypothesis, one is forced to look inward using one's own private experiences, undermining its purely third-person status.</li>
+                                        <li><strong>Defence (Robert Pargetter):</strong> Pargetter argued in a 1984 paper that scientific hypotheses successfully explain hidden unobserved entities (like electrons, atoms, or a heated piece of metal's atomic structure) without personal experience of them. Furthermore, the existence of a mind allows us to predict human actions perfectly, whereas rival sceptical ideas like philosophical zombies are empty concepts that explain nothing.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Category Mistake -->
+                    <div class="node-card">
+                        <div class="node-header">
+                            <h3>Dualism makes a category mistake</h3>
+                            <span class="badge">Gilbert Ryle</span>
+                        </div>
+                        <div class="sub-nodes-container">
+                            <p style="font-size: 0.95rem; color: var(--text-muted); line-height: 1.4;">
+                                Gilbert Ryle argued in *The Concept of Mind* (1949) that substance dualism is not merely an assemblage of particular errors, but "one big mistake and a mistake of a special kind" known as a category mistake.
+                            </p>
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>The category mistake concept <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>Definition:</strong> A category mistake is an error that arises when we place concepts or properties in the wrong logical category (e.g. claiming "the triangle is bitter" places a geometric shape into a sensory taste category).</li>
+                                        <li><strong>The official doctrine:</strong> Ryle targeted what he called the "dogma of the Ghost in the Machine"—the official dualist view that every human has a physical body subject to mechanical laws and a private, non-physical mind existing in a parallel realm.</li>
+                                        <li><strong>Ryle's illustrations:</strong> 
+                                            <ul>
+                                                <li>*The University Tour:* A visitor tours the libraries, labs, and offices of Oxford, then asks to see "the University", treating it as an extra building alongside the colleges.</li>
+                                                <li>*The Military Parade:* A child watches marching battalions and artillery, then asks "When is the Division going to appear?", treating the division as an additional troop unit.</li>
+                                                <li>*The Cricket Match:* A spectator sees batsmen, bowlers, and fielders, then asks who is contributing the "team-spirit", treating team-spirit as another player on the field.</li>
+                                            </ul>
+                                        </li>
+                                        <li><strong>Formal deductive formulation:</strong>
+                                            <ol>
+                                                <li>A category mistake occurs when a concept belongs to one logical type or category but is incorrectly treated as belonging to another.</li>
+                                                <li>Dualism treats mental concepts (such as intelligence, volition, and emotion) as if they designate hidden, non-physical objects or substances ("ghosts in the machine") that interact with physical mechanisms.</li>
+                                                <li>Mental concepts actually belong to the category of dispositions and capacities manifested through public, observable behaviours and actions.</li>
+                                                <li>Therefore, substance dualism commits a fundamental category mistake by miscategorising mental concepts as non-physical substances.</li>
+                                            </ol>
+                                        </li>
+                                        <li><strong>Conclusion of the critique:</strong> Ryle concluded that when we describe people exercising qualities of mind, we are not referring to occult inner episodes of which overt acts are effects, but to those overt acts and utterances themselves.</li>
+                                        <li><strong>Criticisms and responses:</strong> Thomas Nagel (in "What Is It Like to Be a Bat?") defended internal life by showing that subjective experiences and qualia are real internal data and distinct viewpoints rather than abstract labels or grammatical errors. Richard Swinburne argued that Ryle's university analogy begs the question: we already know a university is a collection of physical buildings, whereas dualists do not know for certain whether the mind is just a collection of bodily parts or behaviours.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Right Branch: Issues Facing Interactionist Dualism -->
+                <div class="branch-column">
+                    <div class="branch-group-header">Issues facing interactionist dualism</div>
+
+                    <!-- Conceptual Interaction Problem -->
+                    <div class="node-card">
+                        <div class="node-header">
+                            <h3>The conceptual interaction problem</h3>
+                            <span class="badge">Princess Elisabeth</span>
+                        </div>
+                        <div class="sub-nodes-container">
+                            <p style="font-size: 0.95rem; color: var(--text-muted); line-height: 1.4;">
+                                Articulated in historic correspondence between Princess Elisabeth of Bohemia and René Descartes starting in May 1643.
+                            </p>
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>Causation and extension <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>Elisabeth's challenge:</strong> Elisabeth challenged Descartes by pointing out that causation conceptually requires physical contact and extension between bodies through the direct impulsion of the thing moved.</li>
+                                        <li><strong>The contradiction:</strong> Because Descartes defined the mind as an unextended, immaterial thinking substance, it cannot have spatial boundaries or physical surfaces. Therefore, it cannot be in physical contact with or proximity to an extended body, making causal interaction conceptually impossible.</li>
+                                        <li><strong>Formal deductive formulation:</strong>
+                                            <ol>
+                                                <li>Causation conceptually requires physical contact and extension between bodies (impulsion).</li>
+                                                <li>The mind is an immaterial substance that is unextended and lacks physical properties.</li>
+                                                <li>Therefore, an immaterial mind cannot be in contact with or exert physical impulsion upon an extended physical body.</li>
+                                                <li>Therefore, causal interaction between the mind and body is conceptually impossible.</li>
+                                            </ol>
+                                        </li>
+                                        <li><strong>Descartes' replies:</strong> Descartes introduced "primitive notions"—arguing that the mind is known through pure understanding, the body through imagination, and their union is known directly through experience. He later dedicated *The Passions of the Soul* (1649) to Elisabeth, proposing the pineal gland in the centre of the brain as the "principal seat of the soul" where animal spirits mediate mental and physical states.</li>
+                                        <li><strong>Elisabeth's persistence:</strong> Elisabeth remained unconvinced, writing that while the senses show her that the soul moves the body, they fail to explain *the manner* in which it does so, noting it would be easier to attribute extension to the soul than to accept unintelligible immaterial causation.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Empirical Interaction Problem -->
+                    <div class="node-card">
+                        <div class="node-header">
+                            <h3>The empirical interaction problem</h3>
+                            <span class="badge">Science & Physics</span>
+                        </div>
+                        <div class="sub-nodes-container">
+                            <p style="font-size: 0.95rem; color: var(--text-muted); line-height: 1.4;">
+                                An objection arguing that the dualist claim that a non-physical mind causes physical changes in the body is directly contradicted by established empirical science and physical laws.
+                            </p>
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>Conservation of mass-energy <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>The physical objection:</strong> Formulated by modern philosophers and scientists such as Patricia Churchland, who points out that an interaction whereby a non-physical mental event causes physical effects (such as a change in the firing pattern or behaviour of neurons) would violate the fundamental law of the conservation of mass-energy.</li>
+                                        <li><strong>Empirical observation:</strong> So far, controlled scientific observation reveals no such violations or unexplained inputs/outputs of energy within biological nervous systems.</li>
+                                        <li><strong>Formal deductive formulation:</strong>
+                                            <ol>
+                                                <li>The physical world, including the nervous system, is a closed system governed strictly by the law of the conservation of mass-energy.</li>
+                                                <li>If a non-physical mind were to cause physical effects in the body, it would have to introduce or alter mass-energy within that system.</li>
+                                                <li>Empirical science observes no violations of the conservation of mass-energy in nervous systems.</li>
+                                                <li>Therefore, the non-physical mind does not cause physical changes in the body.</li>
+                                            </ol>
+                                        </li>
+                                        <li><strong>Defences of interaction:</strong> Richard Swinburne defends interaction by arguing from the principle of credulity (things are as they appear unless we have strong reason to doubt). He notes that we have privileged access to our mental states and experience our decisions causing actions. To protect against the physics objection, Swinburne argues that physical conservation laws apply strictly to closed systems, and "the brain is not a closed system if souls interact with it".</li>
+                                        <li><strong>Abandoning interaction (Epiphenomenalism):</strong> Due to these interaction problems, some philosophers abandon interactionism entirely in favour of epiphenomenalism (championed by T.H. Huxley). Huxley viewed consciousness as a non-causal "collateral product" or by-product of physical mechanisms—comparing it to the steam-whistle of a locomotive engine, which accompanies the machinery without influencing its operation. Under this view, physical states affect the mental, but the mental has zero causal impact on the physical.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        MoM Unit 2: Problems with substance dualism &bull; Interactive Mind Map for Teaching & Revision
+    </footer>
+
+    <script>
+        function toggleNode(element) {
+            element.classList.toggle('active');
+        }
+    </script>
+</body>
+</html>
