@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Epistemology Unit 2: Theories of Perception</title>
+    <style>
+        :root {
+            --bg-color: #f8fafc;
+            --card-bg: #ffffff;
+            --card-border: #94a3b8;
+            --text-main: #0f172a;
+            --text-muted: #475569;
+            --accent-primary: #0369a1;
+            --accent-header: #075985;
+            --hover-bg: #f1f5f9;
+            --line-color: #0369a1;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: auto;
+        }
+
+        header {
+            padding: 1.5rem 1rem 1rem;
+            text-align: center;
+            border-bottom: 1px solid #cbd5e1;
+            background: #ffffff;
+            position: relative;
+        }
+
+        .nav-container {
+            position: absolute;
+            top: 1.5rem;
+            left: 2rem;
+            display: flex;
+            gap: 10px;
+        }
+
+        .nav-btn {
+            background-color: #ffffff;
+            color: var(--accent-header);
+            border: 1px solid var(--card-border);
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            font-weight: 600;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: background-color 0.2s ease, border-color 0.2s ease;
+        }
+
+        .nav-btn:hover {
+            background-color: var(--hover-bg);
+            border-color: var(--accent-primary);
+        }
+
+        header h1 {
+            font-size: 2.2rem;
+            color: var(--accent-header);
+            font-weight: 700;
+        }
+
+        .container {
+            max-width: 1800px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            flex: 1;
+            width: 100%;
+        }
+
+        .mindmap {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            position: relative;
+        }
+
+        .root-node {
+            background-color: var(--accent-header);
+            color: #ffffff;
+            padding: 1.2rem 3rem;
+            border-radius: 12px;
+            font-weight: bold;
+            font-size: 1.5rem;
+            box-shadow: 0 10px 15px -3px rgba(3, 105, 161, 0.2);
+            z-index: 2;
+            text-align: center;
+            margin-bottom: 4rem;
+            letter-spacing: 0.5px;
+        }
+
+        .branches-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            width: 100%;
+            max-width: 1600px;
+            position: relative;
+        }
+
+        .branches-wrapper::before {
+            content: '';
+            position: absolute;
+            top: -40px;
+            left: 50%;
+            width: 3px;
+            height: 40px;
+            background-color: var(--line-color);
+            transform: translateX(-50%);
+        }
+
+        .branch-column {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            position: relative;
+        }
+
+        .branch-group-header {
+            background-color: #e0f2fe;
+            border: 2px solid var(--accent-primary);
+            color: var(--accent-header);
+            padding: 1rem 1.5rem;
+            border-radius: 10px;
+            font-size: 1.25rem;
+            font-weight: bold;
+            text-align: center;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        }
+
+        .node-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-left: 5px solid var(--accent-primary);
+            border-radius: 8px;
+            padding: 1.25rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.04);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .node-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 12px -3px rgba(3, 105, 161, 0.15);
+        }
+
+        .node-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #e2e8f0;
+            padding-bottom: 0.5rem;
+        }
+
+        .node-header h3 {
+            font-size: 1.1rem;
+            color: var(--accent-header);
+            font-weight: 700;
+        }
+
+        .badge {
+            background-color: rgba(3, 105, 161, 0.1);
+            color: var(--accent-primary);
+            font-size: 0.75rem;
+            padding: 0.25rem 0.6rem;
+            border-radius: 9999px;
+            font-weight: 600;
+        }
+
+        .sub-nodes-container {
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+        }
+
+        .sub-node {
+            background-color: #f8fafc;
+            border: 1px solid #cbd5e1;
+            border-left: 3px solid var(--accent-primary);
+            padding: 0.75rem;
+            border-radius: 0 6px 6px 0;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+
+        .sub-node:hover {
+            background-color: var(--hover-bg);
+        }
+
+        .sub-node h4 {
+            font-size: 1rem;
+            color: var(--text-main);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+        }
+
+        .sub-node h4::after {
+            content: '+';
+            color: var(--accent-primary);
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        .sub-node.active h4::after {
+            content: '-';
+        }
+
+        .sub-content {
+            display: none;
+            margin-top: 0.5rem;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            line-height: 1.5;
+            border-top: 1px dashed #cbd5e1;
+            padding-top: 0.5rem;
+        }
+
+        .sub-node.active .sub-content {
+            display: block;
+        }
+
+        ul {
+            margin-left: 1.2rem;
+            margin-top: 0.3rem;
+            list-style-type: disc;
+        }
+
+        ul li {
+            margin-bottom: 0.4rem;
+        }
+
+        footer {
+            text-align: center;
+            padding: 1.5rem;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            border-top: 1px solid #cbd5e1;
+            background: #ffffff;
+            margin-top: 3rem;
+        }
+
+        @media (max-width: 1024px) {
+            .branches-wrapper {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            .branches-wrapper::before {
+                display: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-container {
+                position: static;
+                justify-content: center;
+                margin-bottom: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="nav-container">
+            <a href="index.html" class="nav-btn">🏠 Home</a>
+            <a href="epistemology-hub.html" class="nav-btn">← Back</a>
+        </div>
+        <h1>Epistemology Unit 2: Theories of Perception</h1>
+    </header>
+
+    <div class="container">
+        <div class="mindmap">
+            <div class="root-node">Theories of Perception</div>
+            
+            <div class="branches-wrapper">
+
+                <!-- Left Column: Direct Realism & Issues/Responses -->
+                <div class="branch-column">
+                    <div class="branch-group-header">Direct Realism & Challenges</div>
+
+                    <!-- Direct Realism Basics -->
+                    <div class="node-card">
+                        <div class="node-header">
+                            <h3>Direct Realism</h3>
+                            <span class="badge">Core Theory</span>
+                        </div>
+                        <div class="sub-nodes-container">
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>Core definitions and foundational commitments <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>Definition of Direct Realism:</strong> The epistemological and metaphysical view that the immediate objects of perception are mind-independent physical objects and their actual properties.</li>
+                                        <li><strong>Realism commitment:</strong> The ontological claim that mind-independent material bodies, physical objects, and their inherent qualities genuinely exist whether or not anyone is around to perceive them.</li>
+                                        <li><strong>Directness commitment:</strong> The claim that our perceptual contact with these physical objects is unmediated, meaning there are no mental veils, internal representations, or sense-data standing between the conscious perceiver and the external object.</li>
+                                        <li><strong>Common-sense status:</strong> Often dubbed the "common-sense view" because it aligns with everyday pre-philosophical intuition—when ordinary people look at a tree or touch a table, they believe they are directly interacting with the physical object itself.</li>
+                                        <li><strong>The falling tree thought experiment:</strong> Explores whether physical disturbances create sound in a forest independently of human ears, probing the difference between naïve physical existence and subjective sensory reception.</li>
+                                        <li><strong>Thomas Reid's philosophical defence:</strong> In his *Essays on the Intellectual Powers of Man*, Reid argued that perception comprises three distinct elements: a direct conception or notion of the external object, an irresistible natural conviction and belief in its present reality, and the immediacy of this belief which does not rely on inference or logical reasoning.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Issues with Direct Realism -->
+                    <div class="node-card">
+                        <div class="node-header">
+                            <h3>Issues with Direct Realism</h3>
+                            <span class="badge">Criticism</span>
+                        </div>
+                        <div class="sub-nodes-container">
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>The Argument from Illusion <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>Core mechanics of illusion:</strong> An experience where it seems to an observer that an object possesses a specific property (such as bentness), whereas the mind-independent object itself lacks that property (the stick is physically straight).</li>
+                                        <li><strong>A.J. Ayer's formulation:</strong> Ayer noted in *The Foundations of Empirical Knowledge* that when a straight stick is refracted in water and appears crooked, our immediate subjective perceptual experience is qualitatively identical to looking at an object that really is crooked.</li>
+                                        <li><strong>The direct realist dilemma:</strong> If the immediate object of perception possesses the property of being bent, but the physical object is straight, the immediate object cannot be the physical object itself, forcing a rejection of direct realism in favour of mental items like sense-data.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="sub-nodes-container">
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>The Argument from Perceptual Variation <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>Core mechanics of variation:</strong> Perceptual experiences change systematically with shifts in the perceiver's spatial position, viewing angle, or physiological condition (such as colour-blindness or wearing tinted spectacles), even though the physical object remains completely unaltered.</li>
+                                        <li><strong>Russell's table analysis:</strong> Bertrand Russell observed in *The Problems of Philosophy* that a physical table appears to have various shades of colour depending on lighting angles, artificial illumination, or the observer's visual impairments.</li>
+                                        <li><strong>The problem of conflicting properties:</strong> Because no single perceived colour can be privileged as the "real" colour inherent in the table without arbitrariness, Russell argued that the immediate object of perception must be a subjective, mind-dependent appearance rather than the physical surface itself.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="sub-nodes-container">
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>The Argument from Hallucination and Time-Lag <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>Hallucination mechanics:</strong> An experience that is introspectively and subjectively indistinguishable from veridical perception, yet no corresponding mind-independent physical object exists anywhere in reality.</li>
+                                        <li><strong>Macbeth's dagger example:</strong> Macbeth experiences a vivid, menacing dagger floating before him, yet there is no physical dagger in the external room to be perceived.</li>
+                                        <li><strong>The time-lag argument:</strong> Physical causal transmission—such as light photons travelling from distant stars or sound waves moving through air—takes a finite, non-zero amount of time to reach our sensory receptors.</li>
+                                        <li><strong>Perceiving the past:</strong> Because light from the Sun takes roughly eight minutes to reach Earth, when we look up at the Sun we perceive it as it was eight minutes ago, meaning our immediate perceptual object cannot be the simultaneous, present state of the physical star.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Direct Realist Responses -->
+                    <div class="node-card">
+                        <div class="node-header">
+                            <h3>Responses to Direct Realism Issues</h3>
+                            <span class="badge">Defences</span>
+                        </div>
+                        <div class="sub-nodes-container">
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>Relational properties, Disjunctivism and George Pitcher <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>Relational properties defense:</strong> Thomas Reid argued that apparent changes like a stick looking bent in water are actually real relational properties—features generated by the interaction between the physical object, the medium (water), and the observer's sensory organs.</li>
+                                        <li><strong>Disjunctivist theory:</strong> The view that veridical perception and hallucination belong to entirely different categories of mental states with no common psychological core or shared experiential nature.</li>
+                                        <li><strong>The tiger and hologram analogy:</strong> As Ram Neta notes, the subjective similarity between veridical perception and hallucination is comparable to a real tiger and a high-tech hologram of a tiger—they look identical to an observer, but their underlying metaphysical structures are radically different.</li>
+                                        <li><strong>Pitcher's time-lag response:</strong> George Pitcher argued in *A Theory of Perception* (1971) that direct realism only requires perception to be of external physical objects; it does not demand that perception occur simultaneously with the current physical state of those objects.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Right Column: Indirect Realism, Idealism & Scepticism -->
+                <div class="branch-column">
+                    <div class="branch-group-header">Indirect Realism & Idealism</div>
+
+                    <!-- Indirect Realism & Locke -->
+                    <div class="node-card">
+                        <div class="node-header">
+                            <h3>Indirect Realism & Locke</h3>
+                            <span class="badge">Indirect View</span>
+                        </div>
+                        <div class="sub-nodes-container">
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>Sense-data definitions, Locke's qualities and Leibniz <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>Indirect Realism definition:</strong> The epistemological position that the immediate objects of perception are mind-dependent entities called sense-data, which are caused by and represent mind-independent physical objects.</li>
+                                        <li><strong>Characteristics of sense-data:</strong> Private, subjective mental items that possess precisely the properties they appear to have (known with certainty and infallibility), acting as a necessary intermediary between the mind and the physical world.</li>
+                                        <li><strong>Primary qualities (Locke):</strong> Powers in mind-independent objects to produce ideas that genuinely resemble their actual inherent properties—such as number, extension, figure, motion, and solidity—which are inseparable from the body.</li>
+                                        <li><strong>Secondary qualities (Locke):</strong> Powers in objects to produce ideas that bear no resemblance to any real properties residing in the object itself—such as colour, taste, smell, sound, and temperature—which vary entirely across different perceivers.</li>
+                                        <li><strong>Locke's argument from the fire:</strong> Locke noted that a fire produces a sensation of warmth at a distance, but produces pain when brought closer; since pain is clearly not physically inside the fire, warmth must also be a subjective secondary quality.</li>
+                                        <li><strong>Leibniz's criticism:</strong> Gottfried Leibniz argued against Locke that the relationship between sensory ideas (like pain or colour) and physical motions is not arbitrary, maintaining a natural expression through orderly mathematical relationships.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Scepticism and Responses (Locke & Russell) -->
+                    <div class="node-card">
+                        <div class="node-header">
+                            <h3>The Veil of Perception & Scepticism</h3>
+                            <span class="badge">Sceptical Challenges</span>
+                        </div>
+                        <div class="sub-nodes-container">
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>The Veil of Perception, Likeness Principle and Demon scenarios <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>The Veil of Perception metaphor:</strong> The epistemic barrier created because we only ever have direct cognitive access to private mental sense-data, locking us behind a veil and rendering the existence and true nature of external physical reality uncertain.</li>
+                                        <li><strong>Berkeley's Likeness Principle:</strong> George Berkeley's objection that an idea can only resemble another idea, meaning our mind-dependent sensory ideas can never resemble insensible, mind-independent physical objects.</li>
+                                        <li><strong>Threat of solipsism:</strong> The severe sceptical consequence that one can only have valid knowledge of one's own conscious mind, or that only one's own mind exists.</li>
+                                        <li><strong>Descartes' Evil Demon:</strong> René Descartes' radical meditation hypothesis imagining an all-powerful, supremely cunning deceiver systematically manufacturing all sensory states, making external reality indistinguishable from internal fiction.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="sub-nodes-container">
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>Locke's, Cockburn's and Russell's defensive strategies <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>Involuntary nature of experience (Locke):</strong> Locke argued that perceptual ideas are forced upon us with irresistible force and vigour, unlike voluntary acts of imagination, demonstrating they originate from an external source.</li>
+                                        <li><strong>Coherence of experiences (Locke & Cockburn):</strong> Supported by Catharine Trotter Cockburn, this argument points out that different sensory modalities systematically cohere and corroborate one another (such as seeing a fire while simultaneously feeling its heat), validating an external reality.</li>
+                                        <li><strong>The Best Hypothesis (Russell):</strong> Bertrand Russell argued that postulating an external physical world is not deductively certain, but stands as the simplest, most coherent hypothesis that systematically explains the regular patterns and anomalies of our sense-data (such as cats continuing to exist and grow hungry when unobserved).</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Berkeley's Idealism -->
+                    <div class="node-card">
+                        <div class="node-header">
+                            <h3>Berkeley's Idealism</h3>
+                            <span class="badge">Immaterialism</span>
+                        </div>
+                        <div class="sub-nodes-container">
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>Immaterialist principles, Master argument and God's role <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>Definition of Idealism:</strong> George Berkeley's immaterialist view that ordinary physical objects (tables, chairs, trees) are mind-dependent collections of ideas, summarised by the Latin maxim *esse est percipi* (to be is to be perceived or to perceive).</li>
+                                        <li><strong>Attack on primary/secondary distinction:</strong> Through dialogues between Hylas and Philonous, Berkeley argued that primary qualities are subject to the exact same perceptual variations as secondary qualities (e.g., apparent size changes with distance), proving primary qualities are equally mind-dependent.</li>
+                                        <li><strong>The 'Master' Argument:</strong> Berkeley's challenge demonstrating that attempting to conceive of an unperceived object fails because the very act of conceiving it brings it into the mind, proving we cannot logically think of anything existing completely outside of all minds.</li>
+                                        <li><strong>Berkeley's argument for the existence of God:</strong> Berkeley argued that because finite human minds do not choose, control, or create the vivid, orderly sensory ideas they experience, there must be an external, omnipotent spiritual cause that produces them within us. Furthermore, to account for the continuous, uninterrupted existence of physical objects when humans are not looking at them, there must be an omnipresent, eternal Mind (God) that perceives everything continuously, upholding the structured laws of nature.</li>
+                                        <li><strong>Detailed criticism of God's role:</strong> Critics like Georges Dicker and Stephen Daniel highlight major flaws: circular reasoning (using object persistence to prove God, then God to prove persistence), lack of independent evidence violating empiricism, and the severe problem of how an impassible God who cannot feel pain can cause human pain sensations without being a blind agent.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        Epistemology Unit 2: Theories of Perception &bull; Interactive Mind Map for Teaching & Revision
+    </footer>
+
+    <script>
+        function toggleNode(element) {
+            element.classList.toggle('active');
+        }
+    </script>
+</body>
+</html>
