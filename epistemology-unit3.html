@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Epistemology Unit 3: Sources of Knowledge</title>
+    <style>
+        :root {
+            --bg-color: #f8fafc;
+            --card-bg: #ffffff;
+            --card-border: #94a3b8;
+            --text-main: #0f172a;
+            --text-muted: #475569;
+            --accent-primary: #0369a1;
+            --accent-header: #075985;
+            --hover-bg: #f1f5f9;
+            --line-color: #0369a1;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: auto;
+        }
+
+        header {
+            padding: 1.5rem 1rem 1rem;
+            text-align: center;
+            border-bottom: 1px solid #cbd5e1;
+            background: #ffffff;
+            position: relative;
+        }
+
+        .nav-container {
+            position: absolute;
+            top: 1.5rem;
+            left: 2rem;
+            display: flex;
+            gap: 10px;
+        }
+
+        .nav-btn {
+            background-color: #ffffff;
+            color: var(--accent-header);
+            border: 1px solid var(--card-border);
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            font-weight: 600;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: background-color 0.2s ease, border-color 0.2s ease;
+        }
+
+        .nav-btn:hover {
+            background-color: var(--hover-bg);
+            border-color: var(--accent-primary);
+        }
+
+        header h1 {
+            font-size: 2.2rem;
+            color: var(--accent-header);
+            font-weight: 700;
+        }
+
+        .container {
+            max-width: 1800px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            flex: 1;
+            width: 100%;
+        }
+
+        .mindmap {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            position: relative;
+        }
+
+        .root-node {
+            background-color: var(--accent-header);
+            color: #ffffff;
+            padding: 1.2rem 3rem;
+            border-radius: 12px;
+            font-weight: bold;
+            font-size: 1.5rem;
+            box-shadow: 0 10px 15px -3px rgba(3, 105, 161, 0.2);
+            z-index: 2;
+            text-align: center;
+            margin-bottom: 4rem;
+            letter-spacing: 0.5px;
+        }
+
+        .branches-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            width: 100%;
+            max-width: 1600px;
+            position: relative;
+        }
+
+        .branches-wrapper::before {
+            content: '';
+            position: absolute;
+            top: -40px;
+            left: 50%;
+            width: 3px;
+            height: 40px;
+            background-color: var(--line-color);
+            transform: translateX(-50%);
+        }
+
+        .branch-column {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            position: relative;
+        }
+
+        .branch-group-header {
+            background-color: #e0f2fe;
+            border: 2px solid var(--accent-primary);
+            color: var(--accent-header);
+            padding: 1rem 1.5rem;
+            border-radius: 10px;
+            font-size: 1.25rem;
+            font-weight: bold;
+            text-align: center;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        }
+
+        .node-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-left: 5px solid var(--accent-primary);
+            border-radius: 8px;
+            padding: 1.25rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.04);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .node-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 12px -3px rgba(3, 105, 161, 0.15);
+        }
+
+        .node-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #e2e8f0;
+            padding-bottom: 0.5rem;
+        }
+
+        .node-header h3 {
+            font-size: 1.1rem;
+            color: var(--accent-header);
+            font-weight: 700;
+        }
+
+        .badge {
+            background-color: rgba(3, 105, 161, 0.1);
+            color: var(--accent-primary);
+            font-size: 0.75rem;
+            padding: 0.25rem 0.6rem;
+            border-radius: 9999px;
+            font-weight: 600;
+        }
+
+        .sub-nodes-container {
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+        }
+
+        .sub-node {
+            background-color: #f8fafc;
+            border: 1px solid #cbd5e1;
+            border-left: 3px solid var(--accent-primary);
+            padding: 0.75rem;
+            border-radius: 0 6px 6px 0;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+
+        .sub-node:hover {
+            background-color: var(--hover-bg);
+        }
+
+        .sub-node h4 {
+            font-size: 1rem;
+            color: var(--text-main);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+        }
+
+        .sub-node h4::after {
+            content: '+';
+            color: var(--accent-primary);
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        .sub-node.active h4::after {
+            content: '-';
+        }
+
+        .sub-content {
+            display: none;
+            margin-top: 0.5rem;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            line-height: 1.5;
+            border-top: 1px dashed #cbd5e1;
+            padding-top: 0.5rem;
+        }
+
+        .sub-node.active .sub-content {
+            display: block;
+        }
+
+        ul {
+            margin-left: 1.2rem;
+            margin-top: 0.3rem;
+            list-style-type: disc;
+        }
+
+        ul li {
+            margin-bottom: 0.4rem;
+        }
+
+        footer {
+            text-align: center;
+            padding: 1.5rem;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            border-top: 1px solid #cbd5e1;
+            background: #ffffff;
+            margin-top: 3rem;
+        }
+
+        @media (max-width: 1024px) {
+            .branches-wrapper {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            .branches-wrapper::before {
+                display: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-container {
+                position: static;
+                justify-content: center;
+                margin-bottom: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="nav-container">
+            <a href="index.html" class="nav-btn">🏠 Home</a>
+            <a href="epistemology-hub.html" class="nav-btn">← Back</a>
+        </div>
+        <h1>Epistemology Unit 3: Sources of knowledge</h1>
+    </header>
+
+    <div class="container">
+        <div class="mindmap">
+            <div class="root-node">Sources of knowledge</div>
+            
+            <div class="branches-wrapper">
+
+                <!-- Left Column: Innatism & Empiricist Responses -->
+                <div class="branch-column">
+                    <div class="branch-group-header">Reason as a source of knowledge: Innatism</div>
+
+                    <!-- Innatism -->
+                    <div class="node-card">
+                        <div class="node-header">
+                            <h3>Innatism</h3>
+                            <span class="badge">Rationalist view</span>
+                        </div>
+                        <div class="sub-nodes-container">
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>Arguments from Plato (The 'slave boy' argument) <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>Theory of recollection:</strong> Plato argues that true knowledge is innate because the immortal soul pre-existed in the world of the Forms before being imprisoned in the body, meaning all learning is simply recalling eternal truths.</li>
+                                        <li><strong>The Meno experiment:</strong> Socrates questions an uneducated slave boy without teaching him any geometry, leading him step-by-step through drawing lines to discover a version of Pythagoras' theorem regarding how to double the area of a square.</li>
+                                        <li><strong>Deductive formulation of Plato's argument:</strong>
+                                            <ul>
+                                                <li>Premise 1: The slave boy has no prior formal instruction or education in geometry.</li>
+                                                <li>Premise 2: Through mere questioning alone, the boy successfully recognises and grasps necessary geometric truths.</li>
+                                                <li>Premise 3: These necessary truths could not have been derived solely from his limited empirical environment.</li>
+                                                <li>Conclusion: Therefore, the knowledge must be innate, retrieved from a prior existence through recollection.</li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="sub-nodes-container">
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>Gottfried Leibniz's argument based on necessary truths <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>Necessary vs contingent truths:</strong> Leibniz distinguished contingent truths (facts about the actual world that could have been otherwise) from necessary truths (propositions that are true in all possible worlds, such as logical and mathematical laws).</li>
+                                        <li><strong>Limitation of the senses:</strong> Sensory experience can only ever show us particular instances or sample observations in the actual world; no accumulation of empirical data can ever establish universal necessity or logical certainty.</li>
+                                        <li><strong>Deductive formulation of Leibniz's argument:</strong>
+                                            <ul>
+                                                <li>Premise 1: The senses give us only particular instances and contingent physical facts.</li>
+                                                <li>Premise 2: A collection or accumulation of particular instances can never logically show, prove, or guarantee the absolute necessity of a truth.</li>
+                                                <li>Premise 3: We can clearly grasp, prove, and know many universal necessary truths (such as those in mathematics and formal logic).</li>
+                                                <li>Conclusion: Therefore, the necessary truths we grasp do not derive from the senses; the mind is the internal source of these ideas, which are known innately.</li>
+                                            </ul>
+                                        </li>
+                                        <li><strong>The veined marble metaphor:</strong> Leibniz compared the mind not to a blank slate, but to a block of marble veined in the shape of Hercules, where natural dispositions incline us toward certain thoughts that experience then helps to carve out and reveal.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Empiricist Responses to Innatism -->
+                    <div class="node-card">
+                        <div class="node-header">
+                            <h3>Empiricist responses</h3>
+                            <span class="badge">Empiricist view</span>
+                        </div>
+                        <div class="sub-nodes-container">
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>Locke's arguments against innatism and Leibniz's responses <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>Lack of universal assent:</strong> John Locke argued that if principles like logic or morality were innate, they would be universally accepted by all human minds. However, children and idiots are entirely unaware of them, proving they cannot be innate.</li>
+                                        <li><strong>Leibniz's response on universal assent:</strong> Leibniz responded that individuals can use innate principles implicitly or instinctively without being able to articulate them formally.</li>
+                                        <li><strong>Transparency of the mind:</strong> Locke argued that the mind is transparent to itself; if innate ideas existed within us, we would be consciously aware of them at all times without needing experience to discover them.</li>
+                                        <li><strong>Leibniz's response on transparency:</strong> Leibniz argued that ideas and dispositions can exist unconsciously within the mind's structure until brought to light by experience.</li>
+                                        <li><strong>Distinguishing innate from learned:</strong> Rationalist attempts to distinguish innate principles from learned ones fail because any accepted universal rule can be explained through normal experiential learning. Leibniz countered that we can distinguish them because experience only provides particular instances, whereas reason provides absolute necessity.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="sub-nodes-container">
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>The mind as a 'tabula rasa' <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>Tabula rasa definition:</strong> Locke argued in his Essay Concerning Human Understanding that the human mind at birth is like a blank sheet of white paper void of all characters, completely unpopulated by innate concepts.</li>
+                                        <li><strong>Sensation and reflection:</strong> All ideas originate from two experiential sources: external sensation (perceptions of the physical world via sensory organs) and internal reflection (awareness of our own mental operations like thinking or doubting).</li>
+                                        <li><strong>Simple and complex concepts:</strong> Simple ideas are phenomenally simple, uncompounded direct effects of sensory experience, whereas complex concepts are formed when the active mind combines, compares, relates, and abstracts these simple components.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="sub-nodes-container">
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>Issues with these responses <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>Hume's missing shade of blue:</strong> David Hume admitted a counter-example to his copy principle, noting that someone who has seen every shade of blue except one could imagine the missing shade without having a prior impression of it.</li>
+                                        <li><strong>Relational and abstract concepts:</strong> Concepts like sameness, difference, substance, and cause-and-effect cannot be directly observed as simple sensory impressions, challenging strict empiricist concept acquisition.</li>
+                                        <li><strong>Chomsky's universal grammar:</strong> Modern cognitive science and linguistics argue that language acquisition is too rapid and complex to be learned from environmental input alone, suggesting innate cognitive structures.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Right Column: Intuition, Deduction & Rationalism -->
+                <div class="branch-column">
+                    <div class="branch-group-header">The intuition and deduction thesis</div>
+
+                    <!-- The Intuition and Deduction Thesis -->
+                    <div class="node-card">
+                        <div class="node-header">
+                            <h3>The intuition and deduction thesis</h3>
+                            <span class="badge">Rationalist method</span>
+                        </div>
+                        <div class="sub-nodes-container">
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>Meaning of intuition, deduction and clear & distinct ideas <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>A priori intuition:</strong> A belief or concept that is justified non-inferentially through the clear and attentive light of reason alone, without relying on sensory observation or syllogistic reasoning.</li>
+                                        <li><strong>A priori deduction:</strong> An argument that is deductive and a priori, moving step-by-step from intuitively certain premises to valid conclusions without empirical input.</li>
+                                        <li><strong>Clear and distinct ideas:</strong> René Descartes defined a clear idea as one that is present and accessible to an attentive mind, and a distinct idea as one that is precisely separated from all other ideas so it contains only what is clear.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Descartes' Arguments -->
+                    <div class="node-card">
+                        <div class="node-header">
+                            <h3>Descartes' arguments</h3>
+                            <span class="badge">Rationalist proofs</span>
+                        </div>
+                        <div class="sub-nodes-container">
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>The cogito <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>The cogito definition:</strong> Descartes' cogito, ergo sum ("I think, therefore I am") is grasped directly in the act of thinking as a primary notion, functioning as an indubitable a priori intuition that survives all sceptical doubt. It is an intuition, not a deduction.</li>
+                                        <li><strong>Criticisms of the cogito:</strong>
+                                            <ul>
+                                                <li><strong>Hume's bundle theory:</strong> Deep introspection reveals only a changing, fragmented bundle of transient perceptions, failing to locate a persistent substantial "self".</li>
+                                                <li><strong>Russell's criticism:</strong> Bertrand Russell argued that certainty only warrants the modest conclusion that "there is thinking going on", making the leap to infer a permanent substance "I" an unjustified assumption.</li>
+                                                <li><strong>Stroud's criticism:</strong> Barry Stroud argued that while thinking is indubitable, it does not follow that there exists a permanent thinker operating as a metaphysical substance.</li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="sub-nodes-container">
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>The trademark argument <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>Deductive formulation:</strong>
+                                            <ul>
+                                                <li>Premise 1: I possess an innate idea of God defined as an infinite, supreme, independent, all-knowing, and perfect being.</li>
+                                                <li>Premise 2: The causal principle dictates that there must be at least as much reality in the efficient and total cause as there is in its resulting effect.</li>
+                                                <li>Premise 3: As a finite, imperfect, and dependent being, I could not have invented, generated, or caused this idea of infinite perfection from my own limited resources.</li>
+                                                <li>Conclusion: Therefore, an infinite God must exist as the only possible external cause of my idea of Him.</li>
+                                            </ul>
+                                        </li>
+                                        <li><strong>Criticisms:</strong>
+                                            <ul>
+                                                <li><strong>Hume's causal scepticism:</strong> The causal principle is not a self-evident a priori truth; anything might potentially produce anything, and genuine knowledge of causal relations requires a posteriori experience.</li>
+                                                <li><strong>Origin of the idea:</strong> The idea of God is not an innate stamp, but is manufactured by finite minds taking ordinary human qualities of wisdom and goodness and magnifying them to infinity.</li>
+                                                <li><strong>Impersonal alternatives:</strong> Descartes assumes the necessary cause must possess mind-like attributes, whereas the material universe itself could potentially be the necessary reality.</li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="sub-nodes-container">
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>The contingency argument <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>Deductive formulation:</strong>
+                                            <ul>
+                                                <li>Premise 1: I am a dependent thinking thing that possesses an idea of God.</li>
+                                                <li>Premise 2: If I caused myself, I would have given myself all perfections (making me God); since I lack them, I did not cause myself.</li>
+                                                <li>Premise 3: My parents or lesser causes cannot account for my ongoing preservation or my idea of God.</li>
+                                                <li>Premise 4: An infinite regress of causes is rejected for an existing thinking thing.</li>
+                                                <li>Conclusion: Therefore, God must exist as the necessary first cause and sustainer of my existence.</li>
+                                            </ul>
+                                        </li>
+                                        <li><strong>Criticisms:</strong>
+                                            <ul>
+                                                <li><strong>Empiricist rejection:</strong> Assumes contingent beings and rejects infinite regress without empirical proof, treating causation a priori.</li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="sub-nodes-container">
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>The ontological argument <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>Deductive formulation:</strong>
+                                            <ul>
+                                                <li>Premise 1: I have an idea of God as a supremely perfect being.</li>
+                                                <li>Premise 2: A supremely perfect being must contain all perfections.</li>
+                                                <li>Premise 3: Actual existence is a perfection (an entity that exists in reality is greater than one that exists only in the mind).</li>
+                                                <li>Conclusion: Therefore, God exists.</li>
+                                            </ul>
+                                        </li>
+                                        <li><strong>Criticisms:</strong>
+                                            <ul>
+                                                <li><strong>Gaunilo's perfect island:</strong> Parodies the ontological argument, showing that the exact same logic could be used to prove the necessary existence of a hypothetical perfect island.</li>
+                                                <li><strong>Kant's criticism:</strong> Immanuel Kant argued that existence is not a real predicate or perfection that adds to the conceptual definition of a thing; it merely posits the object in actual reality.</li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="sub-nodes-container">
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>Proof of the external world <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>Deductive formulation:</strong>
+                                            <ul>
+                                                <li>Premise 1: Sensations are vivid, passive, and involuntary, produced without my consent and against my will.</li>
+                                                <li>Premise 2: If sensations were caused by me or originated in my mind, I would know it; furthermore, my mind is unextended and cannot produce ideas of extension.</li>
+                                                <li>Premise 3: Sensations must therefore be caused by something external to me.</li>
+                                                <li>Premise 4: God exists, is supremely perfect, and is not a deceiver; He would not systematically allow me to be deceived into believing these ideas come from physical things if they did not exist.</li>
+                                                <li>Conclusion: Therefore, the external physical world of material bodies exists.</li>
+                                            </ul>
+                                        </li>
+                                        <li><strong>Criticisms:</strong>
+                                            <ul>
+                                                <li><strong>Hume's dream objection:</strong> Vividness and involuntariness do not guarantee an external material cause, since dreams, hallucinations, and fevers produce equally vivid and involuntary experiences internally.</li>
+                                                <li><strong>Alternative non-material causes:</strong> Sensations could theoretically be caused by non-material agents—such as God directly impressing ideas upon us, as argued by George Berkeley—without requiring an independent physical material world.</li>
+                                                <li><strong>Anthony Kenny's criticism:</strong> Commentator Anthony Kenny pointed out that Descartes' argument for material things is not purely a priori, because it illicitly presupposes the prior veracity of sensory impressions once guaranteed by God.</li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- General Criticisms of Descartes -->
+                    <div class="node-card">
+                        <div class="node-header">
+                            <h3>General criticisms</h3>
+                            <span class="badge">Systemic flaws</span>
+                        </div>
+                        <div class="sub-nodes-container">
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>Hume's Fork and the Cartesian circle <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>Application of Hume's Fork:</strong> Descartes treats metaphysical claims about God and reality as a priori deductions, but under Hume's fork, any non-analytic claim must be a matter of fact requiring a posteriori observation, rendering rationalist proofs meaningless ("throw it to the flames").</li>
+                                        <li><strong>The Cartesian circle:</strong> Antoine Arnauld's classic objection pointing out circularity: Descartes uses clear and distinct ideas to prove God, but then relies entirely on God's truthfulness to guarantee the validity of clear and distinct ideas.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        Epistemology Unit 3: Sources of Knowledge &bull; Interactive Mind Map for Teaching & Revision
+    </footer>
+
+    <script>
+        function toggleNode(element) {
+            element.classList.toggle('active');
+        }
+    </script>
+</body>
+</html>
