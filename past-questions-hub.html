@@ -37,6 +37,32 @@
             text-align: center;
             border-bottom: 1px solid #cbd5e1;
             background: #ffffff;
+            position: relative;
+        }
+
+        .nav-container {
+            position: absolute;
+            top: 1.5rem;
+            left: 2rem;
+            display: flex;
+            gap: 10px;
+        }
+
+        .nav-btn {
+            background-color: #ffffff;
+            color: var(--accent-header);
+            border: 1px solid var(--card-border);
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            font-weight: 600;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: background-color 0.2s ease, border-color 0.2s ease;
+        }
+
+        .nav-btn:hover {
+            background-color: var(--hover-bg);
+            border-color: var(--accent-primary);
         }
 
         header h1 {
@@ -45,18 +71,27 @@
             font-weight: 700;
         }
 
-        .back-nav {
+        .header-actions {
             margin-top: 1rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
-        .back-nav a {
-            color: var(--accent-primary);
-            text-decoration: none;
+        .action-btn {
+            background-color: var(--accent-primary);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
             font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
         }
 
-        .back-nav a:hover {
-            text-decoration: underline;
+        .action-btn:hover {
+            background-color: var(--accent-header);
         }
 
         .container {
@@ -202,14 +237,57 @@
             border-top: 1px solid #cbd5e1;
             background: #ffffff;
         }
+
+        @media (max-width: 1024px) {
+            .nav-container {
+                position: static;
+                justify-content: center;
+                margin-bottom: 1rem;
+            }
+        }
+
+        /* Print styling: clean layout for printing or saving to PDF */
+        @media print {
+            body {
+                background: white;
+                color: black;
+            }
+            header, .filters-container, footer, .action-btn, .nav-container {
+                display: none !important;
+            }
+            .container {
+                max-width: 100%;
+                padding: 0;
+            }
+            .unit-section {
+                border: none;
+                box-shadow: none;
+                padding: 0;
+                margin-bottom: 2rem;
+                page-break-inside: avoid;
+            }
+            .question-card {
+                border: 1px solid #000;
+                break-inside: avoid;
+                margin-bottom: 1.5rem;
+                background: white;
+            }
+            .practice-area textarea {
+                border: 1px solid #000;
+                height: 120px;
+            }
+        }
     </style>
 </head>
 <body>
 
     <header>
-        <h1>Past questions hub</h1>
-        <div class="back-nav">
-            <a href="index.html">&larr; Back to home</a>
+        <div class="nav-container">
+            <a href="index.html" class="nav-btn">🏠 Home</a>
+        </div>
+        <h1>Past Questions Hub</h1>
+        <div class="header-actions">
+            <button class="action-btn" onclick="window.print()">🖨️ Print / Save Answers</button>
         </div>
     </header>
 
@@ -217,13 +295,20 @@
         
         <!-- Filter Controls -->
         <div class="filters-container">
-            <div class="filter-label">Filter by unit</div>
+            <div class="filter-label">Filter by Paper</div>
+            <div class="filter-group" id="paper-filters" style="width: 100%; flex-direction: column;">
+                <button class="filter-btn active" style="width: 100%; text-align: center;" onclick="setFilter('paper', 'all')">All Papers</button>
+                <button class="filter-btn" style="width: 100%; text-align: center;" onclick="setFilter('paper', 'paper1')">Paper 1: Epistemology and Moral Philosophy</button>
+                <button class="filter-btn" style="width: 100%; text-align: center;" onclick="setFilter('paper', 'paper2')">Paper 2: Metaphysics of God and Metaphysics of Mind</button>
+            </div>
+
+            <div class="filter-label" style="margin-top: 0.5rem;">Filter by unit</div>
             <div class="filter-group" id="unit-filters">
                 <button class="filter-btn active" onclick="setFilter('unit', 'all')">All units</button>
                 <button class="filter-btn" onclick="setFilter('unit', 'epistemology')">Epistemology</button>
-                <button class="filter-btn" onclick="setFilter('unit', 'moral')">Moral philosophy</button>
-                <button class="filter-btn" onclick="setFilter('unit', 'god')">Metaphysics of god</button>
-                <button class="filter-btn" onclick="setFilter('unit', 'mind')">Metaphysics of mind</button>
+                <button class="filter-btn" onclick="setFilter('unit', 'moral')">Moral Philosophy</button>
+                <button class="filter-btn" onclick="setFilter('unit', 'god')">Metaphysics of God</button>
+                <button class="filter-btn" onclick="setFilter('unit', 'mind')">Metaphysics of Mind</button>
             </div>
 
             <div class="filter-label" style="margin-top: 0.5rem;">Filter by question marks</div>
@@ -251,7 +336,7 @@
 
         <div id="questions-container">
             <!-- Epistemology -->
-            <div class="unit-section" data-unit="epistemology">
+            <div class="unit-section" data-unit="epistemology" data-paper="paper1">
                 <h2>Epistemology</h2>
                 
                 <div class="question-card" data-marks="3" data-year="Sample">
@@ -460,8 +545,8 @@
             </div>
 
             <!-- Moral Philosophy -->
-            <div class="unit-section" data-unit="moral">
-                <h2>Moral philosophy</h2>
+            <div class="unit-section" data-unit="moral" data-paper="paper1">
+                <h2>Moral Philosophy</h2>
                 
                 <div class="question-card" data-marks="3" data-year="Sample">
                     <div class="question-meta"><span>Sample paper</span><span>3 marks | AVE</span></div>
@@ -669,8 +754,8 @@
             </div>
 
             <!-- Metaphysics of God -->
-            <div class="unit-section" data-unit="god">
-                <h2>Metaphysics of god</h2>
+            <div class="unit-section" data-unit="god" data-paper="paper2">
+                <h2>Metaphysics of God</h2>
                 
                 <div class="question-card" data-marks="3" data-year="Sample">
                     <div class="question-meta"><span>Sample paper</span><span>3 marks | Attributes of God</span></div>
@@ -878,8 +963,8 @@
             </div>
 
             <!-- Metaphysics of Mind -->
-            <div class="unit-section" data-unit="mind">
-                <h2>Metaphysics of mind</h2>
+            <div class="unit-section" data-unit="mind" data-paper="paper2">
+                <h2>Metaphysics of Mind</h2>
                 
                 <div class="question-card" data-marks="3" data-year="Sample">
                     <div class="question-meta"><span>Sample paper</span><span>3 marks | Eliminative materialism</span></div>
@@ -1031,7 +1116,7 @@
                 <div class="question-card" data-marks="12" data-year="2023">
                     <div class="question-meta"><span>2023</span><span>12 marks | Dualism</span></div>
                     <div class="question-text">Explain the ‘problem of other minds’ facing dualism and the response that the existence of other minds is the best hypothesis</div>
-                    <div class="practice-area"><textarea placeholder="Have a go at writing your answer here..."></textarea><span class="save-note">Practice workspace</span></div>
+                    <div class="practice-area"><textarea placeholder="Have a go+ to writing your answer here..."></textarea><span class="save-note">Practice workspace</span></div>
                 </div>
                 <div class="question-card" data-marks="12" data-year="2024">
                     <div class="question-meta"><span>2024</span><span>12 marks | Substance dualism</span></div>
@@ -1094,12 +1179,20 @@
     </footer>
 
     <script>
+        let currentPaper = 'all';
         let currentUnit = 'all';
         let currentMark = 'all';
         let currentYear = 'all';
 
         function setFilter(type, value) {
-            if (type === 'unit') {
+            if (type === 'paper') {
+                currentPaper = value;
+                currentUnit = 'all'; // Reset unit filter when changing paper
+                document.querySelectorAll('#paper-filters .filter-btn').forEach(btn => btn.classList.remove('active'));
+                document.querySelectorAll('#unit-filters .filter-btn').forEach(btn => btn.classList.remove('active'));
+                document.querySelector('#unit-filters .filter-btn').classList.add('active'); // set 'All units' active
+                event.target.classList.add('active');
+            } else if (type === 'unit') {
                 currentUnit = value;
                 document.querySelectorAll('#unit-filters .filter-btn').forEach(btn => btn.classList.remove('active'));
                 event.target.classList.add('active');
@@ -1117,9 +1210,13 @@
             const unitSections = document.querySelectorAll('.unit-section');
 
             unitSections.forEach(section => {
-                const unitMatch = (currentUnit === 'all' || section.getAttribute('data-unit') === currentUnit);
+                const paperAttr = section.getAttribute('data-paper');
+                const unitAttr = section.getAttribute('data-unit');
+
+                const paperMatch = (currentPaper === 'all' || paperAttr === currentPaper);
+                const unitMatch = (currentUnit === 'all' || unitAttr === currentUnit);
                 
-                if (!unitMatch) {
+                if (!paperMatch || !unitMatch) {
                     section.style.display = 'none';
                     return;
                 }
@@ -1128,6 +1225,7 @@
                 const cards = section.querySelectorAll('.question-card');
                 let visibleCardsCount = 0;
 
+                cards.cardsList = cards; // standard iteration helper
                 cards.forEach(card => {
                     const markMatch = (currentMark === 'all' || card.getAttribute('data-marks') === currentMark);
                     const yearMatch = (currentYear === 'all' || card.getAttribute('data-year') === currentYear);
