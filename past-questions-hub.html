@@ -1,0 +1,1151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A level philosophy</title>
+    <style>
+        :root {
+            --bg-color: #f8fafc;
+            --card-bg: #ffffff;
+            --card-border: #94a3b8;
+            --text-main: #0f172a;
+            --text-muted: #475569;
+            --accent-primary: #0369a1;
+            --accent-header: #075985;
+            --hover-bg: #f1f5f9;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        header {
+            padding: 2.5rem 1rem 1.5rem;
+            text-align: center;
+            border-bottom: 1px solid #cbd5e1;
+            background: #ffffff;
+        }
+
+        header h1 {
+            font-size: 2.8rem;
+            color: var(--accent-header);
+            font-weight: 700;
+        }
+
+        .back-nav {
+            margin-top: 1rem;
+        }
+
+        .back-nav a {
+            color: var(--accent-primary);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .back-nav a:hover {
+            text-decoration: underline;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            flex: 1;
+            width: 100%;
+        }
+
+        .filters-container {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            align-items: center;
+            margin-bottom: 1rem;
+            background: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: 10px;
+            border: 1px solid var(--card-border);
+        }
+
+        .filter-group {
+            display: flex;
+            gap: 0.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .filter-label {
+            font-weight: 700;
+            font-size: 0.9rem;
+            color: var(--accent-header);
+            width: 100%;
+            text-align: center;
+            margin-bottom: 0.25rem;
+        }
+
+        .filter-btn {
+            padding: 0.4rem 0.8rem;
+            background-color: var(--bg-color);
+            border: 1px solid var(--card-border);
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .filter-btn.active, .filter-btn:hover {
+            background-color: var(--accent-primary);
+            color: white;
+            border-color: var(--accent-primary);
+        }
+
+        .unit-section {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.04);
+            margin-bottom: 2rem;
+        }
+
+        .unit-section h2 {
+            color: var(--accent-header);
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            border-bottom: 2px solid var(--bg-color);
+            padding-bottom: 0.5rem;
+        }
+
+        .question-card {
+            background: var(--bg-color);
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+            padding: 1.25rem;
+            margin-bottom: 1rem;
+        }
+
+        .question-meta {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .question-text {
+            font-size: 1.1rem;
+            font-weight: 500;
+            margin-bottom: 1rem;
+            color: var(--text-main);
+        }
+
+        .practice-area {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .practice-area textarea {
+            width: 100%;
+            height: 80px;
+            padding: 0.75rem;
+            border: 1px solid var(--card-border);
+            border-radius: 5px;
+            font-family: inherit;
+            resize: vertical;
+        }
+
+        .save-note {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            font-style: italic;
+        }
+
+        .plan-link-btn {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background-color: var(--accent-primary);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: background-color 0.2s ease;
+        }
+
+        .plan-link-btn:hover {
+            background-color: var(--accent-header);
+        }
+
+        footer {
+            text-align: center;
+            padding: 1.5rem;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            border-top: 1px solid #cbd5e1;
+            background: #ffffff;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Past questions hub</h1>
+        <div class="back-nav">
+            <a href="index.html">&larr; Back to home</a>
+        </div>
+    </header>
+
+    <div class="container">
+        
+        <!-- Filter Controls -->
+        <div class="filters-container">
+            <div class="filter-label">Filter by unit</div>
+            <div class="filter-group" id="unit-filters">
+                <button class="filter-btn active" onclick="setFilter('unit', 'all')">All units</button>
+                <button class="filter-btn" onclick="setFilter('unit', 'epistemology')">Epistemology</button>
+                <button class="filter-btn" onclick="setFilter('unit', 'moral')">Moral philosophy</button>
+                <button class="filter-btn" onclick="setFilter('unit', 'god')">Metaphysics of god</button>
+                <button class="filter-btn" onclick="setFilter('unit', 'mind')">Metaphysics of mind</button>
+            </div>
+
+            <div class="filter-label" style="margin-top: 0.5rem;">Filter by question marks</div>
+            <div class="filter-group" id="mark-filters">
+                <button class="filter-btn active" onclick="setFilter('marks', 'all')">All marks</button>
+                <button class="filter-btn" onclick="setFilter('marks', '3')">3 marks</button>
+                <button class="filter-btn" onclick="setFilter('marks', '5')">5 marks</button>
+                <button class="filter-btn" onclick="setFilter('marks', '12')">12 marks</button>
+                <button class="filter-btn" onclick="setFilter('marks', '25')">25 marks</button>
+            </div>
+
+            <div class="filter-label" style="margin-top: 0.5rem;">Filter by year</div>
+            <div class="filter-group" id="year-filters">
+                <button class="filter-btn active" onclick="setFilter('year', 'all')">All years</button>
+                <button class="filter-btn" onclick="setFilter('year', 'Sample')">Sample</button>
+                <button class="filter-btn" onclick="setFilter('year', '2019')">2019</button>
+                <button class="filter-btn" onclick="setFilter('year', '2020')">2020</button>
+                <button class="filter-btn" onclick="setFilter('year', '2021')">2021</button>
+                <button class="filter-btn" onclick="setFilter('year', '2022')">2022</button>
+                <button class="filter-btn" onclick="setFilter('year', '2023')">2023</button>
+                <button class="filter-btn" onclick="setFilter('year', '2024')">2024</button>
+                <button class="filter-btn" onclick="setFilter('year', '2025')">2025</button>
+            </div>
+        </div>
+
+        <div id="questions-container">
+            <!-- Epistemology -->
+            <div class="unit-section" data-unit="epistemology">
+                <h2>Epistemology</h2>
+                
+                <div class="question-card" data-marks="3" data-year="Sample">
+                    <div class="question-meta"><span>Sample paper</span><span>3 marks | Scepticism</span></div>
+                    <div class="question-text">What is philosophical scepticism?</div>
+                    <div class="practice-area"><textarea placeholder="Have a go at writing your answer here..."></textarea><span class="save-note">Practice workspace</span></div>
+                </div>
+                <div class="question-card" data-marks="3" data-year="2019">
+                    <div class="question-meta"><span>2019</span><span>3 marks | Definition of knowledge</span></div>
+                    <div class="question-text">Define (a) acquaintance knowledge, (b) ability knowledge, and (c) propositional knowledge.</div>
+                    <div class="practice-area"><textarea placeholder="Have a go at writing your answer here..."></textarea><span class="save-note">Practice workspace</span></div>
+                </div>
+                <div class="question-card" data-marks="3" data-year="2020">
+                    <div class="question-meta"><span>2020</span><span>3 marks | Rationalism</span></div>
+                    <div class="question-text">What does Descartes mean by ‘clear and distinct ideas’?</div>
+                    <div class="practice-area"><textarea placeholder="Have a go at writing your answer here..."></textarea><span class="save-note">Practice workspace</span></div>
+                </div>
+                <div class="question-card" data-marks="3" data-year="2021">
+                    <div class="question-meta"><span>2021</span><span>3 marks | Sources of knowledge</span></div>
+                    <div class="question-text">What is the difference between a priori and a posteriori knowledge?</div>
+                    <div class="practice-area"><textarea placeholder="Have a go at writing your answer here..."></textarea><span class="save-note">Practice workspace</span></div>
+                </div>
+                <div class="question-card" data-marks="3" data-year="2022">
+                    <div class="question-meta"><span>2022</span><span>3 marks | Innatism</span></div>
+                    <div class="question-text">What is the difference between a necessary truth and a contingent truth?</div>
+                    <div class="practice-area"><textarea placeholder="Have a go at writing your answer here..."></textarea><span class="save-note">Practice workspace</span></div>
+                </div>
+                <div class="question-card" data-marks="3" data-year="2023">
+                    <div class="question-meta"><span>2023</span><span>3 marks | Perception</span></div>
+                    <div class="question-text">What is the difference between direct realism and indirect realism?</div>
+                    <div class="practice-area"><textarea placeholder="Have a go at writing your answer here..."></textarea><span class="save-note">Practice workspace</span></div>
+                </div>
+                <div class="question-card" data-marks="3" data-year="2024">
+                    <div class="question-meta"><span>2024</span><span>3 marks | Definition of knowledge</span></div>
+                    <div class="question-text">What is meant by (a) a necessary condition and (b) a sufficient condition?</div>
+                    <div class="practice-area"><textarea placeholder="Have a go at writing your answer here..."></textarea><span class="save-note">Practice workspace</span></div>
+                </div>
+                <div class="question-card" data-marks="3" data-year="2025">
+                    <div class="question-meta"><span>2025</span><span>3 marks | Sources of knowledge</span></div>
+                    <div class="question-text">What is the difference between analytic truths and synthetic truths?</div>
+                    <div class="practice-area"><textarea placeholder="Have a go at writing your answer here..."></textarea><span class="save-note">Practice workspace</span></div>
+                </div>
+
+                <div class="question-card" data-marks="5" data-year="Sample">
+                    <div class="question-meta"><span>Sample paper</span><span>5 marks | Perception</span></div>
+                    <div class="question-text">Explain one way in which a direct realist could respond to the argument from illusion.</div>
+                    <div class="practice-area"><textarea placeholder="Have a go at writing your answer here..."></textarea><span class="save-note">Practice workspace</span></div>
+                </div>
+                <div class="question-card" data-marks="5" data-year="Sample">
+                    <div class="question-meta"><span>Sample paper</span><span>5 marks | Perception</span></div>
+                    <div class="question-text">Explain how Berkeley’s idealism differs from indirect realism.</div>
+                    <div class="practice-area"><textarea placeholder="Have a go at writing your answer here..."></textarea><span class="save-note">Practice workspace</span></div>
+                </div>
+                <div class="question-card" data-marks="5" data-year="2019">
+                    <div class="question-meta"><span>2019</span><span>5 marks | Perception</span></div>
+                    <div class="question-text">Explain Berkeley’s ‘Master’ argument</div>
+                    <div class="practice-area"><textarea placeholder="Have a go at writing your answer here..."></textarea><span class="save-note">Practice workspace</span></div>
+                </div>
+                <div class="question-card" data-marks="5" data-year="2019">
+                    <div class="question-meta"><span>2019</span><span>5 marks | Rationalism</span></div>
+                    <div class="question-text">Explain Descartes’ cogito as an example of an a priori intuition.</div>
+                    <div class="practice-area"><textarea placeholder="Have a go at writing your answer here..."></textarea><span class="save-note">Practice workspace</span></div>
+                </div>
+                <div class="question-card" data-marks="5" data-year="2020">
+                    <div class="question-meta"><span>2020</span><span>5 marks | Perception</span></div>
+                    <div class="question-text">Explain why there might be a problem with the role played by God in Berkeley’s idealism</div>
+                    <div class="practice-area"><textarea placeholder="Have a go at writing your answer here..."></textarea><span class="save-note">Practice workspace</span></div>
+                </div>
+                <div class="question-card" data-marks="5" data-year="2020">
+                    <div class="question-meta"><span>2020</span><span>5 marks | Definition of knowledge</span></div>
+                    <div class="question-text">Explain the view that belief is not a necessary condition for knowledge</div>
+                    <div class="practice-area"><textarea placeholder="Have a go at writing your answer here..."></textarea><span class="save-note">Practice workspace</span></div>
+                </div>
+                <div class="question-card" data-marks="5" data-year="2021">
+                    <div class="question-meta"><span>2021</span><span>5 marks | Empiricism</span></div>
+                    <div class="question-text">Explain the view that the mind is ‘tabula rasa’ at birth</div>
+                    <div class="practice-area"><textarea placeholder="Have a go at writing your answer here..."></textarea><span class="save-note">Practice workspace</span></div>
+                </div>
+                <div class="question-card" data-marks="5" data-year="2021">
+                    <div class="question-meta"><span>2021</span><span>5 marks | Scepticism</span></div>
+                    <div class="question-text">Explain Descartes’ third ‘wave of doubt’</div>
+                    <div class="practice-area"><textarea placeholder="Have a go at writing your answer here..."></textarea><span class="save-note">Practice workspace</span></div>
+                </div>
+                <div class="question-card" data-marks="5" data-year="2022">
+                    <div class="question-meta"><span>2022</span><span>5 marks | Perception</span></div>
+                    <div class="question-text">Explain how the argument from hallucination presents an issue for direct realism.</div>
+                    <div class="practice-area"><textarea placeholder="Have a go at writing your answer here..."></textarea><span class="save-note">Practice workspace</span></div>
+                </div>
+                <div class="question-card" data-marks="5" data-year="2022">
+                    <div class="question-meta"><span>2022</span><span>5 marks | Definition of knowledge</span></div>
+                    <div class="question-text">Explain the reliabilist definition of knowledge.</div>
+                    <div class="practice-area"><textarea placeholder="Have a go at writing your answer here..."></textarea><span class="save-note">Practice workspace</span></div>
+                </div>
+                <div class="question-card" data-marks="5" data-year="2023">
+                    <div class="question-meta"><span>2023</span><span>5 marks | Perception</span></div>
+                    <div class="question-text">Explain Locke's distinction between primary and secondary qualities.</div>
+                    <div class="practice-area"><textarea placeholder="Have a go at writing your answer here..."></textarea><span class="save-note">Practice workspace</span></div>
+                </div>
+                <div class="question-card" data-marks="5" data-year="2023">
+                    <div class="question-meta"><span>2023</span><span>5 marks | Sources of knowledge</span></div>
+                    <div class="question-text">Explain Hume’s Fork</div>
+                    <div class="practice-area"><textarea placeholder="Have a go at writing your answer here..."></textarea><span class="save-note">Practice workspace</span></div>
+                </div>
+                <div class="question-card" data-marks="5" data-year="2024">
+                    <div class="question-meta"><span>2024</span><span>5 marks | Perception</span></div>
+                    <div class="question-text">How does the argument from perceptual variation present an issue for direct realism?</div>
+                    <div class="practice-area"><textarea placeholder="Have a go at writing your answer here..."></textarea><span class="save-note">Practice workspace</span></div>
+                </div>
+                <div class="question-card" data-marks="5" data-year="2024">
+                    <div class="question-meta"><span>2024</span><span>5 marks | Perception</span></div>
+                    <div class="question-text">Explain how Bertrand Russell responds to scepticism by arguing that the external world is the ‘best hypothesis’.</div>
+                    <div class="practice-area"><textarea placeholder="Have a go at writing your answer here..."></textarea><span class="save-note">Practice workspace</span></div>
+                </div>
+                <div class="question-card" data-marks="5" data-year="2025">
+                    <div class="question-meta"><span>2025</span><span>5 marks | Definition of knowledge</span></div>
+                    <div class="question-text">Explain the tripartite view of propositional knowledge</div>
+                    <div class="practice-area"><textarea placeholder="Have a go at writing your answer here..."></textarea><span class="save-note">Practice workspace</span></div>
+                </div>
+                <div class="question-card" data-marks="5" data-year="2025">
+                    <div class="question-meta"><span>2025</span><span>5 marks | Scepticism</span></div>
+                    <div class="question-text">Explain how local and global scepticism are similar and how they are different</div>
+                    <div class="practice-area"><textarea placeholder="Have a go at writing your answer here..."></textarea><span class="save-note">Practice workspace</span></div>
+                </div>
+
+                <div class="question-card" data-marks="12" data-year="Sample">
+                    <div class="question-meta"><span>Sample paper</span><span>12 marks | Rationalism</span></div>
+                    <div class="question-text">Explain how Descartes argues that we can gain a priori knowledge through intuition and deduction.</div>
+                    <div class="practice-area"><textarea placeholder="Have a go at writing your answer here..."></textarea><span class="save-note">Practice workspace</span></div>
+                </div>
+                <div class="question-card" data-marks="12" data-year="2019">
+                    <div class="question-meta"><span>2019</span><span>12 marks | Perception</span></div>
+                    <div class="question-text">Outline how indirect realism leads to scepticism about the existence of mind-independent objects and explain Locke’s response based on the involuntary nature of our experience.</div>
+                    <div class="practice-area"><textarea placeholder="Have a go at writing your answer here..."></textarea><span class="save-note">Practice workspace</span></div>
+                </div>
+                <div class="question-card" data-marks="12" data-year="2020">
+                    <div class="question-meta"><span>2020</span><span>12 marks | Scepticism</span></div>
+                    <div class="question-text">Outline philosophical scepticism and explain how reliabilism responds to it.</div>
+                    <div class="practice-area"><textarea placeholder="Have a go at writing your answer here..."></textarea><span class="save-note">Practice workspace</span></div>
+                </div>
+                <div class="question-card" data-marks="12" data-year="2021">
+                    <div class="question-meta"><span>2021</span><span>12 marks | Definition of knowledge</span></div>
+                    <div class="question-text">Explain how an account of epistemic virtue can be used to show why Smith lacks knowledge in one of Gettier’s original counter-examples.</div>
+                    <div class="practice-area"><textarea placeholder="Have a go at writing your answer here..."></textarea><span class="save-note">Practice workspace</span></div>
+                </div>
+                <div class="question-card" data-marks="12" data-year="2022">
+                    <div class="question-meta"><span>2022</span><span>12 marks | Perception</span></div>
+                    <div class="question-text">Outline indirect realism and explain Berkeley’s objection that mind-dependent ideas cannot be like mind-independent objects</div>
+                    <div class="practice-area"><textarea placeholder="Have a go at writing your answer here..."></textarea><span class="save-note">Practice workspace</span></div>
+                </div>
+                <div class="question-card" data-marks="12" data-year="2023">
+                    <div class="question-meta"><span>2023</span><span>12 marks | Definition of knowledge</span></div>
+                    <div class="question-text">Explain one of Gettier’s original counter examples and explain how the addition of a ‘no false lemmas’ condition responds to it.</div>
+                    <div class="practice-area"><textarea placeholder="Have a go at writing your answer here..."></textarea><span class="save-note">Practice workspace</span></div>
+                </div>
+                <div class="question-card" data-marks="12" data-year="2024">
+                    <div class="question-meta"><span>2024</span><span>12 marks | Rationalism</span></div>
+                    <div class="question-text">Explain Descartes’ cogito and an empiricist response to it</div>
+                    <div class="practice-area"><textarea placeholder="Have a go at writing your answer here..."></textarea><span class="save-note">Practice workspace</span></div>
+                </div>
+                <div class="question-card" data-marks="12" data-year="2025">
+                    <div class="question-meta"><span>2025</span><span>12 marks | Innatism</span></div>
+                    <div class="question-text">Explain Leibniz's innatism and one of Locke's arguments against this position</div>
+                    <div class="practice-area"><textarea placeholder="Have a go at writing your answer here..."></textarea><span class="save-note">Practice workspace</span></div>
+                </div>
+
+                <div class="question-card" data-marks="25" data-year="Sample">
+                    <div class="question-meta"><span>Sample paper</span><span>25 marks | Definition of knowledge</span></div>
+                    <div class="question-text">How should propositional knowledge be defined?</div>
+                    <a href="25.html" class="plan-link-btn">Plan this 25-mark essay &rarr;</a>
+                </div>
+                <div class="question-card" data-marks="25" data-year="2019">
+                    <div class="question-meta"><span>2019</span><span>25 marks | Innatism</span></div>
+                    <div class="question-text">Do we have innate knowledge?</div>
+                    <a href="25.html" class="plan-link-btn">Plan this 25-mark essay &rarr;</a>
+                </div>
+                <div class="question-card" data-marks="25" data-year="2020">
+                    <div class="question-meta"><span>2020</span><span>25 marks | Perception</span></div>
+                    <div class="question-text">How convincing is direct realism?</div>
+                    <a href="25.html" class="plan-link-btn">Plan this 25-mark essay &rarr;</a>
+                </div>
+                <div class="question-card" data-marks="25" data-year="2021">
+                    <div class="question-meta"><span>2021</span><span>25 marks | Perception</span></div>
+                    <div class="question-text">Is Berkeley’s idealist account of perception convincing?</div>
+                    <a href="25.html" class="plan-link-btn">Plan this 25-mark essay &rarr;</a>
+                </div>
+                <div class="question-card" data-marks="25" data-year="2022">
+                    <div class="question-meta"><span>2022</span><span>25 marks | Rationalism</span></div>
+                    <div class="question-text">To what extent is Descartes’ intuition and deduction thesis successful?</div>
+                    <a href="25.html" class="plan-link-btn">Plan this 25-mark essay &rarr;</a>
+                </div>
+                <div class="question-card" data-marks="25" data-year="2023">
+                    <div class="question-meta"><span>2023</span><span>25 marks | Scepticism</span></div>
+                    <div class="question-text">Are the claims of philosophical scepticism true?</div>
+                    <a href="25.html" class="plan-link-btn">Plan this 25-mark essay &rarr;</a>
+                </div>
+                <div class="question-card" data-marks="25" data-year="2024">
+                    <div class="question-meta"><span>2024</span><span>25 marks | Definition of knowledge</span></div>
+                    <div class="question-text">Is there a successful way in which propositional knowledge can be defined?</div>
+                    <a href="25.html" class="plan-link-btn">Plan this 25-mark essay &rarr;</a>
+                </div>
+                <div class="question-card" data-marks="25" data-year="2025">
+                    <div class="question-meta"><span>2025</span><span>25 marks | Perception</span></div>
+                    <div class="question-text">Is indirect realism convincing?</div>
+                    <a href="25.html" class="plan-link-btn">Plan this 25-mark essay &rarr;</a>
+                </div>
+            </div>
+
+            <!-- Moral Philosophy -->
+            <div class="unit-section" data-unit="moral">
+                <h2>Moral philosophy</h2>
+                
+                <div class="question-card" data-marks="3" data-year="Sample">
+                    <div class="question-meta"><span>Sample paper</span><span>3 marks | AVE</span></div>
+                    <div class="question-text">Briefly explain why Aristotle thinks that pleasure is not the only good.</div>
+                    <div class="practice-area"><textarea placeholder="Have a go at writing your answer here..."></textarea><span class="save-note">Practice workspace</span></div>
+                </div>
+                <div class="question-card" data-marks="3" data-year="2019">
+                    <div class="question-meta"><span>2019</span><span>3 marks | Meta-ethics</span></div>
+                    <div class="question-text">What is moral anti-realism?</div>
+                    <div class="practice-area"><textarea placeholder="Have a go at writing your answer here..."></textarea><span class="save-note">Practice workspace</span></div>
+                </div>
+                <div class="question-card" data-marks="3" data-year="2020">
+                    <div class="question-meta"><span>2020</span><span>3 marks | Meta-ethics</span></div>
+                    <div class="question-text">Outline Ayer’s verification principle</div>
+                    <div class="practice-area"><textarea placeholder="Have a go at writing your answer here..."></textarea><span class="save-note">Practice workspace</span></div>
+                </div>
+                <div class="question-card" data-marks="3" data-year="2021">
+                    <div class="question-meta"><span>2021</span><span>3 marks | Meta-ethics</span></div>
+                    <div class="question-text">What is the difference between cognitivism and non-cognitivism about ethical language?</div>
+                    <div class="practice-area"><textarea placeholder="Have a go at writing your answer here..."></textarea><span class="save-note">Practice workspace</span></div>
+                </div>
+                <div class="question-card" data-marks="3" data-year="2022">
+                    <div class="question-meta"><span>2022</span><span>3 marks | Kant</span></div>
+                    <div class="question-text">What does Kant mean by ‘hypothetical imperative’?</div>
+                    <div class="practice-area"><textarea placeholder="Have a go at writing your answer here..."></textarea><span class="save-note">Practice workspace</span></div>
+                </div>
+                <div class="question-card" data-marks="3" data-year="2023">
+                    <div class="question-meta"><span>2023</span><span>3 marks | Meta-ethics</span></div>
+                    <div class="question-text">What is the difference between moral naturalism and moral non-naturalism?</div>
+                    <div class="practice-area"><textarea placeholder="Have a go at writing your answer here..."></textarea><span class="save-note">Practice workspace</span></div>
+                </div>
+                <div class="question-card" data-marks="3" data-year="2024">
+                    <div class="question-meta"><span>2024</span><span>3 marks | Meta-ethics</span></div>
+                    <div class="question-text">State Ayer’s verification principle</div>
+                    <div class="practice-area"><textarea placeholder="Have a go at writing your answer here..."></textarea><span class="save-note">Practice workspace</span></div>
+                </div>
+                <div class="question-card" data-marks="3" data-year="2025">
+                    <div class="question-meta"><span>2025</span><span>3 marks | AVE</span></div>
+                    <div class="question-text">What, for Aristotle, is the difference between voluntary and involuntary actions?</div>
+                    <div class="practice-area"><textarea placeholder="Have a go at writing your answer here..."></textarea><span class="save-note">Practice workspace</span></div>
+                </div>
+
+                <div class="question-card" data-marks="5" data-year="Sample">
+                    <div class="question-meta"><span>Sample paper</span><span>5 marks | Meta-ethics</span></div>
+                    <div class="question-text">Explain why emotivism is a non-cognitivist theory of ethical language.</div>
+                    <div class="practice-area"><textarea placeholder="Have a go at writing your answer here..."></textarea><span class="save-note">Practice workspace</span></div>
+                </div>
+                <div class="question-card" data-marks="5" data-year="Sample">
+                    <div class="question-meta"><span>Sample paper</span><span>5 marks | AVE</span></div>
+                    <div class="question-text">Explain the analogy drawn between virtues and skills within Aristotelian ethics.</div>
+                    <div class="practice-area"><textarea placeholder="Have a go at writing your answer here..."></textarea><span class="save-note">Practice workspace</span></div>
+                </div>
+                <div class="question-card" data-marks="5" data-year="2019">
+                    <div class="question-meta"><span>2019</span><span>5 marks | Meta-ethics</span></div>
+                    <div class="question-text">Explain why Hume thinks that moral judgements are not beliefs</div>
+                    <div class="practice-area"><textarea placeholder="Have a go at writing your answer here..."></textarea><span class="save-note">Practice workspace</span></div>
+                </div>
+                <div class="question-card" data-marks="5" data-year="2019">
+                    <div class="question-meta"><span>2019</span><span>5 marks | Kant</span></div>
+                    <div class="question-text">Explain Kant’s distinction between acting in accordance with duty and acting out of duty.</div>
+                    <div class="practice-area"><textarea placeholder="Have a go at writing your answer here..."></textarea><span class="save-note">Practice workspace</span></div>
+                </div>
+                <div class="question-card" data-marks="5" data-year="2020">
+                    <div class="question-meta"><span>2020</span><span>5 marks | Meta-ethics</span></div>
+                    <div class="question-text">Explain Moore’s ‘open question’ argument</div>
+                    <div class="practice-area"><textarea placeholder="Have a go at writing your answer here..."></textarea><span class="save-note">Practice workspace</span></div>
+                </div>
+                <div class="question-card" data-marks="5" data-year="2020">
+                    <div class="question-meta"><span>2020</span><span>5 marks | Kant</span></div>
+                    <div class="question-text">Explain Kant’s first formulation of the categorical imperative</div>
+                    <div class="practice-area"><textarea placeholder="Have a go at writing your answer here..."></textarea><span class="save-note">Practice workspace</span></div>
+                </div>
+                <div class="question-card" data-marks="5" data-year="2021">
+                    <div class="question-meta"><span>2021</span><span>5 marks | Meta-ethics</span></div>
+                    <div class="question-text">Explain what Mackie’s error theory claims.</div>
+                    <div class="practice-area"><textarea placeholder="Have a go at writing your answer here..."></textarea><span class="save-note">Practice workspace</span></div>
+                </div>
+                <div class="question-card" data-marks="5" data-year="2021">
+                    <div class="question-meta"><span>2021</span><span>5 marks | Utilitarianism</span></div>
+                    <div class="question-text">Explain why utilitarianism has an issue with partiality.</div>
+                    <div class="practice-area"><textarea placeholder="Have a go at writing your answer here..."></textarea><span class="save-note">Practice workspace</span></div>
+                </div>
+                <div class="question-card" data-marks="5" data-year="2022">
+                    <div class="question-meta"><span>2022</span><span>5 marks | AVE</span></div>
+                    <div class="question-text">Explain the ‘skill analogy’ that Aristotle uses in his account of virtue.</div>
+                    <div class="practice-area"><textarea placeholder="Have a go at writing your answer here..."></textarea><span class="save-note">Practice workspace</span></div>
+                </div>
+                <div class="question-card" data-marks="5" data-year="2022">
+                    <div class="question-meta"><span>2022</span><span>5 marks | Kant</span></div>
+                    <div class="question-text">Explain the criticism that Kant ignores the value of certain motives.</div>
+                    <div class="practice-area"><textarea placeholder="Have a go at writing your answer here..."></textarea><span class="save-note">Practice workspace</span></div>
+                </div>
+                <div class="question-card" data-marks="5" data-year="2023">
+                    <div class="question-meta"><span>2023</span><span>5 marks | Utilitarianism</span></div>
+                    <div class="question-text">Explain the difference between Bentham’s quantitative hedonistic utilitarianism and Mill’s qualitative hedonistic utilitarianism.</div>
+                    <div class="practice-area"><textarea placeholder="Have a go at writing your answer here..."></textarea><span class="save-note">Practice workspace</span></div>
+                </div>
+                <div class="question-card" data-marks="5" data-year="2023">
+                    <div class="question-meta"><span>2023</span><span>5 marks | Meta-ethics</span></div>
+                    <div class="question-text">Explain Hare’s prescriptivism.</div>
+                    <div class="practice-area"><textarea placeholder="Have a go at writing your answer here..."></textarea><span class="save-note">Practice workspace</span></div>
+                </div>
+                <div class="question-card" data-marks="5" data-year="2024">
+                    <div class="question-meta"><span>2024</span><span>5 marks | AVE</span></div>
+                    <div class="question-text">Explain Aristotle’s function argument</div>
+                    <div class="practice-area"><textarea placeholder="Have a go at writing your answer here..."></textarea><span class="save-note">Practice workspace</span></div>
+                </div>
+                <div class="question-card" data-marks="5" data-year="2024">
+                    <div class="question-meta"><span>2024</span><span>5 marks | Meta-ethics</span></div>
+                    <div class="question-text">Explain Mackie’s argument from relativity against moral realism</div>
+                    <div class="practice-area"><textarea placeholder="Have a go at writing your answer here..."></textarea><span class="save-note">Practice workspace</span></div>
+                </div>
+                <div class="question-card" data-marks="5" data-year="2025">
+                    <div class="question-meta"><span>2025</span><span>5 marks | Utilitarianism</span></div>
+                    <div class="question-text">Explain the difference between act utilitarianism and rule utilitarianism</div>
+                    <div class="practice-area"><textarea placeholder="Have a go at writing your answer here..."></textarea><span class="save-note">Practice workspace</span></div>
+                </div>
+                <div class="question-card" data-marks="5" data-year="2025">
+                    <div class="question-meta"><span>2025</span><span>5 marks | AVE</span></div>
+                    <div class="question-text">Explain what Aristotle meant by eudaimonia</div>
+                    <div class="practice-area"><textarea placeholder="Have a go at writing your answer here..."></textarea><span class="save-note">Practice workspace</span></div>
+                </div>
+
+                <div class="question-card" data-marks="12" data-year="Sample">
+                    <div class="question-meta"><span>Sample paper</span><span>12 marks | Kant</span></div>
+                    <div class="question-text">Explain how Kant’s deontological ethics can be applied to the question of whether we should ever tell lies.</div>
+                    <div class="practice-area"><textarea placeholder="Have a go at writing your answer here..."></textarea><span class="save-note">Practice workspace</span></div>
+                </div>
+                <div class="question-card" data-marks="12" data-year="2019">
+                    <div class="question-meta"><span>2019</span><span>12 marks | AVE</span></div>
+                    <div class="question-text">Explain how Aristotelian virtue ethics might be applied to the issue of simulated killing.</div>
+                    <div class="practice-area"><textarea placeholder="Have a go at writing your answer here..."></textarea><span class="save-note">Practice workspace</span></div>
+                </div>
+                <div class="question-card" data-marks="12" data-year="2020">
+                    <div class="question-meta"><span>2020</span><span>12 marks | Utilitarianism</span></div>
+                    <div class="question-text">Explain Bentham’s Utilitarianism and how Nozick’s experience machine challenges this view</div>
+                    <div class="practice-area"><textarea placeholder="Have a go at writing your answer here..."></textarea><span class="save-note">Practice workspace</span></div>
+                </div>
+                <div class="question-card" data-marks="12" data-year="2021">
+                    <div class="question-meta"><span>2021</span><span>12 marks | AVE</span></div>
+                    <div class="question-text">Explain Aristotle’s view on how we develop moral character and how this is challenged by the issue of circularity in his definition of ‘virtuous acts’.</div>
+                    <div class="practice-area"><textarea placeholder="Have a go at writing your answer here..."></textarea><span class="save-note">Practice workspace</span></div>
+                </div>
+                <div class="question-card" data-marks="12" data-year="2022">
+                    <div class="question-meta"><span>2022</span><span>12 marks | Utilitarianism</span></div>
+                    <div class="question-text">Explain hedonistic utilitarianism and explain the criticism that it ignores the moral integrity of the individual</div>
+                    <div class="practice-area"><textarea placeholder="Have a go at writing your answer here..."></textarea><span class="save-note">Practice workspace</span></div>
+                </div>
+                <div class="question-card" data-marks="12" data-year="2023">
+                    <div class="question-meta"><span>2023</span><span>12 marks | Kant</span></div>
+                    <div class="question-text">Explain how Kant’s deontological approach to ethics might be applied to the issue of stealing.</div>
+                    <div class="practice-area"><textarea placeholder="Have a go at writing your answer here..."></textarea><span class="save-note">Practice workspace</span></div>
+                </div>
+                <div class="question-card" data-marks="12" data-year="2024">
+                    <div class="question-meta"><span>2024</span><span>12 marks | Kant</span></div>
+                    <div class="question-text">Explain how Kantian deontological ethics might be applied to the issue of simulated killing</div>
+                    <div class="practice-area"><textarea placeholder="Have a go at writing your answer here..."></textarea><span class="save-note">Practice workspace</span></div>
+                </div>
+                <div class="question-card" data-marks="12" data-year="2025">
+                    <div class="question-meta"><span>2025</span><span>12 marks | Kant</span></div>
+                    <div class="question-text">Explain Kant's first formulation of the categorical imperative and explain the issue that not all universalisable maxims are distinctly moral</div>
+                    <div class="practice-area"><textarea placeholder="Have a go at writing your answer here..."></textarea><span class="save-note">Practice workspace</span></div>
+                </div>
+
+                <div class="question-card" data-marks="25" data-year="Sample">
+                    <div class="question-meta"><span>Sample paper</span><span>25 marks | Utilitarianism</span></div>
+                    <div class="question-text">How convincing is utilitarianism as an account of what makes an action morally right?</div>
+                    <a href="25.html" class="plan-link-btn">Plan this 25-mark essay &rarr;</a>
+                </div>
+                <div class="question-card" data-marks="25" data-year="2019">
+                    <div class="question-meta"><span>2019</span><span>25 marks | Utilitarianism</span></div>
+                    <div class="question-text">Are utilitarians correct when they say that it is morally right to maximise utility?</div>
+                    <a href="25.html" class="plan-link-btn">Plan this 25-mark essay &rarr;</a>
+                </div>
+                <div class="question-card" data-marks="25" data-year="2020">
+                    <div class="question-meta"><span>2020</span><span>25 marks | AVE</span></div>
+                    <div class="question-text">How convincing is Aristotelian virtue ethics?</div>
+                    <a href="25.html" class="plan-link-btn">Plan this 25-mark essay &rarr;</a>
+                </div>
+                <div class="question-card" data-marks="25" data-year="2021">
+                    <div class="question-meta"><span>2021</span><span>25 marks | Kant</span></div>
+                    <div class="question-text">To what extent can Kantian deontological ethics be defended?</div>
+                    <a href="25.html" class="plan-link-btn">Plan this 25-mark essay &rarr;</a>
+                </div>
+                <div class="question-card" data-marks="25" data-year="2022">
+                    <div class="question-meta"><span>2022</span><span>25 marks | Meta-ethics</span></div>
+                    <div class="question-text">Is moral anti-realism the correct meta-ethical view?</div>
+                    <a href="25.html" class="plan-link-btn">Plan this 25-mark essay &rarr;</a>
+                </div>
+                <div class="question-card" data-marks="25" data-year="2023">
+                    <div class="question-meta"><span>2023</span><span>25 marks | AVE</span></div>
+                    <div class="question-text">To what extent can Aristotelian virtue ethics be defended?</div>
+                    <a href="25.html" class="plan-link-btn">Plan this 25-mark essay &rarr;</a>
+                </div>
+                <div class="question-card" data-marks="25" data-year="2024">
+                    <div class="question-meta"><span>2024</span><span>25 marks | Utilitarianism</span></div>
+                    <div class="question-text">Can utilitarianism be successfully defended?</div>
+                    <a href="25.html" class="plan-link-btn">Plan this 25-mark essay &rarr;</a>
+                </div>
+                <div class="question-card" data-marks="25" data-year="2025">
+                    <div class="question-meta"><span>2025</span><span>25 marks | Meta-ethics</span></div>
+                    <div class="question-text">Are moral realists right to claim that mind-independent moral facts/properties exist?</div>
+                    <a href="25.html" class="plan-link-btn">Plan this 25-mark essay &rarr;</a>
+                </div>
+            </div>
+
+            <!-- Metaphysics of God -->
+            <div class="unit-section" data-unit="god">
+                <h2>Metaphysics of god</h2>
+                
+                <div class="question-card" data-marks="3" data-year="Sample">
+                    <div class="question-meta"><span>Sample paper</span><span>3 marks | Attributes of God</span></div>
+                    <div class="question-text">Explain the difference between the claims ‘God is eternal’ and ‘God is everlasting’.</div>
+                    <div class="practice-area"><textarea placeholder="Have a go at writing your answer here..."></textarea><span class="save-note">Practice workspace</span></div>
+                </div>
+                <div class="question-card" data-marks="3" data-year="2019">
+                    <div class="question-meta"><span>2019</span><span>3 marks | Problem of evil</span></div>
+                    <div class="question-text">What is the difference between moral and natural evil?</div>
+                    <div class="practice-area"><textarea placeholder="Have a go at writing your answer here..."></textarea><span class="save-note">Practice workspace</span></div>
+                </div>
+                <div class="question-card" data-marks="3" data-year="2020">
+                    <div class="question-meta"><span>2020</span><span>3 marks | Religious language</span></div>
+                    <div class="question-text">What does Hick mean by ‘eschatological verification’?</div>
+                    <div class="practice-area"><textarea placeholder="Have a go at writing your answer here..."></textarea><span class="save-note">Practice workspace</span></div>
+                </div>
+                <div class="question-card" data-marks="3" data-year="2021">
+                    <div class="question-meta"><span>2021</span><span>3 marks | Religious language</span></div>
+                    <div class="question-text">What does it mean to say that a person’s religious claim is unfalsifiable?</div>
+                    <div class="practice-area"><textarea placeholder="Have a go at writing your answer here..."></textarea><span class="save-note">Practice workspace</span></div>
+                </div>
+                <div class="question-card" data-marks="3" data-year="2022">
+                    <div class="question-meta"><span>2022</span><span>3 marks | Attributes of God</span></div>
+                    <div class="question-text">State the definitions of ‘God’ used by (a) Anselm and (b) Descartes in their ontological arguments.</div>
+                    <div class="practice-area"><textarea placeholder="Have a go at writing your answer here..."></textarea><span class="save-note">Practice workspace</span></div>
+                </div>
+                <div class="question-card" data-marks="3" data-year="2023">
+                    <div class="question-meta"><span>2023</span><span>3 marks | Design argument</span></div>
+                    <div class="question-text">What does Swinburne mean by ‘temporal order/regularity’ in his design argument?</div>
+                    <div class="practice-area"><textarea placeholder="Have a go at writing your answer here..."></textarea><span class="save-note">Practice workspace</span></div>
+                </div>
+                <div class="question-card" data-marks="3" data-year="2024">
+                    <div class="question-meta"><span>2024</span><span>3 marks | Attributes of God</span></div>
+                    <div class="question-text">What does it mean to say God is (a) ‘omniscient’ and (b) ‘omnipotent’?</div>
+                    <div class="practice-area"><textarea placeholder="Have a go at writing your answer here..."></textarea><span class="save-note">Practice workspace</span></div>
+                </div>
+                <div class="question-card" data-marks="3" data-year="2025">
+                    <div class="question-meta"><span>2025</span><span>3 marks | Attributes of God</span></div>
+                    <div class="question-text">State the difference between God being everlasting and God being external.</div>
+                    <div class="practice-area"><textarea placeholder="Have a go at writing your answer here..."></textarea><span class="save-note">Practice workspace</span></div>
+                </div>
+
+                <div class="question-card" data-marks="5" data-year="Sample">
+                    <div class="question-meta"><span>Sample paper</span><span>5 marks | Problem of evil</span></div>
+                    <div class="question-text">Explain the evidential problem of evil.</div>
+                    <div class="practice-area"><textarea placeholder="Have a go at writing your answer here..."></textarea><span class="save-note">Practice workspace</span></div>
+                </div>
+                <div class="question-card" data-marks="5" data-year="Sample">
+                    <div class="question-meta"><span>Sample paper</span><span>5 marks | Cosmological argument</span></div>
+                    <div class="question-text">Outline Aquinas’ Third Way.</div>
+                    <div class="practice-area"><textarea placeholder="Have a go at writing your answer here..."></textarea><span class="save-note">Practice workspace</span></div>
+                </div>
+                <div class="question-card" data-marks="5" data-year="2019">
+                    <div class="question-meta"><span>2019</span><span>5 marks | Religious language</span></div>
+                    <div class="question-text">Explain the difference between cognitivism and non-cognitivism about religious language.</div>
+                    <div class="practice-area"><textarea placeholder="Have a go at writing your answer here..."></textarea><span class="save-note">Practice workspace</span></div>
+                </div>
+                <div class="question-card" data-marks="5" data-year="2019">
+                    <div class="question-meta"><span>2019</span><span>5 marks | Attributes of God</span></div>
+                    <div class="question-text">Outline the paradox of the stone.</div>
+                    <div class="practice-area"><textarea placeholder="Have a go at writing your answer here..."></textarea><span class="save-note">Practice workspace</span></div>
+                </div>
+                <div class="question-card" data-marks="5" data-year="2020">
+                    <div class="question-meta"><span>2020</span><span>5 marks | Cosmological argument</span></div>
+                    <div class="question-text">Outline Leibniz’s cosmological argument from the principle of sufficient reason</div>
+                    <div class="practice-area"><textarea placeholder="Have a go at writing your answer here..."></textarea><span class="save-note">Practice workspace</span></div>
+                </div>
+                <div class="question-card" data-marks="5" data-year="2020">
+                    <div class="question-meta"><span>2020</span><span>5 marks | Arguments for the existence of God</span></div>
+                    <div class="question-text">Explain how deductive and inductive arguments for the existence of God differ</div>
+                    <div class="practice-area"><textarea placeholder="Have a go at writing your answer here..."></textarea><span class="save-note">Practice workspace</span></div>
+                </div>
+                <div class="question-card" data-marks="5" data-year="2021">
+                    <div class="question-meta"><span>2021</span><span>5 marks | Cosmological argument</span></div>
+                    <div class="question-text">Outline Aquinas’ 1st Way (the argument from motion)</div>
+                    <div class="practice-area"><textarea placeholder="Have a go at writing your answer here..."></textarea><span class="save-note">Practice workspace</span></div>
+                </div>
+                <div class="question-card" data-marks="5" data-year="2021">
+                    <div class="question-meta"><span>2021</span><span>5 marks | Attributes of God</span></div>
+                    <div class="question-text">Explain the argument that the existence of an omniscient God is incompatible with free human beings.</div>
+                    <div class="practice-area"><textarea placeholder="Have a go at writing your answer here..."></textarea><span class="save-note">Practice workspace</span></div>
+                </div>
+                <div class="question-card" data-marks="5" data-year="2022">
+                    <div class="question-meta"><span>2022</span><span>5 marks | Design argument</span></div>
+                    <div class="question-text">Explain the design argument from analogy as presented by Hume</div>
+                    <div class="practice-area"><textarea placeholder="Have a go at writing your answer here..."></textarea><span class="save-note">Practice workspace</span></div>
+                </div>
+                <div class="question-card" data-marks="5" data-year="2022">
+                    <div class="question-meta"><span>2022</span><span>5 marks | Cosmological argument</span></div>
+                    <div class="question-text">Explain how Russell objects to the cosmological argument by arguing that it commits the fallacy of composition.</div>
+                    <div class="practice-area"><textarea placeholder="Have a go at writing your answer here..."></textarea><span class="save-note">Practice workspace</span></div>
+                </div>
+                <div class="question-card" data-marks="5" data-year="2023">
+                    <div class="question-meta"><span>2023</span><span>5 marks | Ontological argument</span></div>
+                    <div class="question-text">Outline Norman Malcolm’s ontological argument.</div>
+                    <div class="practice-area"><textarea placeholder="Have a go at writing your answer here..."></textarea><span class="save-note">Practice workspace</span></div>
+                </div>
+                <div class="question-card" data-marks="5" data-year="2023">
+                    <div class="question-meta"><span>2023</span><span>5 marks | Religious language</span></div>
+                    <div class="question-text">Explain how Ayer’s verification principle challenges the status of religious language</div>
+                    <div class="practice-area"><textarea placeholder="Have a go at writing your answer here..."></textarea><span class="save-note">Practice workspace</span></div>
+                </div>
+                <div class="question-card" data-marks="5" data-year="2024">
+                    <div class="question-meta"><span>2024</span><span>5 marks | Cosmological argument</span></div>
+                    <div class="question-text">Explain Descartes’ version of the cosmological argument based on his continuing existence</div>
+                    <div class="practice-area"><textarea placeholder="Have a go at writing your answer here..."></textarea><span class="save-note">Practice workspace</span></div>
+                </div>
+                <div class="question-card" data-marks="5" data-year="2024">
+                    <div class="question-meta"><span>2024</span><span>5 marks | Ontological argument</span></div>
+                    <div class="question-text">Explain how an empiricist might object to the ontological argument as an a priori proof for God’s existence</div>
+                    <div class="practice-area"><textarea placeholder="Have a go at writing your answer here..."></textarea><span class="save-note">Practice workspace</span></div>
+                </div>
+                <div class="question-card" data-marks="5" data-year="2025">
+                    <div class="question-meta"><span>2025</span><span>5 marks | Cosmological argument</span></div>
+                    <div class="question-text">Explain Aquinas' Second Way (his argument from temporal causation)</div>
+                    <div class="practice-area"><textarea placeholder="Have a go at writing your answer here..."></textarea><span class="save-note">Practice workspace</span></div>
+                </div>
+                <div class="question-card" data-marks="5" data-year="2025">
+                    <div class="question-meta"><span>2025</span><span>5 marks | Religious language</span></div>
+                    <div class="question-text">Explain Basil Mitchell's view about religious language using his 'Partisan' story</div>
+                    <div class="practice-area"><textarea placeholder="Have a go at writing your answer here..."></textarea><span class="save-note">Practice workspace</span></div>
+                </div>
+
+                <div class="question-card" data-marks="12" data-year="Sample">
+                    <div class="question-meta"><span>Sample paper</span><span>12 marks | Design argument</span></div>
+                    <div class="question-text">Compare and contrast Paley’s and Swinburne’s versions of the design argument</div>
+                    <div class="practice-area"><textarea placeholder="Have a go at writing your answer here..."></textarea><span class="save-note">Practice workspace</span></div>
+                </div>
+                <div class="question-card" data-marks="12" data-year="2019">
+                    <div class="question-meta"><span>2019</span><span>12 marks | Ontological argument</span></div>
+                    <div class="question-text">Outline Descartes’ ontological argument and explain Kant’s objection to it.</div>
+                    <div class="practice-area"><textarea placeholder="Have a go at writing your answer here..."></textarea><span class="save-note">Practice workspace</span></div>
+                </div>
+                <div class="question-card" data-marks="12" data-year="2020">
+                    <div class="question-meta"><span>2020</span><span>12 marks | Ontological argument</span></div>
+                    <div class="question-text">Outline St Anselm’s ontological argument and explain Gaunilo’s perfect island objection.</div>
+                    <div class="practice-area"><textarea placeholder="Have a go at writing your answer here..."></textarea><span class="save-note">Practice workspace</span></div>
+                </div>
+                <div class="question-card" data-marks="12" data-year="2021">
+                    <div class="question-meta"><span>2021</span><span>12 marks | Problem of evil</span></div>
+                    <div class="question-text">Outline the logical problem of evil and explain the Free Will Defence.</div>
+                    <div class="practice-area"><textarea placeholder="Have a go at writing your answer here..."></textarea><span class="save-note">Practice workspace</span></div>
+                </div>
+                <div class="question-card" data-marks="12" data-year="2022">
+                    <div class="question-meta"><span>2022</span><span>12 marks | Religious language</span></div>
+                    <div class="question-text">Explain Flew's view on religious language and explain how Hare responds to this using the notion of a ‘blik’.</div>
+                    <div class="practice-area"><textarea placeholder="Have a go at writing your answer here..."></textarea><span class="save-note">Practice workspace</span></div>
+                </div>
+                <div class="question-card" data-marks="12" data-year="2023">
+                    <div class="question-meta"><span>2023</span><span>12 marks | Attributes of God</span></div>
+                    <div class="question-text">Outline what it means to say that God is supremely good (omnibenevolent) and explain how the Euthyphro dilemma challenges this attribute.</div>
+                    <div class="practice-area"><textarea placeholder="Have a go at writing your answer here..."></textarea><span class="save-note">Practice workspace</span></div>
+                </div>
+                <div class="question-card" data-marks="12" data-year="2024">
+                    <div class="question-meta"><span>2024</span><span>12 marks | Design argument</span></div>
+                    <div class="question-text">Explain the design argument as presented by Hume and his objection that it fails as it is an argument from a unique case.</div>
+                    <div class="practice-area"><textarea placeholder="Have a go at writing your answer here..."></textarea><span class="save-note">Practice workspace</span></div>
+                </div>
+                <div class="question-card" data-marks="12" data-year="2025">
+                    <div class="question-meta"><span>2025</span><span>12 marks | Problem of evil</span></div>
+                    <div class="question-text">Explain the evidential problem of evil and how Hick responds using the idea of soul-making.</div>
+                    <div class="practice-area"><textarea placeholder="Have a go at writing your answer here..."></textarea><span class="save-note">Practice workspace</span></div>
+                </div>
+
+                <div class="question-card" data-marks="25" data-year="Sample">
+                    <div class="question-meta"><span>Sample paper</span><span>25 marks | Religious language</span></div>
+                    <div class="question-text">Is religious language meaningful?</div>
+                    <a href="25.html" class="plan-link-btn">Plan this 25-mark essay &rarr;</a>
+                </div>
+                <div class="question-card" data-marks="25" data-year="2019">
+                    <div class="question-meta"><span>2019</span><span>25 marks | Design argument</span></div>
+                    <div class="question-text">How successful is the design argument for the existence of God?</div>
+                    <a href="25.html" class="plan-link-btn">Plan this 25-mark essay &rarr;</a>
+                </div>
+                <div class="question-card" data-marks="25" data-year="2020">
+                    <div class="question-meta"><span>2020</span><span>25 marks | Attributes of God</span></div>
+                    <div class="question-text">Is the concept of God ‘incoherent’?</div>
+                    <a href="25.html" class="plan-link-btn">Plan this 25-mark essay &rarr;</a>
+                </div>
+                <div class="question-card" data-marks="25" data-year="2021">
+                    <div class="question-meta"><span>2021</span><span>25 marks | Ontological argument</span></div>
+                    <div class="question-text">Can God’s existence be proved using an ontological argument?</div>
+                    <a href="25.html" class="plan-link-btn">Plan this 25-mark essay &rarr;</a>
+                </div>
+                <div class="question-card" data-marks="25" data-year="2022">
+                    <div class="question-meta"><span>2022</span><span>25 marks | Problem of evil</span></div>
+                    <div class="question-text">Does the existence of evil disprove the existence of God?</div>
+                    <a href="25.html" class="plan-link-btn">Plan this 25-mark essay &rarr;</a>
+                </div>
+                <div class="question-card" data-marks="25" data-year="2023">
+                    <div class="question-meta"><span>2023</span><span>25 marks | Cosmological argument</span></div>
+                    <div class="question-text">Does the cosmological argument prove God exists?</div>
+                    <a href="25.html" class="plan-link-btn">Plan this 25-mark essay &rarr;</a>
+                </div>
+                <div class="question-card" data-marks="25" data-year="2024">
+                    <div class="question-meta"><span>2024</span><span>25 marks | Religious language</span></div>
+                    <div class="question-text">Can we talk meaningfully about God?</div>
+                    <a href="25.html" class="plan-link-btn">Plan this 25-mark essay &rarr;</a>
+                </div>
+                <div class="question-card" data-marks="25" data-year="2025">
+                    <div class="question-meta"><span>2025</span><span>25 marks | Design argument</span></div>
+                    <div class="question-text">Is the teleological/design argument for the existence of God persuasive?</div>
+                    <a href="25.html" class="plan-link-btn">Plan this 25-mark essay &rarr;</a>
+                </div>
+            </div>
+
+            <!-- Metaphysics of Mind -->
+            <div class="unit-section" data-unit="mind">
+                <h2>Metaphysics of mind</h2>
+                
+                <div class="question-card" data-marks="3" data-year="Sample">
+                    <div class="question-meta"><span>Sample paper</span><span>3 marks | Eliminative materialism</span></div>
+                    <div class="question-text">What do eliminative materialists claim about mental states?</div>
+                    <div class="practice-area"><textarea placeholder="Have a go at writing your answer here..."></textarea><span class="save-note">Practice workspace</span></div>
+                </div>
+                <div class="question-card" data-marks="3" data-year="2019">
+                    <div class="question-meta"><span>2019</span><span>3 marks | Property dualism</span></div>
+                    <div class="question-text">Define qualia.</div>
+                    <div class="practice-area"><textarea placeholder="Have a go at writing your answer here..."></textarea><span class="save-note">Practice workspace</span></div>
+                </div>
+                <div class="question-card" data-marks="3" data-year="2020">
+                    <div class="question-meta"><span>2020</span><span>3 marks | Behaviourism</span></div>
+                    <div class="question-text">What is ‘hard’ behaviourism?</div>
+                    <div class="practice-area"><textarea placeholder="Have a go at writing your answer here..."></textarea><span class="save-note">Practice workspace</span></div>
+                </div>
+                <div class="question-card" data-marks="3" data-year="2021">
+                    <div class="question-meta"><span>2021</span><span>3 marks | Functionalism</span></div>
+                    <div class="question-text">What does functionalism claim about mental states?</div>
+                    <div class="practice-area"><textarea placeholder="Have a go at writing your answer here..."></textarea><span class="save-note">Practice workspace</span></div>
+                </div>
+                <div class="question-card" data-marks="3" data-year="2022">
+                    <div class="question-meta"><span>2022</span><span>3 marks | Property dualism</span></div>
+                    <div class="question-text">What is a philosophical zombie?</div>
+                    <div class="practice-area"><textarea placeholder="Have a go at writing your answer here..."></textarea><span class="save-note">Practice workspace</span></div>
+                </div>
+                <div class="question-card" data-marks="3" data-year="2023">
+                    <div class="question-meta"><span>2023</span><span>3 marks | Mental states</span></div>
+                    <div class="question-text">What are phenomenal properties?</div>
+                    <div class="practice-area"><textarea placeholder="Have a go at writing your answer here..."></textarea><span class="save-note">Practice workspace</span></div>
+                </div>
+                <div class="question-card" data-marks="3" data-year="2024">
+                    <div class="question-meta"><span>2024</span><span>3 marks | Functionalism</span></div>
+                    <div class="question-text">What do functionalists mean when they say mental states can be multiply realised?</div>
+                    <div class="practice-area"><textarea placeholder="Have a go at writing your answer here..."></textarea><span class="save-note">Practice workspace</span></div>
+                </div>
+                <div class="question-card" data-marks="3" data-year="2025">
+                    <div class="question-meta"><span>2025</span><span>3 marks | MBTI</span></div>
+                    <div class="question-text">State what mind-brain type identity theory claims about mental states.</div>
+                    <div class="practice-area"><textarea placeholder="Have a go at writing your answer here..."></textarea><span class="save-note">Practice workspace</span></div>
+                </div>
+
+                <div class="question-card" data-marks="5" data-year="Sample">
+                    <div class="question-meta"><span>Sample paper</span><span>5 marks | Substance dualism</span></div>
+                    <div class="question-text">Outline Descartes’ conceivability argument for substance dualism.</div>
+                    <div class="practice-area"><textarea placeholder="Have a go at writing your answer here..."></textarea><span class="save-note">Practice workspace</span></div>
+                </div>
+                <div class="question-card" data-marks="5" data-year="Sample">
+                    <div class="question-meta"><span>Sample paper</span><span>5 marks | Functionalism</span></div>
+                    <div class="question-text">Explain how Block’s China thought experiment can be used to argue against functionalism.</div>
+                    <div class="practice-area"><textarea placeholder="Have a go at writing your answer here..."></textarea><span class="save-note">Practice workspace</span></div>
+                </div>
+                <div class="question-card" data-marks="5" data-year="2019">
+                    <div class="question-meta"><span>2019</span><span>5 marks | Property dualism</span></div>
+                    <div class="question-text">Outline how the ‘knowledge/Mary argument’ can be applied to functional facts.</div>
+                    <div class="practice-area"><textarea placeholder="Have a go at writing your answer here..."></textarea><span class="save-note">Practice workspace</span></div>
+                </div>
+                <div class="question-card" data-marks="5" data-year="2019">
+                    <div class="question-meta"><span>2019</span><span>5 marks | Substance dualism</span></div>
+                    <div class="question-text">Explain Ryle’s claim that substance dualism makes a ‘category mistake’.</div>
+                    <div class="practice-area"><textarea placeholder="Have a go at writing your answer here..."></textarea><span class="save-note">Practice workspace</span></div>
+                </div>
+                <div class="question-card" data-marks="5" data-year="2020">
+                    <div class="question-meta"><span>2020</span><span>5 marks | Physicalism</span></div>
+                    <div class="question-text">Explain how claims made by eliminative materialism and mind-brain identity theory differ.</div>
+                    <div class="practice-area"><textarea placeholder="Have a go at writing your answer here..."></textarea><span class="save-note">Practice workspace</span></div>
+                </div>
+                <div class="question-card" data-marks="5" data-year="2020">
+                    <div class="question-meta"><span>2020</span><span>5 marks | Substance dualism</span></div>
+                    <div class="question-text">Outline Descartes’ indivisibility argument for substance dualism.</div>
+                    <div class="practice-area"><textarea placeholder="Have a go at writing your answer here..."></textarea><span class="save-note">Practice workspace</span></div>
+                </div>
+                <div class="question-card" data-marks="5" data-year="2021">
+                    <div class="question-meta"><span>2021</span><span>5 marks | Behaviourism</span></div>
+                    <div class="question-text">Explain the view that ‘hard’ behaviourists cannot satisfactorily define mental states due to the multiple realisability of mental states in behaviour.</div>
+                    <div class="practice-area"><textarea placeholder="Have a go at writing your answer here..."></textarea><span class="save-note">Practice workspace</span></div>
+                </div>
+                <div class="question-card" data-marks="5" data-year="2021">
+                    <div class="question-meta"><span>2021</span><span>5 marks | Epiphenomenalism</span></div>
+                    <div class="question-text">Explain how natural selection/evolution poses a challenge for epiphenomenalist dualism.</div>
+                    <div class="practice-area"><textarea placeholder="Have a go at writing your answer here..."></textarea><span class="save-note">Practice workspace</span></div>
+                </div>
+                <div class="question-card" data-marks="5" data-year="2022">
+                    <div class="question-meta"><span>2022</span><span>5 marks | Behaviourism</span></div>
+                    <div class="question-text">Explain why the asymmetry between self-knowledge and knowledge of other people’s mental states is problematic for philosophical behaviourism</div>
+                    <div class="practice-area"><textarea placeholder="Have a go at writing your answer here..."></textarea><span class="save-note">Practice workspace</span></div>
+                </div>
+                <div class="question-card" data-marks="5" data-year="2022">
+                    <div class="question-meta"><span>2022</span><span>5 marks | Functionalism</span></div>
+                    <div class="question-text">Explain the inverted qualia objection to functionalism</div>
+                    <div class="practice-area"><textarea placeholder="Have a go at writing your answer here..."></textarea><span class="save-note">Practice workspace</span></div>
+                </div>
+                <div class="question-card" data-marks="5" data-year="2023">
+                    <div class="question-meta"><span>2023</span><span>5 marks | Dualism</span></div>
+                    <div class="question-text">Explain how substance dualism and property dualism differ</div>
+                    <div class="practice-area"><textarea placeholder="Have a go at writing your answer here..."></textarea><span class="save-note">Practice workspace</span></div>
+                </div>
+                <div class="question-card" data-marks="5" data-year="2023">
+                    <div class="question-meta"><span>2023</span><span>5 marks | Behaviourism</span></div>
+                    <div class="question-text">Explain the issue that ‘Super-Spartans’ pose for ‘hard’ behaviourism</div>
+                    <div class="practice-area"><textarea placeholder="Have a go at writing your answer here..."></textarea><span class="save-note">Practice workspace</span></div>
+                </div>
+                <div class="question-card" data-marks="5" data-year="2024">
+                    <div class="question-meta"><span>2024</span><span>5 marks | Substance dualism</span></div>
+                    <div class="question-text">Explain Descartes’ conceivability argument for substance dualism</div>
+                    <div class="practice-area"><textarea placeholder="Have a go at writing your answer here..."></textarea><span class="save-note">Practice workspace</span></div>
+                </div>
+                <div class="question-card" data-marks="5" data-year="2024">
+                    <div class="question-meta"><span>2024</span><span>5 marks | Eliminative materialism</span></div>
+                    <div class="question-text">Explain why the good predictive and explanatory power of folk-psychology is an issue for eliminative materialism</div>
+                    <div class="practice-area"><textarea placeholder="Have a go at writing your answer here..."></textarea><span class="save-note">Practice workspace</span></div>
+                </div>
+                <div class="question-card" data-marks="5" data-year="2025">
+                    <div class="question-meta"><span>2025</span><span>5 marks | Dualism</span></div>
+                    <div class="question-text">Explain one similarity and one difference between interactionist dualism and epiphenomenalist dualism.</div>
+                    <div class="practice-area"><textarea placeholder="Have a go at writing your answer here..."></textarea><span class="save-note">Practice workspace</span></div>
+                </div>
+                <div class="question-card" data-marks="5" data-year="2025">
+                    <div class="question-meta"><span>2025</span><span>5 marks | Behaviourism</span></div>
+                    <div class="question-text">Explain Ryle's 'soft' behaviourism.</div>
+                    <div class="practice-area"><textarea placeholder="Have a go at writing your answer here..."></textarea><span class="save-note">Practice workspace</span></div>
+                </div>
+
+                <div class="question-card" data-marks="12" data-year="Sample">
+                    <div class="question-meta"><span>Sample paper</span><span>12 marks | MBTI</span></div>
+                    <div class="question-text">Outline mind-brain type identity theory and explain how the issue of multiple realisability challenges this view.</div>
+                    <div class="practice-area"><textarea placeholder="Have a go at writing your answer here..."></textarea><span class="save-note">Practice workspace</span></div>
+                </div>
+                <div class="question-card" data-marks="12" data-year="2019">
+                    <div class="question-meta"><span>2019</span><span>12 marks | Property dualism</span></div>
+                    <div class="question-text">Explain the philosophical zombies argument and the response that what is conceivable may not be metaphysically possible.</div>
+                    <div class="practice-area"><textarea placeholder="Have a go at writing your answer here..."></textarea><span class="save-note">Practice workspace</span></div>
+                </div>
+                <div class="question-card" data-marks="12" data-year="2020">
+                    <div class="question-meta"><span>2020</span><span>12 marks | Epiphenomenalism</span></div>
+                    <div class="question-text">Outline epiphenomenalist dualism and explain the challenge posed by introspective self-knowledge.</div>
+                    <div class="practice-area"><textarea placeholder="Have a go at writing your answer here..."></textarea><span class="save-note">Practice workspace</span></div>
+                </div>
+                <div class="question-card" data-marks="12" data-year="2021">
+                    <div class="question-meta"><span>2021</span><span>12 marks | Eliminative materialism</span></div>
+                    <div class="question-text">Outline eliminative materialism and explain the issue that our certainty about the existence of our mental states takes priority over other considerations.</div>
+                    <div class="practice-area"><textarea placeholder="Have a go at writing your answer here..."></textarea><span class="save-note">Practice workspace</span></div>
+                </div>
+                <div class="question-card" data-marks="12" data-year="2022">
+                    <div class="question-meta"><span>2022</span><span>12 marks | Property dualism</span></div>
+                    <div class="question-text">Explain the knowledge Mary argument for property dualism and the response that Mary gains acquaintance knowledge rather than propositional knowledge</div>
+                    <div class="practice-area"><textarea placeholder="Have a go at writing your answer here..."></textarea><span class="save-note">Practice workspace</span></div>
+                </div>
+                <div class="question-card" data-marks="12" data-year="2023">
+                    <div class="question-meta"><span>2023</span><span>12 marks | Dualism</span></div>
+                    <div class="question-text">Explain the ‘problem of other minds’ facing dualism and the response that the existence of other minds is the best hypothesis</div>
+                    <div class="practice-area"><textarea placeholder="Have a go at writing your answer here..."></textarea><span class="save-note">Practice workspace</span></div>
+                </div>
+                <div class="question-card" data-marks="12" data-year="2024">
+                    <div class="question-meta"><span>2024</span><span>12 marks | Substance dualism</span></div>
+                    <div class="question-text">Explain interactionist dualism and the empirical problem of interaction facing it</div>
+                    <div class="practice-area"><textarea placeholder="Have a go at writing your answer here..."></textarea><span class="save-note">Practice workspace</span></div>
+                </div>
+                <div class="question-card" data-marks="12" data-year="2025">
+                    <div class="question-meta"><span>2025</span><span>12 marks | Eliminative materialism</span></div>
+                    <div class="question-text">Explain eliminative materialism and explain how it can be argued that it is self-refuting.</div>
+                    <div class="practice-area"><textarea placeholder="Have a go at writing your answer here..."></textarea><span class="save-note">Practice workspace</span></div>
+                </div>
+
+                <div class="question-card" data-marks="25" data-year="Sample">
+                    <div class="question-meta"><span>Sample paper</span><span>25 marks | Behaviourism</span></div>
+                    <div class="question-text">Does philosophical behaviourism give the correct account of mental states?</div>
+                    <a href="25.html" class="plan-link-btn">Plan this 25-mark essay &rarr;</a>
+                </div>
+                <div class="question-card" data-marks="25" data-year="2019">
+                    <div class="question-meta"><span>2019</span><span>25 marks | Eliminative materialism</span></div>
+                    <div class="question-text">Is eliminative materialism convincing?</div>
+                    <a href="25.html" class="plan-link-btn">Plan this 25-mark essay &rarr;</a>
+                </div>
+                <div class="question-card" data-marks="25" data-year="2020">
+                    <div class="question-meta"><span>2020</span><span>25 marks | Functionalism</span></div>
+                    <div class="question-text">Does functionalism give a convincing account of mental states?</div>
+                    <a href="25.html" class="plan-link-btn">Plan this 25-mark essay &rarr;</a>
+                </div>
+                <div class="question-card" data-marks="25" data-year="2021">
+                    <div class="question-meta"><span>2021</span><span>25 marks | Dualism</span></div>
+                    <div class="question-text">Can a dualist account of mental states be successfully defended?</div>
+                    <a href="25.html" class="plan-link-btn">Plan this 25-mark essay &rarr;</a>
+                </div>
+                <div class="question-card" data-marks="25" data-year="2022">
+                    <div class="question-meta"><span>2022</span><span>25 marks | Eliminative materialism</span></div>
+                    <div class="question-text">To what extent is eliminative materialism correct?</div>
+                    <a href="25.html" class="plan-link-btn">Plan this 25-mark essay &rarr;</a>
+                </div>
+                <div class="question-card" data-marks="25" data-year="2023">
+                    <div class="question-meta"><span>2023</span><span>25 marks | MBTI</span></div>
+                    <div class="question-text">Does mind brain type identity theory give the correct theory of mental states?</div>
+                    <a href="25.html" class="plan-link-btn">Plan this 25-mark essay &rarr;</a>
+                </div>
+                <div class="question-card" data-marks="25" data-year="2024">
+                    <div class="question-meta"><span>2024</span><span>25 marks | Behaviourism</span></div>
+                    <div class="question-text">Is philosophical behaviourism correct?</div>
+                    <a href="25.html" class="plan-link-btn">Plan this 25-mark essay &rarr;</a>
+                </div>
+                <div class="question-card" data-marks="25" data-year="2025">
+                    <div class="question-meta"><span>2025</span><span>25 marks | Functionalism</span></div>
+                    <div class="question-text">Are functionalists right to claim that all mental states can be characterised in terms of functional roles?</div>
+                    <a href="25.html" class="plan-link-btn">Plan this 25-mark essay &rarr;</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <footer>
+        A level philosophy revision portal
+    </footer>
+
+    <script>
+        let currentUnit = 'all';
+        let currentMark = 'all';
+        let currentYear = 'all';
+
+        function setFilter(type, value) {
+            if (type === 'unit') {
+                currentUnit = value;
+                document.querySelectorAll('#unit-filters .filter-btn').forEach(btn => btn.classList.remove('active'));
+                event.target.classList.add('active');
+            } else if (type === 'marks') {
+                currentMark = value;
+                document.querySelectorAll('#mark-filters .filter-btn').forEach(btn => btn.classList.remove('active'));
+                event.target.classList.add('active');
+            } else if (type === 'year') {
+                currentYear = value;
+                document.querySelectorAll('#year-filters .filter-btn').forEach(btn => btn.classList.remove('active'));
+                event.target.classList.add('active');
+            }
+
+            // Apply filters to sections and cards
+            const unitSections = document.querySelectorAll('.unit-section');
+
+            unitSections.forEach(section => {
+                const unitMatch = (currentUnit === 'all' || section.getAttribute('data-unit') === currentUnit);
+                
+                if (!unitMatch) {
+                    section.style.display = 'none';
+                    return;
+                }
+
+                section.style.display = 'block';
+                const cards = section.querySelectorAll('.question-card');
+                let visibleCardsCount = 0;
+
+                cards.forEach(card => {
+                    const markMatch = (currentMark === 'all' || card.getAttribute('data-marks') === currentMark);
+                    const yearMatch = (currentYear === 'all' || card.getAttribute('data-year') === currentYear);
+
+                    if (markMatch && yearMatch) {
+                        card.style.display = 'block';
+                        visibleCardsCount++;
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+
+                // Hide the whole unit section if no cards match the filters within it
+                if (visibleCardsCount === 0) {
+                    section.style.display = 'none';
+                }
+            });
+        }
+    </script>
+</body>
+</html>
