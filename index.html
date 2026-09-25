@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Epistemology Unit 4: The limits of knowledge</title>
+    <title>A Level Philosophy</title>
     <style>
         :root {
             --bg-color: #f8fafc;
@@ -14,7 +14,6 @@
             --accent-primary: #0369a1;
             --accent-header: #075985;
             --hover-bg: #f1f5f9;
-            --line-color: #0369a1;
         }
 
         * {
@@ -30,50 +29,24 @@
             min-height: 100vh;
             display: flex;
             flex-direction: column;
-            overflow-x: auto;
+            justify-content: space-between;
         }
 
         header {
-            padding: 1.5rem 1rem 1rem;
+            padding: 2.5rem 1rem 1.5rem;
             text-align: center;
             border-bottom: 1px solid #cbd5e1;
             background: #ffffff;
-            position: relative;
-        }
-
-        .nav-container {
-            position: absolute;
-            top: 1.5rem;
-            left: 2rem;
-            display: flex;
-            gap: 10px;
-        }
-
-        .nav-btn {
-            background-color: #ffffff;
-            color: var(--accent-header);
-            border: 1px solid var(--card-border);
-            padding: 0.5rem 1rem;
-            border-radius: 6px;
-            font-weight: 600;
-            text-decoration: none;
-            font-size: 0.9rem;
-            transition: background-color 0.2s ease, border-color 0.2s ease;
-        }
-
-        .nav-btn:hover {
-            background-color: var(--hover-bg);
-            border-color: var(--accent-primary);
         }
 
         header h1 {
-            font-size: 2.2rem;
+            font-size: 2.8rem;
             color: var(--accent-header);
             font-weight: 700;
         }
 
         .container {
-            max-width: 1800px;
+            max-width: 1000px;
             margin: 0 auto;
             padding: 3rem 2rem;
             display: flex;
@@ -81,173 +54,71 @@
             align-items: center;
             flex: 1;
             width: 100%;
+            gap: 2rem;
         }
 
-        .mindmap {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            width: 100%;
-            position: relative;
-        }
-
-        .root-node {
-            background-color: var(--accent-header);
-            color: #ffffff;
-            padding: 1.2rem 3rem;
-            border-radius: 12px;
-            font-weight: bold;
-            font-size: 1.5rem;
-            box-shadow: 0 10px 15px -3px rgba(3, 105, 161, 0.2);
-            z-index: 2;
-            text-align: center;
-            margin-bottom: 4rem;
-            letter-spacing: 0.5px;
-        }
-
-        .branches-wrapper {
+        .modules-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
             width: 100%;
-            max-width: 1600px;
-            position: relative;
+            max-width: 800px;
         }
 
-        .branches-wrapper::before {
-            content: '';
-            position: absolute;
-            top: -40px;
-            left: 50%;
-            width: 3px;
-            height: 40px;
-            background-color: var(--line-color);
-            transform: translateX(-50%);
-        }
-
-        .branch-column {
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-            position: relative;
-        }
-
-        .branch-group-header {
-            background-color: #e0f2fe;
-            border: 2px solid var(--accent-primary);
-            color: var(--accent-header);
-            padding: 1rem 1.5rem;
-            border-radius: 10px;
-            font-size: 1.25rem;
-            font-weight: bold;
-            text-align: center;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
-        }
-
-        .node-card {
+        .module-card {
             background-color: var(--card-bg);
             border: 1px solid var(--card-border);
-            border-left: 5px solid var(--accent-primary);
-            border-radius: 8px;
-            padding: 1.25rem;
+            border-top: 5px solid var(--accent-primary);
+            border-radius: 10px;
+            padding: 2.5rem 2rem;
             display: flex;
             flex-direction: column;
-            gap: 0.75rem;
+            align-items: center;
+            justify-content: center;
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.04);
             transition: transform 0.2s ease, box-shadow 0.2s ease;
-        }
-
-        .node-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 12px -3px rgba(3, 105, 161, 0.15);
-        }
-
-        .node-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid #e2e8f0;
-            padding-bottom: 0.5rem;
-        }
-
-        .node-header h3 {
-            font-size: 1.1rem;
+            text-decoration: none;
             color: var(--accent-header);
+            text-align: center;
+        }
+
+        .module-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 15px -3px rgba(3, 105, 161, 0.15);
+        }
+
+        .module-card h3 {
+            font-size: 1.5rem;
             font-weight: 700;
         }
 
-        .badge {
-            background-color: rgba(3, 105, 161, 0.1);
-            color: var(--accent-primary);
-            font-size: 0.75rem;
-            padding: 0.25rem 0.6rem;
-            border-radius: 9999px;
-            font-weight: 600;
-        }
-
-        .sub-nodes-container {
+        .flashcard-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-top: 5px solid var(--accent-primary);
+            border-radius: 10px;
+            padding: 2rem;
             display: flex;
             flex-direction: column;
-            gap: 0.6rem;
-        }
-
-        .sub-node {
-            background-color: #f8fafc;
-            border: 1px solid #cbd5e1;
-            border-left: 3px solid var(--accent-primary);
-            padding: 0.75rem;
-            border-radius: 0 6px 6px 0;
-            font-size: 0.95rem;
-            cursor: pointer;
-            transition: background-color 0.2s ease;
-        }
-
-        .sub-node:hover {
-            background-color: var(--hover-bg);
-        }
-
-        .sub-node h4 {
-            font-size: 1rem;
-            color: var(--text-main);
-            display: flex;
-            justify-content: space-between;
             align-items: center;
-            font-weight: 600;
+            justify-content: center;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.04);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            text-decoration: none;
+            color: var(--accent-header);
+            text-align: center;
+            width: 100%;
+            max-width: 800px;
         }
 
-        .sub-node h4::after {
-            content: '+';
-            color: var(--accent-primary);
-            font-weight: bold;
-            font-size: 1.1rem;
+        .flashcard-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 15px -3px rgba(3, 105, 161, 0.15);
         }
 
-        .sub-node.active h4::after {
-            content: '-';
-        }
-
-        .sub-content {
-            display: none;
-            margin-top: 0.5rem;
-            color: var(--text-muted);
-            font-size: 0.9rem;
-            line-height: 1.5;
-            border-top: 1px dashed #cbd5e1;
-            padding-top: 0.5rem;
-        }
-
-        .sub-node.active .sub-content {
-            display: block;
-        }
-
-        ul {
-            margin-left: 1.2rem;
-            margin-top: 0.3rem;
-            list-style-type: disc;
-        }
-
-        ul li {
-            margin-bottom: 0.4rem;
+        .flashcard-card h3 {
+            font-size: 1.4rem;
+            font-weight: 700;
         }
 
         footer {
@@ -257,24 +128,11 @@
             font-size: 0.9rem;
             border-top: 1px solid #cbd5e1;
             background: #ffffff;
-            margin-top: 3rem;
-        }
-
-        @media (max-width: 1024px) {
-            .branches-wrapper {
-                grid-template-columns: 1fr;
-                gap: 2rem;
-            }
-            .branches-wrapper::before {
-                display: none;
-            }
         }
 
         @media (max-width: 768px) {
-            .nav-container {
-                position: static;
-                justify-content: center;
-                margin-bottom: 1rem;
+            .modules-grid {
+                grid-template-columns: 1fr;
             }
         }
     </style>
@@ -282,184 +140,36 @@
 <body>
 
     <header>
-        <div class="nav-container">
-            <a href="index.html" class="nav-btn">🏠 Home</a>
-            <a href="epistemology-hub.html" class="nav-btn">← Back</a>
-        </div>
-        <h1>Epistemology Unit 4: The limits of knowledge</h1>
+        <h1>A Level Philosophy</h1>
     </header>
 
     <div class="container">
-        <div class="mindmap">
-            <div class="root-node">The limits of knowledge</div>
-            
-            <div class="branches-wrapper">
+        <div class="modules-grid">
+            <a href="epistemology-hub.html" class="module-card">
+                <h3>Epistemology</h3>
+            </a>
 
-                <!-- Left Column: Philosophical Scepticism & Descartes' Method -->
-                <div class="branch-column">
-                    <div class="branch-group-header">Scepticism and Descartes' method</div>
+            <a href="moral philosophy-hub.html" class="module-card">
+                <h3>Moral Philosophy</h3>
+            </a>
 
-                    <!-- Philosophical Scepticism -->
-                    <div class="node-card">
-                        <div class="node-header">
-                            <h3>Philosophical scepticism</h3>
-                            <span class="badge">Sceptical foundations</span>
-                        </div>
-                        <div class="sub-nodes-container">
-                            <div class="sub-node" onclick="toggleNode(this)">
-                                <h4>Nature of philosophical scepticism vs normal incredulity <span></span></h4>
-                                <div class="sub-content">
-                                    <ul>
-                                        <li><strong>Normal incredulity:</strong> Doubt that arises about a specific everyday claim based on other background beliefs you do not doubt, where the reasons for this doubt can, in principle, be removed or investigated through standard empirical inquiry. Examples include doubting whether a friend's birthday is August 17th or 18th, or questioning whether a local shop is open.</li>
-                                        <li><strong>Philosophical scepticism:</strong> The view that we lack knowledge in such a way that the reasons for doubt arguably cannot be removed. It claims that almost none of our usual forms of justification are adequate and challenges the fundamental security of human belief systems.</li>
-                                        <li><strong>Local scepticism:</strong> Scepticism restricted to a specific domain of knowledge or type of justification, such as doubting claims about the past, future induction, or the contents of other minds (e.g., wondering if a smiling friend is truly happy inside).</li>
-                                        <li><strong>Global scepticism:</strong> Radically sweeping scepticism applied to all knowledge claims simultaneously, asserting that we have no knowledge and that none of our usual cognitive justifications are adequate. This is vividly illustrated by thought experiments like the brain in a vat scenario.</li>
-                                        <li><strong>The infinite regress argument:</strong> Challenges the foundational structure of justification by showing that any belief requires support from another belief, leading either to an infinite chain of reasons, circular reasoning, or arbitrary dogmatism.</li>
-                                        <li><strong>Foundationalist responses:</strong> Most epistemologists respond to the regress problem via foundationalism, arguing that the regress terminates in self-justified basic beliefs—such as perceptual, memory, logical, or introspective beliefs—which do not require further support and serve to justify all other derived beliefs.</li>
-                                        <li><strong>Role and function of scepticism:</strong> Philosophers engage in sceptical worry not because they genuinely doubt their everyday lives or memory, but to rigorously test, analyse, and clarify the deep conceptual frameworks underlying human thought.</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+            <a href="God-hub.html" class="module-card">
+                <h3>Metaphysics of God</h3>
+            </a>
 
-                    <!-- Descartes' Method of Doubt -->
-                    <div class="node-card">
-                        <div class="node-header">
-                            <h3>Descartes' method of doubt</h3>
-                            <span class="badge">Rationalist method</span>
-                        </div>
-                        <div class="sub-nodes-container">
-                            <div class="sub-node" onclick="toggleNode(this)">
-                                <h4>The three waves of doubt and foundational restructuring <span></span></h4>
-                                <div class="sub-content">
-                                    <ul>
-                                        <li><strong>Infallibilism and the demolition project:</strong> Descartes operates as an infallibilist who demands absolute certainty, resolving to use the bulldozer of doubt to sweep away all previous uncertain opinions and rebuild his entire belief system from scratch on unbreakable foundations.</li>
-                                        <li><strong>Wave 1 (Illusion):</strong> Challenges sensory reliability because the senses have occasionally deceived us regarding small, distant, or poorly lit objects. However, Descartes notes this does not give reason to doubt all sensory experience, as near and clear perceptions (like sitting by the fire in a dressing gown) seem completely certain.</li>
-                                        <li><strong>Wave 2 (Dreaming):</strong> Poses the hypothesis that we might think we are awake when we are actually dreaming, as dreams can vividly mimic waking reality. While this undermines immediate sensory claims about the physical world, Descartes argues that basic formal concepts common to both dreams and reality—such as space, general magnitude, time, and basic mathematical truths—remain seemingly safe.</li>
-                                        <li><strong>Wave 3 (The evil demon):</strong> The ultimate radical hypothesis that an all-powerful, malicious demon is expending all his energy to systematically deceive us about everything, including arithmetic, geometry, and basic logical structures.</li>
-                                        <li><strong>Criticisms of total doubt:</strong> David Hume argued in the Enquiry that if one doubted one's own faculties entirely, no reasoning could ever bring us back to conviction, making total Cartesian doubt self-defeating and entirely incurable.</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-
-                <!-- Right Column: Responses to Scepticism -->
-                <div class="branch-column">
-                    <div class="branch-group-header">Responses to scepticism</div>
-
-                    <!-- Descartes' Own Response -->
-                    <div class="node-card">
-                        <div class="node-header">
-                            <h3>Descartes' response</h3>
-                            <span class="badge">Rationalist recovery</span>
-                        </div>
-                        <div class="sub-nodes-container">
-                            <div class="sub-node" onclick="toggleNode(this)">
-                                <h4>The cogito as an a priori intuition <span></span></h4>
-                                <div class="sub-content">
-                                    <ul>
-                                        <li><strong>The cogito:</strong> Even under the control of an all-powerful evil demon, the act of doubting requires a thinking subject; thus "I think, therefore I am" is grasped directly as an indubitable a priori intuition that survives all sceptical scenarios.</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="sub-nodes-container">
-                            <div class="sub-node" onclick="toggleNode(this)">
-                                <h4>Deductive argument for the existence of God <span></span></h4>
-                                <div class="sub-content">
-                                    <ul>
-                                        <li><strong>Deductive formulation:</strong>
-                                            <ul>
-                                                <li>Premise 1: I have an idea of God as an infinite, supreme, and perfect being.</li>
-                                                <li>Premise 2: There must be at least as much reality in the cause as in the effect (the causal principle).</li>
-                                                <li>Premise 3: As a finite and imperfect being, I could not have caused this idea of infinite perfection myself.</li>
-                                                <li>Conclusion: Therefore, God must exist as the external cause of my idea.</li>
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="sub-nodes-container">
-                            <div class="sub-node" onclick="toggleNode(this)">
-                                <h4>Deductive argument for the existence of the external world <span></span></h4>
-                                <div class="sub-content">
-                                    <ul>
-                                        <li><strong>Deductive formulation:</strong>
-                                            <ul>
-                                                <li>Premise 1: I experience passive, vivid, and involuntary sensory ideas that occur against my will.</li>
-                                                <li>Premise 2: These ideas must have an active cause distinct from myself, as my mind is unextended and cannot produce ideas of extension.</li>
-                                                <li>Premise 3: God exists, is supremely perfect, and is not a deceiver; He would not allow me to be deceived into thinking physical objects cause my perceptions if they did not exist.</li>
-                                                <li>Conclusion: Therefore, the external physical world of material bodies exists.</li>
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Empiricist Responses -->
-                    <div class="node-card">
-                        <div class="node-header">
-                            <h3>Empiricist responses</h3>
-                            <span class="badge">Empiricist defences</span>
-                        </div>
-                        <div class="sub-nodes-container">
-                            <div class="sub-node" onclick="toggleNode(this)">
-                                <h4>Locke, Berkeley, Russell and Hume <span></span></h4>
-                                <div class="sub-content">
-                                    <ul>
-                                        <li><strong>John Locke:</strong> Argues against scepticism by highlighting the involuntary nature of sense experience (we cannot choose what sensory inputs we receive) and the robust coherence across different sensory modalities.</li>
-                                        <li><strong>George Berkeley:</strong> Rejects material substance to solve sceptical dilemmas, arguing instead that ordinary objects are ideas in God's mind, and because God causes our perceptions directly and consistently, they constitute genuine reality.</li>
-                                        <li><strong>Bertrand Russell:</strong> Rejects infallibilism and argues that the existence of an independent external world is the best hypothesis to explain why our experiences exhibit regular patterns, coherence, and continuity, such as apples continuing to exist in drawers when unobserved.</li>
-                                        <li><strong>David Hume's mitigated scepticism:</strong> Argues that excessive philosophical scepticism cannot be maintained in active life because human action, employment, and the occupations of common life cause radical doubts to vanish like smoke, leaving us on par with non-philosophers.</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Reliabilism as a Response -->
-                    <div class="node-card">
-                        <div class="node-header">
-                            <h3>Reliabilism</h3>
-                            <span class="badge">Externalist solution</span>
-                        </div>
-                        <div class="sub-nodes-container">
-                            <div class="sub-node" onclick="toggleNode(this)">
-                                <h4>Sidestepping scepticism through reliable cognitive processes <span></span></h4>
-                                <div class="sub-content">
-                                    <ul>
-                                        <li><strong>Definition:</strong> Knowledge is defined as a True Belief formed by a reliable cognitive process, where reliability means a high ratio of true to false beliefs produced in the actual world.</li>
-                                        <li><strong>Externalist approach:</strong> Reliabilism is externalist because you do not need internal reflective access or logical proof to rule out radical sceptical scenarios, like being a brain in a vat, in order to have knowledge.</li>
-                                        <li><strong>Scenario analysis:</strong> In Scenario 1, the real world, perception is reliable, leading to a true belief, so you know you have hands. In Scenario 2, the brain in a vat, the process is unreliable, so you lack knowledge.</li>
-                                        <li><strong>Practical resolution:</strong> We do not need to know which scenario we are in to possess knowledge; if we inhabit the actual world, our reliable processes grant us knowledge despite our inability to prove from the inside that we are not deceived.</li>
-                                        <li><strong>Evaluation:</strong> Solves scepticism practically by changing the rules and rejecting internalist justification demands, but concedes that in a demon-world, knowledge would be absent because belief-forming processes would fail to be truth-conducive.</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-
-            </div>
+            <a href="mind-hub.html" class="module-card">
+                <h3>Metaphysics of the Mind</h3>
+            </a>
         </div>
+
+        <a href="terminology.html" class="flashcard-card">
+            <h3>Flashcards App (Terminology)</h3>
+        </a>
     </div>
 
     <footer>
-        Epistemology Unit 4: The Limits of Knowledge &bull; Interactive Mind Map for Teaching & Revision
+        A Level Philosophy Revision Portal
     </footer>
 
-    <script>
-        function toggleNode(element) {
-            element.classList.toggle('active');
-        }
-    </script>
 </body>
 </html>
