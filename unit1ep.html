@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Epistemology Unit 1: Definition of Knowledge</title>
+    <style>
+        :root {
+            --bg-color: #f8fafc;
+            --card-bg: #ffffff;
+            --card-border: #94a3b8;
+            --text-main: #0f172a;
+            --text-muted: #475569;
+            --accent-primary: #0369a1;
+            --accent-header: #075985;
+            --hover-bg: #f1f5f9;
+            --line-color: #0369a1;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: auto;
+        }
+
+        header {
+            padding: 1.5rem 1rem 1rem;
+            text-align: center;
+            border-bottom: 1px solid #cbd5e1;
+            background: #ffffff;
+            position: relative;
+        }
+
+        .nav-container {
+            position: absolute;
+            top: 1.5rem;
+            left: 2rem;
+            display: flex;
+            gap: 10px;
+        }
+
+        .nav-btn {
+            background-color: #ffffff;
+            color: var(--accent-header);
+            border: 1px solid var(--card-border);
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            font-weight: 600;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: background-color 0.2s ease, border-color 0.2s ease;
+        }
+
+        .nav-btn:hover {
+            background-color: var(--hover-bg);
+            border-color: var(--accent-primary);
+        }
+
+        header h1 {
+            font-size: 2.2rem;
+            color: var(--accent-header);
+            font-weight: 700;
+        }
+
+        .container {
+            max-width: 1800px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            flex: 1;
+            width: 100%;
+        }
+
+        .mindmap {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            position: relative;
+        }
+
+        .root-node {
+            background-color: var(--accent-header);
+            color: #ffffff;
+            padding: 1.2rem 3rem;
+            border-radius: 12px;
+            font-weight: bold;
+            font-size: 1.5rem;
+            box-shadow: 0 10px 15px -3px rgba(3, 105, 161, 0.2);
+            z-index: 2;
+            text-align: center;
+            margin-bottom: 4rem;
+            letter-spacing: 0.5px;
+        }
+
+        .branches-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            width: 100%;
+            max-width: 1600px;
+            position: relative;
+        }
+
+        .branches-wrapper::before {
+            content: '';
+            position: absolute;
+            top: -40px;
+            left: 50%;
+            width: 3px;
+            height: 40px;
+            background-color: var(--line-color);
+            transform: translateX(-50%);
+        }
+
+        .branch-column {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            position: relative;
+        }
+
+        .branch-group-header {
+            background-color: #e0f2fe;
+            border: 2px solid var(--accent-primary);
+            color: var(--accent-header);
+            padding: 1rem 1.5rem;
+            border-radius: 10px;
+            font-size: 1.25rem;
+            font-weight: bold;
+            text-align: center;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        }
+
+        .node-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-left: 5px solid var(--accent-primary);
+            border-radius: 8px;
+            padding: 1.25rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.04);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .node-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 12px -3px rgba(3, 105, 161, 0.15);
+        }
+
+        .node-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #e2e8f0;
+            padding-bottom: 0.5rem;
+        }
+
+        .node-header h3 {
+            font-size: 1.1rem;
+            color: var(--accent-header);
+            font-weight: 700;
+        }
+
+        .badge {
+            background-color: rgba(3, 105, 161, 0.1);
+            color: var(--accent-primary);
+            font-size: 0.75rem;
+            padding: 0.25rem 0.6rem;
+            border-radius: 9999px;
+            font-weight: 600;
+        }
+
+        .sub-nodes-container {
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+        }
+
+        .sub-node {
+            background-color: #f8fafc;
+            border: 1px solid #cbd5e1;
+            border-left: 3px solid var(--accent-primary);
+            padding: 0.75rem;
+            border-radius: 0 6px 6px 0;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+
+        .sub-node:hover {
+            background-color: var(--hover-bg);
+        }
+
+        .sub-node h4 {
+            font-size: 1rem;
+            color: var(--text-main);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+        }
+
+        .sub-node h4::after {
+            content: '+';
+            color: var(--accent-primary);
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        .sub-node.active h4::after {
+            content: '-';
+        }
+
+        .sub-content {
+            display: none;
+            margin-top: 0.5rem;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            line-height: 1.5;
+            border-top: 1px dashed #cbd5e1;
+            padding-top: 0.5rem;
+        }
+
+        .sub-node.active .sub-content {
+            display: block;
+        }
+
+        ul {
+            margin-left: 1.2rem;
+            margin-top: 0.3rem;
+            list-style-type: disc;
+        }
+
+        ul li {
+            margin-bottom: 0.4rem;
+        }
+
+        ol {
+            margin-left: 1.2rem;
+            margin-top: 0.3rem;
+        }
+
+        ol li {
+            margin-bottom: 0.4rem;
+        }
+
+        footer {
+            text-align: center;
+            padding: 1.5rem;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            border-top: 1px solid #cbd5e1;
+            background: #ffffff;
+            margin-top: 3rem;
+        }
+
+        @media (max-width: 1024px) {
+            .branches-wrapper {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            .branches-wrapper::before {
+                display: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-container {
+                position: static;
+                justify-content: center;
+                margin-bottom: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="nav-container">
+            <a href="index.html" class="nav-btn">🏠 Home</a>
+            <a href="mind-hub.html" class="nav-btn">← Back</a>
+        </div>
+        <h1>Epistemology Unit 1: Definition of Knowledge</h1>
+    </header>
+
+    <div class="container">
+        <div class="mindmap">
+            <div class="root-node">Definition of Knowledge</div>
+            
+            <div class="branches-wrapper">
+
+                <!-- Left Column: Foundations, Distinctions & Tripartite View -->
+                <div class="branch-column">
+                    <div class="branch-group-header">Foundations & Tripartite View</div>
+
+                    <!-- What is Knowledge & Definitions -->
+                    <div class="node-card">
+                        <div class="node-header">
+                            <h3>What is knowledge?</h3>
+                            <span class="badge">Definitions</span>
+                        </div>
+                        <div class="sub-nodes-container">
+                            <p style="font-size: 0.95rem; color: var(--text-muted); line-height: 1.4;">
+                                Exploring the nature of real definitions and Linda Zagzebski's criteria.
+                            </p>
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>Nature of definition and Linda Zagzebski <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>Real definitions:</strong> Philosophers typically aspire to provide a real definition of knowledge.</li>
+                                        <li><strong>Natural kinds:</strong> Analogous to Locke's real definitions for natural kinds like water, gold, or human beings.</li>
+                                        <li><strong>Unified concept:</strong> Assumes a single unified concept that has been debated for millennia.</li>
+                                        <li><strong>Practical purposes:</strong> Definitions provide directions for finding instances of knowledge in ourselves and others.</li>
+                                        <li><strong>Theoretical purposes:</strong> Definitions place the concept correctly on a conceptual map that philosophers have partially charted.</li>
+                                        <li><strong>Linda Zagzebski's criteria:</strong> Notes that a good definition must avoid specific structural and logical pitfalls.</li>
+                                        <li><strong>Avoid ad hoc definitions:</strong> Must not be artificially constructed just to fit narrow cases.</li>
+                                        <li><strong>Positive preference:</strong> Must not be negative when a positive formulation is possible.</li>
+                                        <li><strong>Conciseness:</strong> Must be brief and direct.</li>
+                                        <li><strong>No circularity:</strong> Must not use the concept to be defined within the definiens, or use other concepts equally in need of definition.</li>
+                                        <li><strong>No reactive patching:</strong> Must not be a mere reactive patch to dodge counterexamples from other theories.</li>
+                                        <li><strong>Terminology:</strong> The definiendum is the term being defined, while the definiens refers to the defining elements or conditions.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Distinctions of Knowledge -->
+                    <div class="node-card">
+                        <div class="node-header">
+                            <h3>The three types of knowledge</h3>
+                            <span class="badge">Distinctions</span>
+                        </div>
+                        <div class="sub-nodes-container">
+                            <p style="font-size: 0.95rem; color: var(--text-muted); line-height: 1.4;">
+                                Ability, acquaintance, and propositional knowledge.
+                            </p>
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>Ability, acquaintance and propositional <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>Ability knowledge:</strong> Knowing how to perform or complete a practical task or action.</li>
+                                        <li><strong>Ability example:</strong> Knowing how to give an impressive handshake.</li>
+                                        <li><strong>Acquaintance knowledge:</strong> Knowing a place, person, or thing through direct personal contact or experience.</li>
+                                        <li><strong>Acquaintance example:</strong> Knowing the president of Smart Corp or the taste of pineapple.</li>
+                                        <li><strong>Propositional knowledge:</strong> Knowing that a proposition ($p$) is true.</li>
+                                        <li><strong>Propositional example:</strong> Knowing that the man is the president of Smart Corp.</li>
+                                        <li><strong>Philosophical focus:</strong> Epistemology focuses exclusively on propositional knowledge.</li>
+                                        <li><strong>Argument requirement:</strong> Constructing valid deductive philosophical arguments requires verified true starting premises to guarantee true conclusions.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tripartite View -->
+                    <div class="node-card">
+                        <div class="node-header">
+                            <h3>The tripartite view (JTB)</h3>
+                            <span class="badge">Standard View</span>
+                        </div>
+                        <div class="sub-nodes-container">
+                            <p style="font-size: 0.95rem; color: var(--text-muted); line-height: 1.4;">
+                                Justified True Belief as necessary and sufficient conditions.
+                            </p>
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>JTB conditions and Plato's Meno <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>Core formula:</strong> The traditional tripartite view—derived from Plato's Meno—defines propositional knowledge as Justified True Belief (JTB).</li>
+                                        <li><strong>Formal condition:</strong> Subject ($S$) knows that proposition ($p$) if and only if $p$ is true, $S$ believes $p$, and $S$ is justified in believing $p$.</li>
+                                        <li><strong>Individually necessary:</strong> Each single condition must be fulfilled for knowledge to exist.</li>
+                                        <li><strong>Jointly sufficient:</strong> Together, fulfilling all three conditions guarantees that knowledge is present.</li>
+                                        <li><strong>Plato's insight:</strong> True opinions are valuable and do good as long as they stay in place.</li>
+                                        <li><strong>The running away metaphor:</strong> True opinions tend to run away from the mind.</li>
+                                        <li><strong>Tethering down:</strong> Opinions are not worth much until tethered down by working out the reason, after which they become stable knowledge.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Issues with Tripartite View -->
+                    <div class="node-card">
+                        <div class="node-header">
+                            <h3>Issues with the tripartite view</h3>
+                            <span class="badge">Criticisms</span>
+                        </div>
+                        <div class="sub-nodes-container">
+                            <p style="font-size: 0.95rem; color: var(--text-muted); line-height: 1.4;">
+                                Challenging individual conditions and addressing lucky true beliefs.
+                            </p>
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>Are conditions individually necessary? <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>Truth condition challenge:</strong> Richard Rorty used a coherence model in Philosophy and the Nature of Nature (1979) to argue that an objective correspondence truth condition is unnecessary.</li>
+                                        <li><strong>Consensus truth:</strong> Rorty claimed truth is simply what a community agrees is useful to believe.</li>
+                                        <li><strong>Bertrand Russell's realist counter:</strong> Argued that the Correspondence Theory is correct because alternative theories confuse what truth means with how we check for it.</li>
+                                        <li><strong>Flat Earth example:</strong> An entire society can agree on a completely coherent flat Earth, but that consensus does not alter physical reality.</li>
+                                        <li><strong>Belief condition challenge:</strong> Colin Radford offered quiz-show thought experiments (1966) where participants correctly answer history questions while maintaining they are merely guessing and lack confidence or belief.</li>
+                                        <li><strong>Radford's conclusion:</strong> Argued they possess knowledge without believing they know.</li>
+                                        <li><strong>Keith Lehrer's counter:</strong> Countered that without conscious endorsement or confidence, writing down the correct answer is functionally identical to a blind guess.</li>
+                                        <li><strong>Hunch distinction:</strong> A thinker who cannot distinguish their knowledge from a hunch does not truly know.</li>
+                                        <li><strong>Justification condition challenge:</strong> Alvin Goldman argued that traditional justification is too demanding since people know they had cereal for breakfast or recognize a friend without producing a sophisticated logical argument.</li>
+                                        <li><strong>Laurence BonJour's defense:</strong> Defended internal justification using the thought experiment of Norman the Clairvoyant (1980).</li>
+                                        <li><strong>Clairvoyant implication:</strong> A reliable psychic power without conscious internal access to reasons leaves the subject blindly accepting a hunch, meaning genuine knowledge requires internal access to justification.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="sub-nodes-container">
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>Cases of lucky true beliefs (Gettier & Zagzebski) <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>Edmund Gettier's 1963 counter-examples:</strong> Proved that JTB is not sufficient because a subject can hold a justified true belief purely by coincidence or epistemic luck.</li>
+                                        <li><strong>Case I (The Ten Coins):</strong> Smith has strong evidence that Jones will get a job and has ten coins in his pocket, leading him to infer that the man who gets the job has ten coins.</li>
+                                        <li><strong>Case I coincidence:</strong> Unknown to Smith, he gets the job himself and coincidentally has ten coins in his pocket.</li>
+                                        <li><strong>Case I failure:</strong> His belief is true and justified, but he does not know it because it rests on a false premise about Jones.</li>
+                                        <li><strong>Case II (The Ford):</strong> Smith is justified in believing Jones owns a Ford and logically constructs disjunctions (e.g., Either Jones owns a Ford or Brown is in Barcelona).</li>
+                                        <li><strong>Case II coincidence:</strong> Coincidentally, Jones does not own a Ford, but Brown genuinely is in Barcelona.</li>
+                                        <li><strong>Case II failure:</strong> The belief is justified and true, but only by chance.</li>
+                                        <li><strong>Linda Zagzebski's generalisation:</strong> In The Inescapability of Gettier Problems (1994), Zagzebski proved mathematically that Gettier problems are inescapable for any definition where justification and truth are logically independent.</li>
+                                        <li><strong>Generalisation mechanism:</strong> Bad luck can make a justified belief false and good luck can make it true.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Right Column: Post-Gettier Responses -->
+                <div class="branch-column">
+                    <div class="branch-group-header">Post-Gettier Analyses & Responses</div>
+
+                    <!-- Infallibilism -->
+                    <div class="node-card">
+                        <div class="node-header">
+                            <h3>Strengthening justification: Infallibilism</h3>
+                            <span class="badge">Analysis 1</span>
+                        </div>
+                        <div class="sub-nodes-container">
+                            <p style="font-size: 0.95rem; color: var(--text-muted); line-height: 1.4;">
+                                Demanding absolute certainty to rule out error.
+                            </p>
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>Theory, thinkers, and Gettier handling <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>Definition:</strong> Infallibilism claims that $S$ knows that $p$ only if $S$ has a justification that guarantees the truth of $p$, making it logically impossible to be mistaken.</li>
+                                        <li><strong>Richard Fumerton:</strong> Argues that traditional justification must provide an infallible cognitive grasp of truth via direct acquaintance with the fact, the proposition, and their correspondence.</li>
+                                        <li><strong>René Descartes:</strong> Famously defended this by using his method of doubt to reach the indubitable Cogito (I think, therefore I am) and rebuilding certainty.</li>
+                                        <li><strong>Dealing with traditional Gettiers:</strong> Infallibilism easily defeats traditional inferential Gettier cases (like the ten coins) because Smith's evidence for Jones getting the job does not guarantee truth with certainty; Smith could easily be mistaken.</li>
+                                        <li><strong>Dealing with perceptual Gettiers:</strong> Infallibilism handles perceptual Gettier cases (like Fake Barn Country) by asserting that fallible empirical observations never provide absolute certainty, meaning Henry does not possess genuine knowledge when looking at the fake-peppered landscape.</li>
+                                        <li><strong>Criticisms:</strong> Alvin Goldman and Ernest Sosa argue that demanding infallible access sets the bar so high that it strips humans, animals, and children of everyday knowledge, collapsing straight into radical scepticism.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- No False Lemmas -->
+                    <div class="node-card">
+                        <div class="node-header">
+                            <h3>Adding a 'No False Lemmas' condition</h3>
+                            <span class="badge">Analysis 2</span>
+                        </div>
+                        <div class="sub-nodes-container">
+                            <p style="font-size: 0.95rem; color: var(--text-muted); line-height: 1.4;">
+                                Requiring that beliefs are not inferred from false premises.
+                            </p>
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>Theory, implicit lemmas, and limitations <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>Definition:</strong> Gilbert Harman argued in Thought (1973) that knowledge must not be inferred from any false propositions, adding a fourth condition ($J + T + B + N$).</li>
+                                        <li><strong>False lemmas:</strong> Disqualifies intermediate false steps or assumptions in reasoning chains.</li>
+                                        <li><strong>Dealing with traditional Gettiers:</strong> In Gettier's ten-coins case, Smith's inference relies explicitly on the false premise that Jones has ten coins; the No False Lemmas theory successfully targets and disqualifies this explicit false lemma.</li>
+                                        <li><strong>Dealing with perceptual Gettiers:</strong> The original theory struggled with non-inferential perceptual cases (such as Russell’s stopped clock or Goldman's fake barn country) where a true belief forms immediately via vision without an explicit conscious chain of steps.</li>
+                                        <li><strong>Implicit lemmas fix:</strong> To save his theory, Harman argued that human perception is a rapid, subconscious process involving implicit lemmas.</li>
+                                        <li><strong>Candle-in-the-mirror example:</strong> The viewer implicitly assumes "I am directly seeing a candle in front of me, not a reflection," which acts as a false subconscious lemma.</li>
+                                        <li><strong>External limitations:</strong> Assassination cases (1973) where hidden global conspiracies threaten justification forced Harman toward an externalist Defeasibility Theory.</li>
+                                        <li><strong>Defeasibility requirement:</strong> Requires that beliefs remain undefeated by any hidden external facts.</li>
+                                        <li><strong>William Lycan alternative:</strong> Proposed the No Essential False Assumptions (NEFA) account to target hidden subconscious lemmas, though critics argue it still fails to rule out environmental luck in fake barn scenarios.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Reliabilism -->
+                    <div class="node-card">
+                        <div class="node-header">
+                            <h3>Replacing with reliably formed: Reliabilism</h3>
+                            <span class="badge">Analysis 3</span>
+                        </div>
+                        <div class="sub-nodes-container">
+                            <p style="font-size: 0.95rem; color: var(--text-muted); line-height: 1.4;">
+                                Shifting from justification to reliable cognitive processes.
+                            </p>
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>Process reliabilism, Gettiers, and local fixes <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>Definition:</strong> Process reliabilism (Alvin Goldman, 1979) states that a belief is justified if and only if it is produced by a reliable cognitive process that yields a high ratio of true-to-false beliefs.</li>
+                                        <li><strong>David Armstrong:</strong> Introduced indicator reliabilism (1973) using a thermometer analogy, requiring an unbroken, lawful physical connection between reality and the mind.</li>
+                                        <li><strong>Dealing with traditional Gettiers:</strong> Reliabilism handles traditional inferential Gettier cases (like the ten coins) because Smith forms his belief through flawed testimony and coincidence rather than an unbroken physical or reliable causal connection, functioning like a broken thermometer that is right by luck.</li>
+                                        <li><strong>Dealing with perceptual Gettiers:</strong> Reliabilism struggles with environmental perceptual Gettiers like Goldman's Fake Barn Country.</li>
+                                        <li><strong>Fake barn failure:</strong> Because Henry's visual mechanism is functioning normally in broad daylight, process reliabilism categorises his eyesight as a reliable process, falsely granting knowledge to a lucky guess.</li>
+                                        <li><strong>Local reliability fixes:</strong> To solve this local reliability failure, Goldman introduced the No Relevant Alternatives (NRA) condition, requiring cognitive tools to distinguish the truth from realistic local alternatives like twins or fake barns.</li>
+                                        <li><strong>Robert Nozick:</strong> Introduced the Sensitivity Condition ("If the claim were false, would you still believe it?").</li>
+                                        <li><strong>Sensitivity failure:</strong> The sensitivity condition fails in Brain-in-a-Vat scenarios because beliefs remain insensitive to truth.</li>
+                                        <li><strong>Global reliability connections:</strong> Further developments link reliability mechanisms to broader anti-luck constraints, helping bridge externalist causal pathways with defences against hidden environmental deception.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Virtue Epistemology -->
+                    <div class="node-card">
+                        <div class="node-header">
+                            <h3>Replacing with epistemic virtue</h3>
+                            <span class="badge">Analysis 4</span>
+                        </div>
+                        <div class="sub-nodes-container">
+                            <p style="font-size: 0.95rem; color: var(--text-muted); line-height: 1.4;">
+                                Evaluating the character and intellectual competencies of the agent.
+                            </p>
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>Virtue models, Gettiers, and levels of knowledge <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>Definition:</strong> Virtue epistemology evaluates the character and intellectual virtues of the person thinking rather than just the abstract process or proposition.</li>
+                                        <li><strong>Ernest Sosa:</strong> Uses the AAA rating model (accuracy, adroitness, and aptness).</li>
+                                        <li><strong>Apt performance:</strong> Defines knowledge as an apt performance where a belief is true because it manifests a cognitive competence.</li>
+                                        <li><strong>Linda Zagzebski:</strong> Defines an intellectual virtue as a stable trait combining a motivation for truth with a success-enabling component, tightly binding justification to truth.</li>
+                                        <li><strong>Dealing with traditional Gettiers:</strong> Virtue epistemology handles traditional Gettiers by defining knowledge as a true belief reached because of the agent's character and intellectual virtue.</li>
+                                        <li><strong>Fusing justification and truth:</strong> Ensures an agent who guesses correctly via accidental coincidence or a broken clock does not hit the mark because of their intellectual virtue.</li>
+                                        <li><strong>Dealing with perceptual Gettiers:</strong> In perceptual Gettier cases like Henry in Fake Barn Country, Sosa splits knowledge into two distinct levels.</li>
+                                        <li><strong>Animal Knowledge:</strong> Henry possesses animal knowledge because his belief is accurate and adroitly formed via excellent eyesight in daylight, meaning his basic tracking of the real barn is apt.</li>
+                                        <li><strong>Reflective Knowledge:</strong> Henry lacks reflective knowledge because he cannot successfully meta-reflect on his environment to guarantee his tools are safe from the surrounding fake-barn deception.</li>
+                                        <li><strong>Criticisms (Basic Knowledge Objection):</strong> Critics raise objections regarding unreflective infant and animal knowledge.</li>
+                                        <li><strong>Criticisms (Situationist Challenge):</strong> Challenges whether humans possess stable fixed character traits across changing environments.</li>
+                                        <li><strong>Criticisms (Anti-luck critiques):</strong> Argues internal virtue can still occasionally be thwarted by external coincidence.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        Epistemology Unit 1: Definition of Knowledge &bull; Interactive Mind Map for Teaching & Revision
+    </footer>
+
+    <script>
+        function toggleNode(element) {
+            element.classList.toggle('active');
+        }
+    </script>
+</body>
+</html>
