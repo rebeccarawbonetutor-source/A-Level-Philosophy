@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Moral philosophy unit 2: Aristotelian virtue ethics</title>
+    <style>
+        :root {
+            --bg-color: #f8fafc;
+            --card-bg: #ffffff;
+            --card-border: #94a3b8;
+            --text-main: #0f172a;
+            --text-muted: #475569;
+            --accent-primary: #0369a1;
+            --accent-header: #075985;
+            --hover-bg: #f1f5f9;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: auto;
+        }
+
+        header {
+            padding: 1.5rem 1rem 1rem;
+            text-align: center;
+            border-bottom: 1px solid #cbd5e1;
+            background: #ffffff;
+            position: relative;
+        }
+
+        .nav-container {
+            position: absolute;
+            top: 1.5rem;
+            left: 2rem;
+            display: flex;
+            gap: 10px;
+        }
+
+        .nav-btn {
+            background-color: #ffffff;
+            color: var(--accent-header);
+            border: 1px solid var(--card-border);
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            font-weight: 600;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: background-color 0.2s ease, border-color 0.2s ease;
+        }
+
+        .nav-btn:hover {
+            background-color: var(--hover-bg);
+            border-color: var(--accent-primary);
+        }
+
+        header h1 {
+            font-size: 2.2rem;
+            color: var(--accent-header);
+            font-weight: 700;
+        }
+
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            flex: 1;
+            width: 100%;
+        }
+
+        .mindmap {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            position: relative;
+        }
+
+        .root-node {
+            background-color: var(--accent-header);
+            color: #ffffff;
+            padding: 1.2rem 3rem;
+            border-radius: 12px;
+            font-weight: bold;
+            font-size: 1.5rem;
+            box-shadow: 0 10px 15px -3px rgba(3, 105, 161, 0.2);
+            z-index: 2;
+            text-align: center;
+            margin-bottom: 4rem;
+            letter-spacing: 0.5px;
+        }
+
+        .branches-wrapper {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2.5rem;
+            width: 100%;
+            max-width: 1400px;
+            position: relative;
+        }
+
+        .branch-column {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            position: relative;
+        }
+
+        .branch-group-header {
+            background-color: #e0f2fe;
+            border: 2px solid var(--accent-primary);
+            color: var(--accent-header);
+            padding: 1rem 1.5rem;
+            border-radius: 10px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            text-align: center;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        }
+
+        .node-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-left: 5px solid var(--accent-primary);
+            border-radius: 8px;
+            padding: 1.25rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.04);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .node-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 12px -3px rgba(3, 105, 161, 0.15);
+        }
+
+        .node-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #e2e8f0;
+            padding-bottom: 0.5rem;
+        }
+
+        .node-header h3 {
+            font-size: 1.05rem;
+            color: var(--accent-header);
+            font-weight: 700;
+        }
+
+        .badge {
+            background-color: rgba(3, 105, 161, 0.1);
+            color: var(--accent-primary);
+            font-size: 0.7rem;
+            padding: 0.2rem 0.5rem;
+            border-radius: 9999px;
+            font-weight: 600;
+        }
+
+        .sub-nodes-container {
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+        }
+
+        .sub-node {
+            background-color: #f8fafc;
+            border: 1px solid #cbd5e1;
+            border-left: 3px solid var(--accent-primary);
+            padding: 0.75rem;
+            border-radius: 0 6px 6px 0;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+
+        .sub-node:hover {
+            background-color: #f1f5f9;
+        }
+
+        .sub-node h4 {
+            font-size: 0.95rem;
+            color: var(--text-main);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+        }
+
+        .sub-node h4::after {
+            content: '+';
+            color: var(--accent-primary);
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        .sub-node.active h4::after {
+            content: '-';
+        }
+
+        .sub-content {
+            display: none;
+            margin-top: 0.5rem;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            line-height: 1.5;
+            border-top: 1px dashed #cbd5e1;
+            padding-top: 0.5rem;
+        }
+
+        .sub-node.active .sub-content {
+            display: block;
+        }
+
+        ul {
+            margin-left: 1.2rem;
+            margin-top: 0.3rem;
+            list-style-type: disc;
+        }
+
+        ul li {
+            margin-bottom: 0.4rem;
+        }
+
+        footer {
+            text-align: center;
+            padding: 1.5rem;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            border-top: 1px solid #cbd5e1;
+            background: #ffffff;
+            margin-top: 3rem;
+        }
+
+        @media (max-width: 1024px) {
+            .branches-wrapper {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-container {
+                position: static;
+                justify-content: center;
+                margin-bottom: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="nav-container">
+            <a href="index.html" class="nav-btn">🏠 Home</a>
+            <a href="moral philosophy-unit 2-overview.html" class="nav-btn">← Back</a>
+        </div>
+        <h1>Moral philosophy unit 2: Aristotelian virtue ethics</h1>
+    </header>
+
+    <div class="container">
+        <div class="mindmap">
+            <div class="root-node">Aristotelian virtue ethics</div>
+            
+            <div class="branches-wrapper">
+
+                <!-- Column 1: Core Framework & Development -->
+                <div class="branch-column">
+                    <div class="branch-group-header">Core concepts, function and character</div>
+
+                    <!-- Eudaimonia and Pleasure -->
+                    <div class="node-card">
+                        <div class="node-header">
+                            <h3>The good for human beings</h3>
+                            <span class="badge">Eudaimonia</span>
+                        </div>
+                        <div class="sub-nodes-container">
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>Eudaimonia as the final end and its link to pleasure <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>The final end (Telos):</strong> Aristotle argues in the Nicomachean Ethics that every human action aims at some perceived good. However, most goals like wealth, health, or political power are pursued as means to something further. Eudaimonia (commonly translated as human flourishing, living well, or thriving) is the ultimate final end because it is always chosen for its own sake and never as a means to anything else.</li>
+                                        <li><strong>Self-sufficiency and completeness:</strong> Eudaimonia is complete and self-sufficient; when isolated, it makes life desirable and lacking in nothing. It is an active state of being, not a passive mood or fleeting sensation.</li>
+                                        <li><strong>The relationship with pleasure:</strong> Aristotle rejects the idea that eudaimonia is identical to physical pleasure or amusement, yet he maintains that true pleasure is not excluded from a flourishing life. Rather, pleasure is a natural, unforced accompaniment that crowns virtuous activity. A truly virtuous person takes delight in doing what is noble; pleasure completes the activity as an added bloom of well-being.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- The Function Argument -->
+                    <div class="node-card">
+                        <div class="node-header">
+                            <h3>The function argument</h3>
+                            <span class="badge">Ergon</span>
+                        </div>
+                        <div class="sub-nodes-container">
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>The human ergon and excellence <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>The concept of function (Ergon):</strong> Aristotle argues that to discover what makes a human being good, we must look at our unique function. Just as a flautist, a sculptor, or an eye has a specific function defined by its characteristic activity, human beings must have a distinctive function that separates us from plants and animals.</li>
+                                        <li><strong>Exclusion of vegetative and appetitive capacities:</strong> Nutrition and growth are shared with plants; sensory perception and locomotion are shared with animals. Therefore, the unique human function must be the active exercise of the soul's rational faculties (logos).</li>
+                                        <li><strong>Connecting virtues to function:</strong> A good human being is one who performs this unique rational function well. This excellent performance of rational activity is precisely what Aristotle defines as virtue (arete). Thus, living a virtuous life is functionally identical to fulfilling our rational human nature.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Virtues, Habituation, Skill Analogy, Doctrine of the Mean -->
+                    <div class="node-card">
+                        <div class="node-header">
+                            <h3>Character traits, habituation & the mean</h3>
+                            <span class="badge">Character</span>
+                        </div>
+                        <div class="sub-nodes-container">
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>Virtues as dispositions, habituation and the skill analogy <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>Dispositions, not feelings:</strong> Virtues are not passing emotions or innate capacities, but stable, deeply ingrained character traits or dispositions to feel, judge, and act in appropriate ways.</li>
+                                        <li><strong>Role of education and habituation:</strong> Moral virtue is acquired through repeated practice, training, and habituation rather than abstract classroom instruction. We become just by doing just acts, courageous by doing courageous acts, transforming conscious effort into second nature.</li>
+                                        <li><strong>The skill analogy:</strong> Aristotle compares moral virtue to learning a practical craft like playing an instrument or building. Just as someone becomes a builder by building houses, a person becomes virtuous by performing virtuous actions until the disposition becomes a fixed, reliable trait.</li>
+                                        <li><strong>Importance of feelings:</strong> Virtue requires harmonising reason with emotion; a truly virtuous person not only performs the correct external act, but feels the appropriate emotions such as proper anger, fear, or compassion at the right time, toward the right people, for the right motive.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>The doctrine of the mean and its application <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>The golden mean:</strong> Moral virtue generally lies in a mean situated between two opposing vices: one of excess and one of deficiency.</li>
+                                        <li><strong>Application to specific virtues:</strong> For example, regarding the feeling of fear, cowardice is the deficiency (too much fear/too little confidence), rashness is the excess (too little fear/reckless confidence), and courage is the virtuous mean. Similarly, regarding generosity, stinginess is deficiency, wastefulness is excess, and liberality is the mean.</li>
+                                        <li><strong>Relativity of the mean:</strong> The mean is not a rigid mathematical midpoint for everyone, but is relative to the individual, context, and circumstances such as the correct amount of food for an elite athlete differing from that for a sedentary person.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Moral Responsibility -->
+                    <div class="node-card">
+                        <div class="node-header">
+                            <h3>Moral responsibility</h3>
+                            <span class="badge">Agency</span>
+                        </div>
+                        <div class="sub-nodes-container">
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>Voluntary, involuntary and non-voluntary actions <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>Voluntary actions:</strong> Actions where the origin of motion lies entirely within the agent, who has full knowledge of the particular circumstances of the act. These actions carry full moral praise or blame, forming the bedrock of character evaluation.</li>
+                                        <li><strong>Involuntary actions:</strong> Actions performed under strict physical compulsion or forced external constraints where the agent contributes nothing such as being physically picked up and pushed, or actions done entirely through profound, non-culpable ignorance that are subsequently accompanied by genuine pain and regret.</li>
+                                        <li><strong>Non-voluntary actions:</strong> Actions done out of ignorance where the agent does not feel subsequent regret or remorse, or actions performed under intense emotional duress or threats such as a captain throwing cargo overboard during a violent storm. These occupy a complex middle ground in moral assessment.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Practical Reasoning -->
+                    <div class="node-card">
+                        <div class="node-header">
+                            <h3>Practical reasoning and wisdom</h3>
+                            <span class="badge">Phronesis</span>
+                        </div>
+                        <div class="sub-nodes-container">
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>Virtues, actions, reasons and practical wisdom (phronesis) <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>Interconnection of elements:</strong> Virtuous actions must stem from a stable character, correct underlying reasons, and a firm understanding of what is noble. Blindly following a rule does not constitute virtue.</li>
+                                        <li><strong>Role of practical wisdom (phronesis):</strong> Practical wisdom is an intellectual virtue that enables an agent to deliberate well about what is good and conducive to the good life as a whole. It bridges the gap between abstract moral ideals and concrete daily choices.</li>
+                                        <li><strong>Unity of the virtues:</strong> Practical wisdom cannot exist without moral virtue because vice distorts our perception of ends, and true moral virtue cannot reach completion without practical wisdom because good intentions need wise guidance to execute successfully.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Column 2: Issues and Responses -->
+                <div class="branch-column">
+                    <div class="branch-group-header">Challenges, issues & responses</div>
+
+                    <!-- Issue 1 -->
+                    <div class="node-card">
+                        <div class="node-header">
+                            <h3>Issue: Clarity of guidance</h3>
+                            <span class="badge">Guidance criticism</span>
+                        </div>
+                        <div class="sub-nodes-container">
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>Whether virtue ethics provides sufficiently clear action-guidance <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>The criticism:</strong> Virtue ethics is frequently criticised for offering vague, unhelpful guidance during complex moral dilemmas such as telling an agent simply to act as a virtuous person would, failing to provide actionable rules, decision procedures, or universal duties.</li>
+                                        <li><strong>Aristotelian response:</strong> Virtue theorists argue that morality is inherently complex and cannot be neatly reduced to rigid algorithmic rules. Instead of cold universal laws, moral education aims to cultivate mature, wise moral exemplars equipped with practical wisdom (phronesis) who can sensitively navigate the nuanced particulars of real-life situations.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Issue 2 -->
+                    <div class="node-card">
+                        <div class="node-header">
+                            <h3>Issue: Clashing or competing virtues</h3>
+                            <span class="badge">Conflict criticism</span>
+                        </div>
+                        <div class="sub-nodes-container">
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>Handling competing virtue requirements <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>The criticism:</strong> Virtues can occasionally pull an agent in opposite directions during a crisis such as a clash between uncompromising honesty and compassionate kindness when telling the truth would cause devastating emotional pain to a friend.</li>
+                                        <li><strong>Aristotelian response:</strong> Aristotle maintains that true virtues cannot ultimately conflict in reality because they are all unified under the overarching guidance of practical wisdom (phronesis). A person with practical wisdom immediately perceives which virtue takes precedence in that specific context, harmonising conflicting demands into a single excellent choice.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Issue 3 -->
+                    <div class="node-card">
+                        <div class="node-header">
+                            <h3>Issue: The problem of circularity</h3>
+                            <span class="badge">Definition criticism</span>
+                        </div>
+                        <div class="sub-nodes-container">
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>Circularity in defining virtuous acts and virtuous persons <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>The criticism:</strong> The theory appears logically circular: a virtuous act is defined as what a virtuous person would characteristically do, while a virtuous person is defined as someone who consistently performs virtuous acts. This creates an uninformative loop that fails to ground ethical definitions objectively.</li>
+                                        <li><strong>Aristotelian response:</strong> Kantians and virtue ethicists alike note that this is a developmental and analogical circle rather than a vicious logical fallacy. Just as one learns a language or a skilled craft by observing masters and practicing until internalised, moral agents learn by emulating established exemplars, gradually acquiring an independent internal standard of human flourishing (eudaimonia).</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Issue 4 -->
+                    <div class="node-card">
+                        <div class="node-header">
+                            <h3>Issue: Connection between trait and Eudaimonia</h3>
+                            <span class="badge">Flourishing criticism</span>
+                        </div>
+                        <div class="sub-nodes-container">
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>Must a trait contribute to Eudaimonia to be a virtue? <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>The criticism:</strong> Critics question whether every traditional virtue strictly contributes to personal flourishing (eudaimonia), pointing to tragic scenarios where being deeply honest, loyal, or courageous leads directly to extreme personal suffering, persecution, or execution without personal reward.</li>
+                                        <li><strong>Aristotelian response:</strong> Aristotle argues that eudaimonia is objective and requires virtuous activity as its primary constituent component rather than merely instrumental means. While external catastrophes can diminish a flourishing life, possessing a virtuous character guarantees that an agent retains internal dignity, nobility, and soul-health, preserving the core of human excellence even under tragic conditions.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        Moral philosophy unit 2: Aristotelian virtue ethics &bull; Interactive specification mind map
+    </footer>
+
+    <script>
+        function toggleNode(element) {
+            element.classList.toggle('active');
+        }
+    </script>
+</body>
+</html>
