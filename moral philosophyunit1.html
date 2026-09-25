@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Moral philosophy unit 1: meta-ethics (complete spec)</title>
+    <style>
+        :root {
+            --bg-color: #f8fafc;
+            --card-bg: #ffffff;
+            --card-border: #94a3b8;
+            --text-main: #0f172a;
+            --text-muted: #475569;
+            --accent-primary: #0369a1;
+            --accent-header: #075985;
+            --hover-bg: #f1f5f9;
+            --line-color: #0369a1;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: auto;
+        }
+
+        header {
+            padding: 1.5rem 1rem 1rem;
+            text-align: center;
+            border-bottom: 1px solid #cbd5e1;
+            background: #ffffff;
+            position: relative;
+        }
+
+        .nav-container {
+            position: absolute;
+            top: 1.5rem;
+            left: 2rem;
+            display: flex;
+            gap: 10px;
+        }
+
+        .nav-btn {
+            background-color: #ffffff;
+            color: var(--accent-header);
+            border: 1px solid var(--card-border);
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            font-weight: 600;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: background-color 0.2s ease, border-color 0.2s ease;
+        }
+
+        .nav-btn:hover {
+            background-color: var(--hover-bg);
+            border-color: var(--accent-primary);
+        }
+
+        header h1 {
+            font-size: 2.2rem;
+            color: var(--accent-header);
+            font-weight: 700;
+        }
+
+        .container {
+            max-width: 1800px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            flex: 1;
+            width: 100%;
+        }
+
+        .mindmap {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            position: relative;
+        }
+
+        .root-node {
+            background-color: var(--accent-header);
+            color: #ffffff;
+            padding: 1.2rem 3rem;
+            border-radius: 12px;
+            font-weight: bold;
+            font-size: 1.5rem;
+            box-shadow: 0 10px 15px -3px rgba(3, 105, 161, 0.2);
+            z-index: 2;
+            text-align: center;
+            margin-bottom: 4rem;
+            letter-spacing: 0.5px;
+        }
+
+        .branches-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            width: 100%;
+            max-width: 1600px;
+            position: relative;
+        }
+
+        .branches-wrapper::before {
+            content: '';
+            position: absolute;
+            top: -40px;
+            left: 50%;
+            width: 3px;
+            height: 40px;
+            background-color: var(--line-color);
+            transform: translateX(-50%);
+        }
+
+        .branch-column {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            position: relative;
+        }
+
+        .branch-group-header {
+            background-color: #e0f2fe;
+            border: 2px solid var(--accent-primary);
+            color: var(--accent-header);
+            padding: 1rem 1.5rem;
+            border-radius: 10px;
+            font-size: 1.25rem;
+            font-weight: bold;
+            text-align: center;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        }
+
+        .node-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-left: 5px solid var(--accent-primary);
+            border-radius: 8px;
+            padding: 1.25rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.04);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .node-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 12px -3px rgba(3, 105, 161, 0.15);
+        }
+
+        .node-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #e2e8f0;
+            padding-bottom: 0.5rem;
+        }
+
+        .node-header h3 {
+            font-size: 1.1rem;
+            color: var(--accent-header);
+            font-weight: 700;
+        }
+
+        .badge {
+            background-color: rgba(3, 105, 161, 0.1);
+            color: var(--accent-primary);
+            font-size: 0.75rem;
+            padding: 0.25rem 0.6rem;
+            border-radius: 9999px;
+            font-weight: 600;
+        }
+
+        .sub-nodes-container {
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+        }
+
+        .sub-node {
+            background-color: #f8fafc;
+            border: 1px solid #cbd5e1;
+            border-left: 3px solid var(--accent-primary);
+            padding: 0.75rem;
+            border-radius: 0 6px 6px 0;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+
+        .sub-node:hover {
+            background-color: #f1f5f9;
+        }
+
+        .sub-node h4 {
+            font-size: 1rem;
+            color: var(--text-main);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+        }
+
+        .sub-node h4::after {
+            content: '+';
+            color: var(--accent-primary);
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        .sub-node.active h4::after {
+            content: '-';
+        }
+
+        .sub-content {
+            display: none;
+            margin-top: 0.5rem;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            line-height: 1.5;
+            border-top: 1px dashed #cbd5e1;
+            padding-top: 0.5rem;
+        }
+
+        .sub-node.active .sub-content {
+            display: block;
+        }
+
+        ul {
+            margin-left: 1.2rem;
+            margin-top: 0.3rem;
+            list-style-type: disc;
+        }
+
+        ul li {
+            margin-bottom: 0.4rem;
+        }
+
+        footer {
+            text-align: center;
+            padding: 1.5rem;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            border-top: 1px solid #cbd5e1;
+            background: #ffffff;
+            margin-top: 3rem;
+        }
+
+        @media (max-width: 1024px) {
+            .branches-wrapper {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            .branches-wrapper::before {
+                display: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-container {
+                position: static;
+                justify-content: center;
+                margin-bottom: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="nav-container">
+            <a href="index.html" class="nav-btn">🏠 Home</a>
+            <a href="moral philosophy-hub.html" class="nav-btn">← Back</a>
+        </div>
+        <h1>Moral philosophy unit 1: meta-ethics</h1>
+    </header>
+
+    <div class="container">
+        <div class="mindmap">
+            <div class="root-node">Meta-ethics (Full specification)</div>
+            
+            <div class="branches-wrapper">
+
+                <!-- Left Column: Origins, Cognitivism & Moral Realism -->
+                <div class="branch-column">
+                    <div class="branch-group-header">Origins, cognitivism & moral realism</div>
+
+                    <!-- Origins of Moral Principles -->
+                    <div class="node-card">
+                        <div class="node-header">
+                            <h3>Origins of moral principles</h3>
+                            <span class="badge">Foundations</span>
+                        </div>
+                        <div class="sub-nodes-container">
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>Reason, emotion/attitudes, or society <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>Reason (Rationalism):</strong> The foundational meta-ethical view that moral principles are derived through rational intuition, a priori intellectual insight, or strict logical deduction. Rationalists like Kant and non-naturalist intuitionists argue that moral truths are apprehended by pure intellect rather than sensory apparatus, providing objective and universal standards that transcend individual or cultural desires.</li>
+                                        <li><strong>Emotion and attitudes (Sentimentalism):</strong> The psychological view championed by David Hume and expanded by logical positivists that moral distinctions originate entirely from human sentiments, emotional responses, or internal psychological approvals and condemnations. On this view, reason is merely the slave of the passions; moral concepts are projections of our internal emotional states onto external actions.</li>
+                                        <li><strong>Society (Cultural constructivism & evolution):</strong> The sociological and evolutionary account arguing that moral principles are historical constructs forged by social tribes, institutions, and evolutionary survival strategies. Morality emerges as an informal system of rules designed to coordinate cooperative behavior, reduce social friction, and preserve group cohesion across generations, varying drastically across different times and geographies.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Cognitivism vs Non-Cognitivism -->
+                    <div class="node-card">
+                        <div class="node-header">
+                            <h3>Cognitivism vs non-cognitivism</h3>
+                            <span class="badge">Semantic divide</span>
+                        </div>
+                        <div class="sub-nodes-container">
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>Cognitivism <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>Definition and mechanics:</strong> The semantic thesis maintaining that ethical sentences express propositions and mental states known as beliefs. When a person utters a moral claim, they are attempting to describe a factual state of affairs in the world.</li>
+                                        <li><strong>Truth-value:</strong> Because cognitivist statements express propositions with descriptive content, they inherently possess a truth-value—they can be genuinely true or false depending on whether they accurately represent moral reality.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>Non-cognitivism <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>Definition and mechanics:</strong> The semantic thesis holding that ethical sentences do not express beliefs or describe any mind-independent facts; instead, they serve to express non-cognitive mental states such as subjective emotions, desires, imperatives, or behavioural attitudes.</li>
+                                        <li><strong>Lack of truth-value:</strong> Because non-cognitive utterances function like emotional outbursts or commands rather than truth-apt descriptions, they completely lack a truth-value—they are neither true nor false in any objective sense.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Moral Realism -->
+                    <div class="node-card">
+                        <div class="node-header">
+                            <h3>Moral realism</h3>
+                            <span class="badge">Realist view</span>
+                        </div>
+                        <div class="sub-nodes-container">
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>Mind-independent properties/facts <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>Ontological realism:</strong> The core realist thesis asserting that moral facts and properties exist objectively in the universe, entirely independent of human opinions, personal desires, societal conventions, or cultural consensus. Actions possess moral qualities just as physical objects possess mass or shape.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>Moral naturalism (Cognitivist) <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>Definition:</strong> The cognitivist view that moral properties are real, objective *natural* properties that can be discovered, measured, and investigated through empirical observation or scientific inquiry.</li>
+                                        <li><strong>Bentham's utilitarianism:</strong> Jeremy Bentham formulated a quantitative naturalism defining moral terms like "good" or "right" strictly in terms of empirical sensations—maximizing physical pleasure and minimizing physical pain across sentient beings.</li>
+                                        <li><strong>Virtue ethics naturalism:</strong> Naturalist virtue ethics looks to objective human nature and biological flourishing, arguing that virtues and *eudaimonia* (human flourishing) are natural properties embedded in human psychology and species-specific flourishing.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>Moral non-naturalism (Cognitivist) <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>G.E. Moore and intuitionism:</strong> Moore argued that moral properties are real and objective, but *non-natural*, meaning they cannot be broken down, analyzed, or reduced to empirical scientific components like pleasure or survival.</li>
+                                        <li><strong>Moore's open question argument:</strong> Any reductive definition of "good" fails logically. If a theorist claims "good means maximizing pleasure", it remains an open and nonsensical question to ask: "Is maximizing pleasure actually good?" Since this question is not trivial, "good" cannot be identical to pleasure.</li>
+                                        <li><strong>The naturalistic fallacy:</strong> The fundamental logical error of attempting to define the simple, unanalysable property of "good" in terms of natural or empirical properties.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Issues for Realism / Cognitivism -->
+                    <div class="node-card">
+                        <div class="node-header">
+                            <h3>Issues for realism / cognitivism</h3>
+                            <span class="badge">Critical challenges</span>
+                        </div>
+                        <div class="sub-nodes-container">
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>Hume's fork and Ayer's verification principle <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>Hume's fork:</strong> David Hume divided all meaningful human knowledge into two exclusive categories: "relations of ideas" (a priori analytic truths like mathematics) and "matters of fact" (empirical synthetic claims tested by science). Moral statements fit neither, rendering them non-factual.</li>
+                                        <li><strong>Ayer's verification principle:</strong> Logical positivists argued that a statement is factually meaningful only if it is analytically true by definition or empirically verifiable by observation. Because moral statements fail both tests, Ayer claimed they are literally meaningless emotional ejaculations.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>Hume's argument on motivation <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>Internalism and motivation:</strong> Hume argued that pure cognitive beliefs alone can never motivate human action; motivation inherently requires a desire, passion, or affective state. Because moral judgements automatically generate internal motivation to act, they cannot be mere cognitive beliefs, thereby undermining cognitivism.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>Hume's is-ought gap <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>The guillotine:</strong> Hume observed that philosophers habitually slip from descriptive premises about how the world *is* to prescriptive conclusions about how it *ought* to be. Because an "ought" introduces an entirely new evaluative dimension, it cannot be logically deduced from descriptive facts alone.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>Mackie's arguments from relativity & queerness <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>Argument from relativity:</strong> Radical, persistent, and unresolvable disagreements in moral codes across different historical epochs and cultural landscapes strongly indicate that moral values reflect changing social customs rather than objective discoveries.</li>
+                                        <li><strong>Argument from queerness:</strong>
+                                            <ul>
+                                                <li><em>Metaphysical:</em> Objective moral facts would have to be bizarre entities possessing intrinsic action-guiding power or "to-be-pursuedness", unlike anything else in physics.</li>
+                                                <li><em>Epistemological:</em> Perceiving such weird properties would require an occult, non-empirical cognitive faculty completely disconnected from standard scientific observation.</li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Right Column: Moral Anti-Realism, Theories & Issues -->
+                <div class="branch-column">
+                    <div class="branch-group-header">Moral anti-realism, theories & issues</div>
+
+                    <!-- Moral Anti-Realism Overview -->
+                    <div class="node-card">
+                        <div class="node-header">
+                            <h3>Moral anti-realism</h3>
+                            <span class="badge">Anti-realist view</span>
+                        </div>
+                        <div class="sub-nodes-container">
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>No mind-independent properties/facts <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>Ontological anti-realism:</strong> The overarching anti-realist thesis asserting that there are zero objective, mind-independent moral properties or facts embedded in the universe. Ethical values are entirely human constructs generated by emotional reactions, linguistic conventions, or social frameworks.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Anti-Realist Theories -->
+                    <div class="node-card">
+                        <div class="node-header">
+                            <h3>Anti-realist & non-cognitivist theories</h3>
+                            <span class="badge">Theories</span>
+                        </div>
+                        <div class="sub-nodes-container">
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>Error theory (Cognitivist anti-realism) - Mackie <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>Systematic error:</strong> Mackie occupies a unique position combining cognitivism with anti-realism. He argued that when people utter moral statements, they *intend* to describe objective, mind-independent features of reality. However, because moral realism is false and no such features exist, every single positive moral claim made by humans is systematically, uniformly, and universally false.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>Emotivism (Non-cognitivist) - Ayer <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>The boo-hurrah theory:</strong> A.J. Ayer argued that moral language lacks all factual or cognitive meaning. Instead, moral statements function purely to vent subjective emotional attitudes and magnetically command others to share those feelings (e.g., saying "Stealing is wrong" translates logically to shouting "Boo to stealing!").</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>Prescriptivism (Non-cognitivist) - Hare <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>Universal commands:</strong> R.M. Hare argued that moral statements function as universalized imperatives or commands (e.g., saying "Lying is wrong" means "Do not lie", which applies universally to all rational agents, including the speaker, with no self-serving exceptions allowed).</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Issues for Anti-Realism -->
+                    <div class="node-card">
+                        <div class="node-header">
+                            <h3>Issues for anti-realist theories</h3>
+                            <span class="badge">Critical challenges</span>
+                        </div>
+                        <div class="sub-nodes-container">
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>Moral language, reasoning, persuading & disagreeing <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>The Frege-Geach problem:</strong> Peter Geach exposed a fatal flaw in non-cognitivism: if moral terms are mere emotional exclamations or commands, standard logical reasoning breaks down. You cannot embed an exclamation or command into a complex conditional argument (such as *"If lying is wrong, getting your brother to lie is wrong"*) while maintaining structural validity.</li>
+                                        <li><strong>Persuasion and disagreement:</strong> Critics contend that anti-realism reduces genuine moral debate to mere psychological manipulation or emotional clashes of attitude rather than rational truth-seeking.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>The problem of accounting for moral progress <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>Loss of objective progress:</strong> If moral anti-realism is true, humanity cannot be said to have made *objective* moral progress over centuries (such as abolishing slavery or achieving equal rights). Progress would merely signify an arbitrary shift in cultural emotional tastes or prevailing social conventions, stripping moral reforms of true moral betterment.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>Whether anti-realism becomes moral nihilism <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>The nihilism threat:</strong> Critics argue that stripping morality of all objective truth-value collapses ethics into subjective fiction or arbitrary preference, sliding directly into moral nihilism—the bleak view that nothing is truly right or wrong, and that moral discourse is either an illusion or an instrument of power. Anti-realists attempt to resist this by appealing to inter-subjective agreements or survival-based rules.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        Moral philosophy unit 1: meta-ethics &bull; Complete interactive specification mind map
+    </footer>
+
+    <script>
+        function toggleNode(element) {
+            element.classList.toggle('active');
+        }
+    </script>
+</body>
+</html>
