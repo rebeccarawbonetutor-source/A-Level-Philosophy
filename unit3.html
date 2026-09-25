@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MoM Unit 3: Property dualism and epiphenomenalism</title>
+    <style>
+        :root {
+            --bg-color: #f8fafc;
+            --card-bg: #ffffff;
+            --card-border: #94a3b8;
+            --text-main: #0f172a;
+            --text-muted: #475569;
+            --accent-primary: #0369a1;
+            --accent-header: #075985;
+            --hover-bg: #f1f5f9;
+            --line-color: #0369a1;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: auto;
+        }
+
+        header {
+            padding: 1.5rem 1rem 1rem;
+            text-align: center;
+            border-bottom: 1px solid #cbd5e1;
+            background: #ffffff;
+        }
+
+        header h1 {
+            font-size: 2.2rem;
+            color: var(--accent-header);
+            font-weight: 700;
+        }
+
+        .container {
+            max-width: 1800px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            flex: 1;
+            width: 100%;
+        }
+
+        .mindmap {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            position: relative;
+        }
+
+        .root-node {
+            background-color: var(--accent-header);
+            color: #ffffff;
+            padding: 1.2rem 3rem;
+            border-radius: 12px;
+            font-weight: bold;
+            font-size: 1.5rem;
+            box-shadow: 0 10px 15px -3px rgba(3, 105, 161, 0.2);
+            z-index: 2;
+            text-align: center;
+            margin-bottom: 4rem;
+            letter-spacing: 0.5px;
+        }
+
+        .branches-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            width: 100%;
+            max-width: 1600px;
+            position: relative;
+        }
+
+        .branches-wrapper::before {
+            content: '';
+            position: absolute;
+            top: -40px;
+            left: 50%;
+            width: 3px;
+            height: 40px;
+            background-color: var(--line-color);
+            transform: translateX(-50%);
+        }
+
+        .branch-column {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            position: relative;
+        }
+
+        .branch-group-header {
+            background-color: #e0f2fe;
+            border: 2px solid var(--accent-primary);
+            color: var(--accent-header);
+            padding: 1rem 1.5rem;
+            border-radius: 10px;
+            font-size: 1.25rem;
+            font-weight: bold;
+            text-align: center;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        }
+
+        .node-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-left: 5px solid var(--accent-primary);
+            border-radius: 8px;
+            padding: 1.25rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.04);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .node-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 12px -3px rgba(3, 105, 161, 0.15);
+        }
+
+        .node-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #e2e8f0;
+            padding-bottom: 0.5rem;
+        }
+
+        .node-header h3 {
+            font-size: 1.1rem;
+            color: var(--accent-header);
+            font-weight: 700;
+        }
+
+        .badge {
+            background-color: rgba(3, 105, 161, 0.1);
+            color: var(--accent-primary);
+            font-size: 0.75rem;
+            padding: 0.25rem 0.6rem;
+            border-radius: 9999px;
+            font-weight: 600;
+        }
+
+        .sub-nodes-container {
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+        }
+
+        .sub-node {
+            background-color: #f8fafc;
+            border: 1px solid #cbd5e1;
+            border-left: 3px solid var(--accent-primary);
+            padding: 0.75rem;
+            border-radius: 0 6px 6px 0;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+
+        .sub-node:hover {
+            background-color: var(--hover-bg);
+        }
+
+        .sub-node h4 {
+            font-size: 1rem;
+            color: var(--text-main);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+        }
+
+        .sub-node h4::after {
+            content: '+';
+            color: var(--accent-primary);
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        .sub-node.active h4::after {
+            content: '-';
+        }
+
+        .sub-content {
+            display: none;
+            margin-top: 0.5rem;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            line-height: 1.5;
+            border-top: 1px dashed #cbd5e1;
+            padding-top: 0.5rem;
+            padding-left: 1rem;
+        }
+
+        .sub-node.active .sub-content {
+            display: block;
+        }
+
+        ul {
+            margin-left: 1.5rem;
+            margin-top: 0.3rem;
+            list-style-type: disc;
+        }
+
+        ul li {
+            margin-bottom: 0.4rem;
+        }
+
+        ol {
+            margin-left: 1.5rem;
+            margin-top: 0.3rem;
+        }
+
+        ol li {
+            margin-bottom: 0.4rem;
+        }
+
+        footer {
+            text-align: center;
+            padding: 1.5rem;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            border-top: 1px solid #cbd5e1;
+            background: #ffffff;
+            margin-top: 3rem;
+        }
+
+        @media (max-width: 1024px) {
+            .branches-wrapper {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            .branches-wrapper::before {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>MoM Unit 3: Property dualism and epiphenomenalism</h1>
+    </header>
+
+    <div class="container">
+        <div class="mindmap">
+            <div class="root-node">Property dualism and epiphenomenalism</div>
+            
+            <div class="branches-wrapper">
+
+                <!-- Left Branch: Property Dualism Arguments & Responses -->
+                <div class="branch-column">
+                    <div class="branch-group-header">Property dualism and core arguments</div>
+
+                    <!-- Philosophical Zombies Argument -->
+                    <div class="node-card">
+                        <div class="node-header">
+                            <h3>The 'philosophical zombies' argument</h3>
+                            <span class="badge">David Chalmers</span>
+                        </div>
+                        <div class="sub-nodes-container">
+                            <p style="font-size: 0.95rem; color: var(--text-muted); line-height: 1.4;">
+                                Property dualism claims that while there are only physical substances, there are at least some mental properties that are neither reducible to nor supervenient upon physical properties.
+                            </p>
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>Argument structure and formulation <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>Core premise:</strong> Physical properties cannot logically explain phenomenal properties (qualia), which characterise what it is like to have subjective experiences.</li>
+                                        <li><strong>Thought experiment:</strong> A philosophical zombie is a hypothetical creature that is an exact physical and behavioural duplicate of a human being, but lacks consciousness entirely.</li>
+                                        <li><strong>Formal deductive formulation:</strong>
+                                            <ol>
+                                                <li>It is conceivable that there could be a being physically identical to a human but lacking consciousness (a zombie world).</li>
+                                                <li>If something is conceivable without contradiction, then it is metaphysically possible.</li>
+                                                <li>A zombie world is conceivable—a universe physically identical to ours but without consciousness.</li>
+                                                <li>If a metaphysically possible world can be physically identical to ours yet lack consciousness, then physical facts alone do not entail consciousness.</li>
+                                                <li>Therefore, consciousness must be a non-physical component of reality.</li>
+                                            </ol>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>Criticisms and property dualist responses <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>Criticism 1: A zombie world is not conceivable:</strong> Daniel Dennett argues that stipulatively removing consciousness while leaving cognitive functions intact is conceptually incoherent, much like removing health while leaving all bodily functions intact.
+                                            <ul>
+                                                <li><em>Property dualist response:</em> Consciousness and physical functioning are logically independent concepts; because we can imagine a creature performing complex physical tasks without subjective light, conceivability remains coherent, and denying it begs the question.</li>
+                                            </ul>
+                                        </li>
+                                        <li><strong>Criticism 2: Conceivability may not mean metaphysical possibility:</strong> Opponents argue that hidden essential natures matter (e.g., water necessarily being H2O).
+                                            <ul>
+                                                <li><em>Property dualist response:</em> Water and consciousness are different; water has a hidden chemical micro-structure as its essential nature, whereas phenomenal properties have qualia and subjective experience as their essential nature, meaning they can genuinely float free of physical properties.</li>
+                                            </ul>
+                                        </li>
+                                        <li><strong>Criticism 3: Metaphysically possible worlds tell us nothing about the actual world:</strong> David Papineau argues that even if abstractly possible, it tells us nothing about whether consciousness is physical in our actual world.
+                                            <ul>
+                                                <li><em>Property dualist response:</em> If consciousness is physical, it must be physical by metaphysical necessity across all possible worlds; if a single world can be physically identical without containing consciousness, physical facts do not necessitate phenomenal properties in our world either.</li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- The Knowledge/Mary Argument -->
+                    <div class="node-card">
+                        <div class="node-header">
+                            <h3>The 'knowledge/mary' argument</h3>
+                            <span class="badge">Frank Jackson</span>
+                        </div>
+                        <div class="sub-nodes-container">
+                            <p style="font-size: 0.95rem; color: var(--text-muted); line-height: 1.4;">
+                                Designed by Frank Jackson to support property dualism and object to reductive physicalism.
+                            </p>
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>Thought experiment and formulation <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>Thought experiment:</strong> Mary is a brilliant scientist specialising in neurophysiology who lives her entire life in a black-and-white room with a monochrome monitor. She acquires all physical information and facts about colour vision. When released to see a red tomato, Jackson argues she learns something new about qualia.</li>
+                                        <li><strong>Formal deductive formulation:</strong>
+                                            <ol>
+                                                <li>Mary has complete physical information about colour vision while confined to her black-and-white environment.</li>
+                                                <li>When released, Mary learns something new about the phenomenal properties of colour vision.</li>
+                                                <li>Therefore, her previous physical knowledge was incomplete.</li>
+                                                <li>Therefore, reductive physicalism is false.</li>
+                                            </ol>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>Physicalist criticisms and dualist counter-responses <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>The ability knowledge response (David Lewis):</strong> Mary acquires no new propositional knowledge ("knowledge that"), but gains ability knowledge ("know how"—the ability to imagine and recognise red).</li>
+                                        <li><strong>The acquaintance knowledge response:</strong> Mary acquires direct acquaintance with the property of redness rather than learning new non-physical facts.</li>
+                                        <li><strong>The new knowledge / old fact response (David Papineau):</strong> Mary gains new propositional knowledge, but it is knowledge of old physical facts known in a new way through phenomenal concepts. *(Note: Jackson later abandoned property dualism, arguing Mary gains a new representational ability.)*</li>
+                                        <li><strong>Property dualist counter-response:</strong> These physicalist responses evade the core intuition; whether framed as abilities or concepts, Mary encounters an intrinsic qualitative aspect of science-defying qualia, demonstrating an ontological gap.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Right Branch: Issues Facing Epiphenomenalist Dualism -->
+                <div class="branch-column">
+                    <div class="branch-group-header">Issues facing epiphenomenalist dualism</div>
+
+                    <!-- Introspective Self-Knowledge -->
+                    <div class="node-card">
+                        <div class="node-header">
+                            <h3>The challenge of introspective self-knowledge</h3>
+                            <span class="badge">Epistemology</span>
+                        </div>
+                        <div class="sub-nodes-container">
+                            <p style="font-size: 0.95rem; color: var(--text-muted); line-height: 1.4;">
+                                Challenges the epiphenomenalist claim that mental states are entirely causally impotent.
+                            </p>
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>The difficulty and epiphenomenalist responses <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>Nature of introspection:</strong> Introspective self-knowledge involves direct, first-person access to our own mental states as internal observation.</li>
+                                        <li><strong>The contradiction:</strong> If epiphenomenalism is true, phenomenal experiences cannot cause our thoughts, beliefs about our perceptions, or verbal reports ("I see a rainbow"). Internal beliefs and speech are caused entirely by physical brain cells, bypassing conscious experience and making introspective self-knowledge logically impossible.</li>
+                                        <li><strong>Epiphenomenalist responses:</strong> Proponents argue knowledge does not require direct causation. The same underlying physical brain state causes both the physical brain process and the mental feeling simultaneously, maintaining a reliable correlation. Furthermore, Benjamin Libet's clock experiments and Daniel Wegner's work on conscious will suggest unconscious brain processes initiate actions before conscious awareness, making the feeling of conscious control a delayed projection.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Phenomenology of Mental Life -->
+                    <div class="node-card">
+                        <div class="node-header">
+                            <h3>The phenomenology of our mental life</h3>
+                            <span class="badge">Causal Connections</span>
+                        </div>
+                        <div class="sub-nodes-container">
+                            <p style="font-size: 0.95rem; color: var(--text-muted); line-height: 1.4;">
+                                Addresses first-person appearances involving psycho-physical and psychological causal connections.
+                            </p>
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>The difficulty and epiphenomenalist responses <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>The evidence of everyday experience:</strong> Phenomenology concerns first-person appearances of conscious mental states, presenting our mental lives as involving active causal connections.</li>
+                                        <li><strong>Psycho-physical and psychological interactions:</strong> We experience physical inputs causing mental states (stubbing a toe causing pain), mental states causing physical actions (hunger causing a desire to reach into a cupboard), and mental states interacting with other mental states (feeling depressed causing sad thoughts). Epiphenomenalism renders all of this an illusion.</li>
+                                        <li><strong>Epiphenomenalist responses:</strong> Frank Jackson argued that apparent causal connections between mental states and behaviour can be explained away by showing that two events are distinct effects of a common underlying cause. Comparing this to a film projector where images appear causally linked but are separate effects of the film, Jackson maintained physical brain states independently cause both mental feelings and behaviour in parallel.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Natural Selection / Evolution -->
+                    <div class="node-card">
+                        <div class="node-header">
+                            <h3>The challenge of natural selection/evolution</h3>
+                            <span class="badge">Evolution</span>
+                        </div>
+                        <div class="sub-nodes-container">
+                            <p style="font-size: 0.95rem; color: var(--text-muted); line-height: 1.4;">
+                                Questions how epiphenomenal mental properties could evolve if they possess zero physical survival effects.
+                            </p>
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>The difficulty and epiphenomenalist responses <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>The evolutionary dilemma:</strong> Natural selection drives evolution by selecting physical traits conducive to survival. If mental properties are epiphenomenal with no physical effects on behaviour, their evolutionary persistence becomes deeply problematic. Natural selection could never "see" or select for mental states, rendering consciousness inexplicable.</li>
+                                        <li><strong>Epiphenomenalist responses:</strong> Frank Jackson defended epiphenomenalism by arguing traits do not need to be directly selected if they are unavoidable structural by-products (concomitants) of traits that *are* selected. Using the polar bear analogy, a heavy coat slows the bear down (disadvantageous), but is an unavoidable physical concomitant of having a warm coat (critically conducive to survival). Similarly, Jackson argued qualia are non-conducive evolutionary by-products of complex brain processes that *are* highly conducive to survival.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        MoM Unit 3: Property dualism and epiphenomenalism &bull; Interactive Mind Map for Teaching & Revision
+    </footer>
+
+    <script>
+        function toggleNode(element) {
+            element.classList.toggle('active');
+        }
+    </script>
+</body>
+</html>
