@@ -1,497 +1,497 @@
-<!DOCTYPE html>
+the back button on this doesn't work needs to take me back to moral philosophy-unit2overview.html <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Moral philosophy unit 2: Kantian ethics</title>
-    <style>
-        :root {
-            --bg-color: #f8fafc;
-            --card-bg: #ffffff;
-            --card-border: #94a3b8;
-            --text-main: #0f172a;
-            --text-muted: #475569;
-            --accent-primary: #0369a1;
-            --accent-header: #075985;
-            --hover-bg: #f1f5f9;
-        }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Moral philosophy unit 2: Kantian ethics</title>
+    <style>
+        :root {
+            --bg-color: #f8fafc;
+            --card-bg: #ffffff;
+            --card-border: #94a3b8;
+            --text-main: #0f172a;
+            --text-muted: #475569;
+            --accent-primary: #0369a1;
+            --accent-header: #075985;
+            --hover-bg: #f1f5f9;
+        }
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
-        body {
-            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-main);
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            overflow-x: auto;
-        }
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: auto;
+        }
 
-        header {
-            padding: 1.5rem 1rem 1rem;
-            text-align: center;
-            border-bottom: 1px solid #cbd5e1;
-            background: #ffffff;
-            position: relative;
-        }
+        header {
+            padding: 1.5rem 1rem 1rem;
+            text-align: center;
+            border-bottom: 1px solid #cbd5e1;
+            background: #ffffff;
+            position: relative;
+        }
 
-        .nav-container {
-            position: absolute;
-            top: 1.5rem;
-            left: 2rem;
-            display: flex;
-            gap: 10px;
-        }
+        .nav-container {
+            position: absolute;
+            top: 1.5rem;
+            left: 2rem;
+            display: flex;
+            gap: 10px;
+        }
 
-        .nav-btn {
-            background-color: #ffffff;
-            color: var(--accent-header);
-            border: 1px solid var(--card-border);
-            padding: 0.5rem 1rem;
-            border-radius: 6px;
-            font-weight: 600;
-            text-decoration: none;
-            font-size: 0.9rem;
-            transition: background-color 0.2s ease, border-color 0.2s ease;
-        }
+        .nav-btn {
+            background-color: #ffffff;
+            color: var(--accent-header);
+            border: 1px solid var(--card-border);
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            font-weight: 600;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: background-color 0.2s ease, border-color 0.2s ease;
+        }
 
-        .nav-btn:hover {
-            background-color: var(--hover-bg);
-            border-color: var(--accent-primary);
-        }
+        .nav-btn:hover {
+            background-color: var(--hover-bg);
+            border-color: var(--accent-primary);
+        }
 
-        header h1 {
-            font-size: 2.2rem;
-            color: var(--accent-header);
-            font-weight: 700;
-        }
+        header h1 {
+            font-size: 2.2rem;
+            color: var(--accent-header);
+            font-weight: 700;
+        }
 
-        .container {
-            max-width: 1600px;
-            margin: 0 auto;
-            padding: 3rem 2rem;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            flex: 1;
-            width: 100%;
-        }
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            flex: 1;
+            width: 100%;
+        }
 
-        .mindmap {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            width: 100%;
-            position: relative;
-        }
+        .mindmap {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            position: relative;
+        }
 
-        .root-node {
-            background-color: var(--accent-header);
-            color: #ffffff;
-            padding: 1.2rem 3rem;
-            border-radius: 12px;
-            font-weight: bold;
-            font-size: 1.5rem;
-            box-shadow: 0 10px 15px -3px rgba(3, 105, 161, 0.2);
-            z-index: 2;
-            text-align: center;
-            margin-bottom: 4rem;
-            letter-spacing: 0.5px;
-        }
+        .root-node {
+            background-color: var(--accent-header);
+            color: #ffffff;
+            padding: 1.2rem 3rem;
+            border-radius: 12px;
+            font-weight: bold;
+            font-size: 1.5rem;
+            box-shadow: 0 10px 15px -3px rgba(3, 105, 161, 0.2);
+            z-index: 2;
+            text-align: center;
+            margin-bottom: 4rem;
+            letter-spacing: 0.5px;
+        }
 
-        .branches-wrapper {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 2.5rem;
-            width: 100%;
-            max-width: 1400px;
-            position: relative;
-        }
+        .branches-wrapper {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2.5rem;
+            width: 100%;
+            max-width: 1400px;
+            position: relative;
+        }
 
-        .branch-column {
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-            position: relative;
-        }
+        .branch-column {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            position: relative;
+        }
 
-        .branch-group-header {
-            background-color: #e0f2fe;
-            border: 2px solid var(--accent-primary);
-            color: var(--accent-header);
-            padding: 1rem 1.5rem;
-            border-radius: 10px;
-            font-size: 1.2rem;
-            font-weight: bold;
-            text-align: center;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
-        }
+        .branch-group-header {
+            background-color: #e0f2fe;
+            border: 2px solid var(--accent-primary);
+            color: var(--accent-header);
+            padding: 1rem 1.5rem;
+            border-radius: 10px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            text-align: center;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        }
 
-        .node-card {
-            background-color: var(--card-bg);
-            border: 1px solid var(--card-border);
-            border-left: 5px solid var(--accent-primary);
-            border-radius: 8px;
-            padding: 1.25rem;
-            display: flex;
-            flex-direction: column;
-            gap: 0.75rem;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.04);
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-        }
+        .node-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-left: 5px solid var(--accent-primary);
+            border-radius: 8px;
+            padding: 1.25rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.04);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
 
-        .node-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 12px -3px rgba(3, 105, 161, 0.15);
-        }
+        .node-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 12px -3px rgba(3, 105, 161, 0.15);
+        }
 
-        .node-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid #e2e8f0;
-            padding-bottom: 0.5rem;
-        }
+        .node-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #e2e8f0;
+            padding-bottom: 0.5rem;
+        }
 
-        .node-header h3 {
-            font-size: 1.05rem;
-            color: var(--accent-header);
-            font-weight: 700;
-        }
+        .node-header h3 {
+            font-size: 1.05rem;
+            color: var(--accent-header);
+            font-weight: 700;
+        }
 
-        .badge {
-            background-color: rgba(3, 105, 161, 0.1);
-            color: var(--accent-primary);
-            font-size: 0.7rem;
-            padding: 0.2rem 0.5rem;
-            border-radius: 9999px;
-            font-weight: 600;
-        }
+        .badge {
+            background-color: rgba(3, 105, 161, 0.1);
+            color: var(--accent-primary);
+            font-size: 0.7rem;
+            padding: 0.2rem 0.5rem;
+            border-radius: 9999px;
+            font-weight: 600;
+        }
 
-        .sub-nodes-container {
-            display: flex;
-            flex-direction: column;
-            gap: 0.6rem;
-        }
+        .sub-nodes-container {
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+        }
 
-        .sub-node {
-            background-color: #f8fafc;
-            border: 1px solid #cbd5e1;
-            border-left: 3px solid var(--accent-primary);
-            padding: 0.75rem;
-            border-radius: 0 6px 6px 0;
-            font-size: 0.9rem;
-            cursor: pointer;
-            transition: background-color 0.2s ease;
-        }
+        .sub-node {
+            background-color: #f8fafc;
+            border: 1px solid #cbd5e1;
+            border-left: 3px solid var(--accent-primary);
+            padding: 0.75rem;
+            border-radius: 0 6px 6px 0;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
 
-        .sub-node:hover {
-            background-color: #f1f5f9;
-        }
+        .sub-node:hover {
+            background-color: #f1f5f9;
+        }
 
-        .sub-node h4 {
-            font-size: 0.95rem;
-            color: var(--text-main);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-weight: 600;
-        }
+        .sub-node h4 {
+            font-size: 0.95rem;
+            color: var(--text-main);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+        }
 
-        .sub-node h4::after {
-            content: '+';
-            color: var(--accent-primary);
-            font-weight: bold;
-            font-size: 1.1rem;
-        }
+        .sub-node h4::after {
+            content: '+';
+            color: var(--accent-primary);
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
 
-        .sub-node.active h4::after {
-            content: '-';
-        }
+        .sub-node.active h4::after {
+            content: '-';
+        }
 
-        .sub-content {
-            display: none;
-            margin-top: 0.5rem;
-            color: var(--text-muted);
-            font-size: 0.85rem;
-            line-height: 1.5;
-            border-top: 1px dashed #cbd5e1;
-            padding-top: 0.5rem;
-        }
+        .sub-content {
+            display: none;
+            margin-top: 0.5rem;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            line-height: 1.5;
+            border-top: 1px dashed #cbd5e1;
+            padding-top: 0.5rem;
+        }
 
-        .sub-node.active .sub-content {
-            display: block;
-        }
+        .sub-node.active .sub-content {
+            display: block;
+        }
 
-        ul {
-            margin-left: 1.2rem;
-            margin-top: 0.3rem;
-            list-style-type: disc;
-        }
+        ul {
+            margin-left: 1.2rem;
+            margin-top: 0.3rem;
+            list-style-type: disc;
+        }
 
-        ul li {
-            margin-bottom: 0.4rem;
-        }
+        ul li {
+            margin-bottom: 0.4rem;
+        }
 
-        footer {
-            text-align: center;
-            padding: 1.5rem;
-            color: var(--text-muted);
-            font-size: 0.9rem;
-            border-top: 1px solid #cbd5e1;
-            background: #ffffff;
-            margin-top: 3rem;
-        }
+        footer {
+            text-align: center;
+            padding: 1.5rem;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            border-top: 1px solid #cbd5e1;
+            background: #ffffff;
+            margin-top: 3rem;
+        }
 
-        @media (max-width: 1024px) {
-            .branches-wrapper {
-                grid-template-columns: 1fr;
-                gap: 2rem;
-            }
-        }
+        @media (max-width: 1024px) {
+            .branches-wrapper {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+        }
 
-        @media (max-width: 768px) {
-            .nav-container {
-                position: static;
-                justify-content: center;
-                margin-bottom: 1rem;
-            }
-        }
-    </style>
+        @media (max-width: 768px) {
+            .nav-container {
+                position: static;
+                justify-content: center;
+                margin-bottom: 1rem;
+            }
+        }
+    </style>
 </head>
 <body>
 
-    <header>
-        <div class="nav-container">
-            <a href="index.html" class="nav-btn">🏠 Home</a>
-            <a href="moral philosophy-unit 2-overview.html" class="nav-btn">← Back</a>
-        </div>
-        <h1>Moral philosophy unit 2: Kantian ethics</h1>
-    </header>
+    <header>
+        <div class="nav-container">
+            <a href="index.html" class="nav-btn">🏠 Home</a>
+            <a href="moral philosophy-unit 2-overview.html" class="nav-btn">← Back</a>
+        </div>
+        <h1>Moral philosophy unit 2: Kantian ethics</h1>
+    </header>
 
-    <div class="container">
-        <div class="mindmap">
-            <div class="root-node">Kantian deontological ethics</div>
-            
-            <div class="branches-wrapper">
+    <div class="container">
+        <div class="mindmap">
+            <div class="root-node">Kantian deontological ethics</div>
+            
+            <div class="branches-wrapper">
 
-                <!-- Column 1: Core Theory & Framework -->
-                <div class="branch-column">
-                    <div class="branch-group-header">Core concepts and duties</div>
+                <!-- Column 1: Core Theory & Framework -->
+                <div class="branch-column">
+                    <div class="branch-group-header">Core concepts and duties</div>
 
-                    <!-- Good Will -->
-                    <div class="node-card">
-                        <div class="node-header">
-                            <h3>The good will</h3>
-                            <span class="badge">Foundations</span>
-                        </div>
-                        <div class="sub-nodes-container">
-                            <div class="sub-node" onclick="toggleNode(this)">
-                                <h4>Immanuel Kant's account of a good will <span></span></h4>
-                                <div class="sub-content">
-                                    <ul>
-                                        <li><strong>Absolute unqualified value:</strong> Kant famously argued in the Groundwork of the Metaphysics of Morals that "Nothing can possibly be conceived in the world... which can be called good without qualification, except a good will."</li>
-                                        <li><strong>Rejection of external goods:</strong> Talents of the mind (intelligence, wit), qualities of temperament (courage, perseverance), and gifts of fortune (wealth, power, health) are entirely good in many respects, but can become extremely bad and mischievous if the will using them is not good.</li>
-                                        <li><strong>Independence from outcomes:</strong> A good will shines like a jewel for its own sake as something which has its full value in itself, completely independent of its utility, success, fruitfulness, or ability to accomplish desired ends.</li>
-                                        <li><strong>Reason as governor:</strong> Nature endowed human beings with reason not merely for self-preservation or happiness, but to produce a will that is good in itself, because instinct alone is far less reliable for achieving true moral orientation.</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <!-- Good Will -->
+                    <div class="node-card">
+                        <div class="node-header">
+                            <h3>The good will</h3>
+                            <span class="badge">Foundations</span>
+                        </div>
+                        <div class="sub-nodes-container">
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>Immanuel Kant's account of a good will <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>Absolute unqualified value:</strong> Kant famously argued in the Groundwork of the Metaphysics of Morals that "Nothing can possibly be conceived in the world... which can be called good without qualification, except a good will."</li>
+                                        <li><strong>Rejection of external goods:</strong> Talents of the mind (intelligence, wit), qualities of temperament (courage, perseverance), and gifts of fortune (wealth, power, health) are entirely good in many respects, but can become extremely bad and mischievous if the will using them is not good.</li>
+                                        <li><strong>Independence from outcomes:</strong> A good will shines like a jewel for its own sake as something which has its full value in itself, completely independent of its utility, success, fruitfulness, or ability to accomplish desired ends.</li>
+                                        <li><strong>Reason as governor:</strong> Nature endowed human beings with reason not merely for self-preservation or happiness, but to produce a will that is good in itself, because instinct alone is far less reliable for achieving true moral orientation.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-                    <!-- Duty -->
-                    <div class="node-card">
-                        <div class="node-header">
-                            <h3>Acting from duty</h3>
-                            <span class="badge">Motives</span>
-                        </div>
-                        <div class="sub-nodes-container">
-                            <div class="sub-node" onclick="toggleNode(this)">
-                                <h4>In accordance with duty vs out of duty <span></span></h4>
-                                <div class="sub-content">
-                                    <ul>
-                                        <li><strong>In accordance with duty:</strong> Performing an external action that happens to align with what duty requires, but doing so for the wrong underlying reason—such as personal inclination, emotional gratification, fear of legal punishment, or direct self-interest.</li>
-                                        <li><strong>The shopkeeper example:</strong> An experienced shopkeeper does not overcharge inexperienced customers, maintaining fair prices. This is strictly in accordance with duty, but if done purely to protect business reputation and profit, it possesses no genuine moral worth.</li>
-                                        <li><strong>Out of duty:</strong> Performing the exact same right action solely because it is your rational moral duty, completely stripping away personal desires, anticipated rewards, or emotional inclinations.</li>
-                                        <li><strong>The depressed philanthropist:</strong> A person whose mind is clouded by personal sorrow that destroys all sympathy for the fate of others, who nevertheless takes trouble to help the distressed out of pure duty rather than inclination, displays authentic moral worth for the very first time.</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <!-- Duty -->
+                    <div class="node-card">
+                        <div class="node-header">
+                            <h3>Acting from duty</h3>
+                            <span class="badge">Motives</span>
+                        </div>
+                        <div class="sub-nodes-container">
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>In accordance with duty vs out of duty <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>In accordance with duty:</strong> Performing an external action that happens to align with what duty requires, but doing so for the wrong underlying reason—such as personal inclination, emotional gratification, fear of legal punishment, or direct self-interest.</li>
+                                        <li><strong>The shopkeeper example:</strong> An experienced shopkeeper does not overcharge inexperienced customers, maintaining fair prices. This is strictly in accordance with duty, but if done purely to protect business reputation and profit, it possesses no genuine moral worth.</li>
+                                        <li><strong>Out of duty:</strong> Performing the exact same right action solely because it is your rational moral duty, completely stripping away personal desires, anticipated rewards, or emotional inclinations.</li>
+                                        <li><strong>The depressed philanthropist:</strong> A person whose mind is clouded by personal sorrow that destroys all sympathy for the fate of others, who nevertheless takes trouble to help the distressed out of pure duty rather than inclination, displays authentic moral worth for the very first time.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-                    <!-- Imperatives -->
-                    <div class="node-card">
-                        <div class="node-header">
-                            <h3>Imperatives of reason</h3>
-                            <span class="badge">Commands</span>
-                        </div>
-                        <div class="sub-nodes-container">
-                            <div class="sub-node" onclick="toggleNode(this)">
-                                <h4>Hypothetical vs categorical imperatives <span></span></h4>
-                                <div class="sub-content">
-                                    <ul>
-                                        <li><strong>Definition of imperatives:</strong> Commands of reason that tell an imperfectly rational will what it ought to do.</li>
-                                        <li><strong>Hypothetical imperatives:</strong> Conditional commands that apply only if the agent has a prior subjective goal or desire (e.g., "If you want to pass your philosophy exams, you must revise hard"). If you drop the desire, the command loses its binding force. They include rules of skill and counsels of prudence.</li>
-                                        <li><strong>Categorical imperatives:</strong> Unconditional commands that apply universally to all rational agents at all times, regardless of any personal desires, goals, inclinations, or consequences.</li>
-                                        <li><strong>The command of morality:</strong> True moral requirements take the strict logical form of categorical imperatives because morality is binding on rational nature as an objective necessity.</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <!-- Imperatives -->
+                    <div class="node-card">
+                        <div class="node-header">
+                            <h3>Imperatives of reason</h3>
+                            <span class="badge">Commands</span>
+                        </div>
+                        <div class="sub-nodes-container">
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>Hypothetical vs categorical imperatives <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>Definition of imperatives:</strong> Commands of reason that tell an imperfectly rational will what it ought to do.</li>
+                                        <li><strong>Hypothetical imperatives:</strong> Conditional commands that apply only if the agent has a prior subjective goal or desire (e.g., "If you want to pass your philosophy exams, you must revise hard"). If you drop the desire, the command loses its binding force. They include rules of skill and counsels of prudence.</li>
+                                        <li><strong>Categorical imperatives:</strong> Unconditional commands that apply universally to all rational agents at all times, regardless of any personal desires, goals, inclinations, or consequences.</li>
+                                        <li><strong>The command of morality:</strong> True moral requirements take the strict logical form of categorical imperatives because morality is binding on rational nature as an objective necessity.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-                    <!-- Formulations -->
-                    <div class="node-card">
-                        <div class="node-header">
-                            <h3>Formulations of the categorical imperative</h3>
-                            <span class="badge">Formulations</span>
-                        </div>
-                        <div class="sub-nodes-container">
-                            <div class="sub-node" onclick="toggleNode(this)">
-                                <h4>First formulation: Universal law <span></span></h4>
-                                <div class="sub-content">
-                                    <ul>
-                                        <li><strong>The formula:</strong> "Act only according to that maxim whereby you can at the same time will that it should become a universal law." A maxim is the subjective subjective principle of volition behind an action.</li>
-                                        <li><strong>Contradiction in conception (strict duties):</strong> Occurs when attempting to universalise a maxim results in a logical self-contradiction, making the imagined world impossible (e.g., universal false promising makes promises logically meaningless). This generates strict, exceptionless **perfect duties** (e.g., do not commit suicide, do not make false promises).</li>
-                                        <li><strong>Contradiction in will (imperfect duties):</strong> Occurs when a maxim can be conceived as a universal law without logical contradiction, but no rational agent could consistently *will* to live in such a world without destroying their own agency or welfare (e.g., refusing ever to help others in need). This generates flexible **imperfect duties** (e.g., develop your talents, help those in distress).</li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="sub-node" onclick="toggleNode(this)">
-                                <h4>Second formulation: Humanity as an end <span></span></h4>
-                                <div class="sub-content">
-                                    <ul>
-                                        <li><strong>The formula:</strong> "Act in such a way that you treat humanity, whether in your own person or in the person of any other, never simply as a means, but always at the same time as an end."</li>
-                                        <li><strong>Rational autonomy:</strong> To treat someone as an end means to respect their intrinsic dignity, rational autonomy, and capacity to set their own goals, rather than treating them merely as an instrument to achieve your own ends.</li>
-                                        <li><strong>Prohibitions and requirements:</strong> This formulation strictly prohibits manipulation, deceit, coercion, and slavery, while demanding that we actively foster and support the rational projects of others.</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <!-- Formulations -->
+                    <div class="node-card">
+                        <div class="node-header">
+                            <h3>Formulations of the categorical imperative</h3>
+                            <span class="badge">Formulations</span>
+                        </div>
+                        <div class="sub-nodes-container">
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>First formulation: Universal law <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>The formula:</strong> "Act only according to that maxim whereby you can at the same time will that it should become a universal law." A maxim is the subjective subjective principle of volition behind an action.</li>
+                                        <li><strong>Contradiction in conception (strict duties):</strong> Occurs when attempting to universalise a maxim results in a logical self-contradiction, making the imagined world impossible (e.g., universal false promising makes promises logically meaningless). This generates strict, exceptionless **perfect duties** (e.g., do not commit suicide, do not make false promises).</li>
+                                        <li><strong>Contradiction in will (imperfect duties):</strong> Occurs when a maxim can be conceived as a universal law without logical contradiction, but no rational agent could consistently *will* to live in such a world without destroying their own agency or welfare (e.g., refusing ever to help others in need). This generates flexible **imperfect duties** (e.g., develop your talents, help those in distress).</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>Second formulation: Humanity as an end <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>The formula:</strong> "Act in such a way that you treat humanity, whether in your own person or in the person of any other, never simply as a means, but always at the same time as an end."</li>
+                                        <li><strong>Rational autonomy:</strong> To treat someone as an end means to respect their intrinsic dignity, rational autonomy, and capacity to set their own goals, rather than treating them merely as an instrument to achieve your own ends.</li>
+                                        <li><strong>Prohibitions and requirements:</strong> This formulation strictly prohibits manipulation, deceit, coercion, and slavery, while demanding that we actively foster and support the rational projects of others.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-                </div>
+                </div>
 
-                <!-- Column 2: Issues and Responses -->
-                <div class="branch-column">
-                    <div class="branch-group-header">Challenges, issues & responses</div>
+                <!-- Column 2: Issues and Responses -->
+                <div class="branch-column">
+                    <div class="branch-group-header">Challenges, issues & responses</div>
 
-                    <!-- Issue 1 -->
-                    <div class="node-card">
-                        <div class="node-header">
-                            <h3>Issue: Clashing or competing duties</h3>
-                            <span class="badge">Conflict criticism</span>
-                        </div>
-                        <div class="sub-nodes-container">
-                            <div class="sub-node" onclick="toggleNode(this)">
-                                <h4>Handling conflicting moral requirements <span></span></h4>
-                                <div class="sub-content">
-                                    <ul>
-                                        <li><strong>The criticism:</strong> Kantian ethics appears to lack an internal decision mechanism, priority hierarchy, or weighting system when two absolute perfect duties inevitably collide in complex real-life dilemmas (e.g., the duty to tell the truth vs. the duty to protect an innocent friend from a murderer at your door).</li>
-                                        <li><strong>Kantian response:</strong> Kant maintained that genuine moral duties cannot logically conflict because the moral law is a unified rational system; apparent dilemmas reveal that our maxims have been improperly formulated or that we have failed to analyze the precise boundaries of the obligation correctly. Furthermore, strict duties of non-maleficence and perfect obligations take structural precedence.</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <!-- Issue 1 -->
+                    <div class="node-card">
+                        <div class="node-header">
+                            <h3>Issue: Clashing or competing duties</h3>
+                            <span class="badge">Conflict criticism</span>
+                        </div>
+                        <div class="sub-nodes-container">
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>Handling conflicting moral requirements <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>The criticism:</strong> Kantian ethics appears to lack an internal decision mechanism, priority hierarchy, or weighting system when two absolute perfect duties inevitably collide in complex real-life dilemmas (e.g., the duty to tell the truth vs. the duty to protect an innocent friend from a murderer at your door).</li>
+                                        <li><strong>Kantian response:</strong> Kant maintained that genuine moral duties cannot logically conflict because the moral law is a unified rational system; apparent dilemmas reveal that our maxims have been improperly formulated or that we have failed to analyze the precise boundaries of the obligation correctly. Furthermore, strict duties of non-maleficence and perfect obligations take structural precedence.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-                    <!-- Issue 2 -->
-                    <div class="node-card">
-                        <div class="node-header">
-                            <h3>Issue: Limits of universalisation</h3>
-                            <span class="badge">Maxim criticism</span>
-                        </div>
-                        <div class="sub-nodes-container">
-                            <div class="sub-node" onclick="toggleNode(this)">
-                                <h4>Trivial and immoral universalisable maxims <span></span></h4>
-                                <div class="sub-content">
-                                    <ul>
-                                        <li><strong>The criticism:</strong> The universal law test allows trivial, silly maxims to pass easily as moral duties (e.g., "Always wear a blue hat on Thursdays"), while conversely, cunningly crafted immoral maxims can be phrased narrowly enough to avoid internal logical contradiction (e.g., "I will steal money from a bank only on leap years when my birthday falls on a Tuesday").</li>
-                                        <li><strong>Kantian response:</strong> Kantians argue that the universal law formula is only a baseline test and must be cross-applied alongside the other formulations, particularly the formula of humanity. A maxim allowing theft or disrespect for property rights collapses under the requirement of respecting universal rational autonomy, regardless of narrow linguistic phrasing.</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <!-- Issue 2 -->
+                    <div class="node-card">
+                        <div class="node-header">
+                            <h3>Issue: Limits of universalisation</h3>
+                            <span class="badge">Maxim criticism</span>
+                        </div>
+                        <div class="sub-nodes-container">
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>Trivial and immoral universalisable maxims <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>The criticism:</strong> The universal law test allows trivial, silly maxims to pass easily as moral duties (e.g., "Always wear a blue hat on Thursdays"), while conversely, cunningly crafted immoral maxims can be phrased narrowly enough to avoid internal logical contradiction (e.g., "I will steal money from a bank only on leap years when my birthday falls on a Tuesday").</li>
+                                        <li><strong>Kantian response:</strong> Kantians argue that the universal law formula is only a baseline test and must be cross-applied alongside the other formulations, particularly the formula of humanity. A maxim allowing theft or disrespect for property rights collapses under the requirement of respecting universal rational autonomy, regardless of narrow linguistic phrasing.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-                    <!-- Issue 3 -->
-                    <div class="node-card">
-                        <div class="node-header">
-                            <h3>Issue: Consequences matter</h3>
-                            <span class="badge">Outcome criticism</span>
-                        </div>
-                        <div class="sub-nodes-container">
-                            <div class="sub-node" onclick="toggleNode(this)">
-                                <h4>Disregard for outcomes and disaster <span></span></h4>
-                                <div class="sub-content">
-                                    <ul>
-                                        <li><strong>The criticism:</strong> By focusing entirely on internal motives, duty, and rule adherence while completely ignoring the consequences of actions, Kantian ethics can mandate catastrophic outcomes (e.g., Kant's notorious example insisting it is morally wrong to lie to an inquiring murderer about the whereabouts of your innocent friend hiding inside).</li>
-                                        <li><strong>Kantian response:</strong> Kant argued that human beings are morally accountable for maintaining the integrity of moral law and personal duty, whereas unforeseeable future consequences are entirely outside our direct control. Lying undermines the foundational conditions of trust and rationality itself, making the liar an accomplice to any subsequent wrongdoing that occurs by chance.</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <!-- Issue 3 -->
+                    <div class="node-card">
+                        <div class="node-header">
+                            <h3>Issue: Consequences matter</h3>
+                            <span class="badge">Outcome criticism</span>
+                        </div>
+                        <div class="sub-nodes-container">
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>Disregard for outcomes and disaster <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>The criticism:</strong> By focusing entirely on internal motives, duty, and rule adherence while completely ignoring the consequences of actions, Kantian ethics can mandate catastrophic outcomes (e.g., Kant's notorious example insisting it is morally wrong to lie to an inquiring murderer about the whereabouts of your innocent friend hiding inside).</li>
+                                        <li><strong>Kantian response:</strong> Kant argued that human beings are morally accountable for maintaining the integrity of moral law and personal duty, whereas unforeseeable future consequences are entirely outside our direct control. Lying undermines the foundational conditions of trust and rationality itself, making the liar an accomplice to any subsequent wrongdoing that occurs by chance.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-                    <!-- Issue 4 -->
-                    <div class="node-card">
-                        <div class="node-header">
-                            <h3>Issue: Ignoring valuable motives</h3>
-                            <span class="badge">Emotion criticism</span>
-                        </div>
-                        <div class="sub-nodes-container">
-                            <div class="sub-node" onclick="toggleNode(this)">
-                                <h4>Exclusion of love, friendship, and kindness <span></span></h4>
-                                <div class="sub-content">
-                                    <ul>
-                                        <li><strong>The criticism:</strong> Critics like Michael Stocker argue that Kantian ethics creates deep emotional alienation by reducing warm human relationships to cold calculations of duty. For example, visiting a sick friend in hospital exclusively because it is your moral duty, rather than because you genuinely love and care for them, strips the act of its true human warmth and moral beauty.</li>
-                                        <li><strong>Kantian response:</strong> Kant does not forbid warm affections, sympathy, or love; he merely asserts that emotional inclinations are fickle and unstable, whereas duty provides the only reliable guarantee of moral worth. An agent can feel deep affection and simultaneously recognize that duty requires acting, ensuring that love and duty operate harmoniously together.</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <!-- Issue 4 -->
+                    <div class="node-card">
+                        <div class="node-header">
+                            <h3>Issue: Ignoring valuable motives</h3>
+                            <span class="badge">Emotion criticism</span>
+                        </div>
+                        <div class="sub-nodes-container">
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>Exclusion of love, friendship, and kindness <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>The criticism:</strong> Critics like Michael Stocker argue that Kantian ethics creates deep emotional alienation by reducing warm human relationships to cold calculations of duty. For example, visiting a sick friend in hospital exclusively because it is your moral duty, rather than because you genuinely love and care for them, strips the act of its true human warmth and moral beauty.</li>
+                                        <li><strong>Kantian response:</strong> Kant does not forbid warm affections, sympathy, or love; he merely asserts that emotional inclinations are fickle and unstable, whereas duty provides the only reliable guarantee of moral worth. An agent can feel deep affection and simultaneously recognize that duty requires acting, ensuring that love and duty operate harmoniously together.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-                    <!-- Issue 5 -->
-                    <div class="node-card">
-                        <div class="node-header">
-                            <h3>Issue: Foot's critique of categorical status</h3>
-                            <span class="badge">Hypothetical criticism</span>
-                        </div>
-                        <div class="sub-nodes-container">
-                            <div class="sub-node" onclick="toggleNode(this)">
-                                <h4>Morality as a system of hypothetical imperatives <span></span></h4>
-                                <div class="sub-content">
-                                    <ul>
-                                        <li><strong>The criticism:</strong> Philippa Foot argued that moral commands function analogously to rules of etiquette, club bylaws, or legal systems; because agents can rationally opt out or choose not to care about moral institutions without exhibiting logical irrationality, moral requirements are actually disguised hypothetical imperatives rather than inescapable categorical bonds.</li>
-                                        <li><strong>Kantian response:</strong> Modern neo-Kantians like Christine Korsgaard respond that rational agents possess a fundamental "practical identity" rooted in agency itself. To reject morality is to reject rational agency entirely, making moral laws inescapably binding as constitutive conditions of having a coherent self and acting at all.</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <!-- Issue 5 -->
+                    <div class="node-card">
+                        <div class="node-header">
+                            <h3>Issue: Foot's critique of categorical status</h3>
+                            <span class="badge">Hypothetical criticism</span>
+                        </div>
+                        <div class="sub-nodes-container">
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>Morality as a system of hypothetical imperatives <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>The criticism:</strong> Philippa Foot argued that moral commands function analogously to rules of etiquette, club bylaws, or legal systems; because agents can rationally opt out or choose not to care about moral institutions without exhibiting logical irrationality, moral requirements are actually disguised hypothetical imperatives rather than inescapable categorical bonds.</li>
+                                        <li><strong>Kantian response:</strong> Modern neo-Kantians like Christine Korsgaard respond that rational agents possess a fundamental "practical identity" rooted in agency itself. To reject morality is to reject rational agency entirely, making moral laws inescapably binding as constitutive conditions of having a coherent self and acting at all.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-                </div>
+                </div>
 
-            </div>
-        </div>
-    </div>
+            </div>
+        </div>
+    </div>
 
-    <footer>
-        Moral philosophy unit 2: Kantian ethics &bull; Interactive specification mind map
-    </footer>
+    <footer>
+        Moral philosophy unit 2: Kantian ethics &bull; Interactive specification mind map
+    </footer>
 
-    <script>
-        function toggleNode(element) {
-            element.classList.toggle('active');
-        }
-    </script>
+    <script>
+        function toggleNode(element) {
+            element.classList.toggle('active');
+        }
+    </script>
 </body>
 </html>
