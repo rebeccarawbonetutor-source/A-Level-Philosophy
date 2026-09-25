@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Metaphysics of mind</title>
+    <title>Epistemology hub</title>
     <style>
         :root {
             --bg-color: #f8fafc;
@@ -172,47 +172,41 @@
             <a href="index.html" class="nav-btn">🏠 Home</a>
             <a href="index.html" class="nav-btn">← Back</a>
         </div>
-        <h1>Metaphysics of mind</h1>
+        <h1>Epistemology</h1>
     </header>
 
     <div class="container">
         <div class="hub-grid">
 
-            <!-- Overview Card -->
-            <div class="hub-card">
-                <h2>Overview of dualism</h2>
-                <a href="#" class="btn disabled">Coming soon</a>
-            </div>
-
             <!-- Unit 1 Card -->
             <div class="hub-card">
-                <h2>Unit 1: Substance dualism</h2>
-                <a href="unit1.html" class="btn">View detailed mind map</a>
+                <h2>Unit 1: Definition of knowledge</h2>
+                <a href="epistemology-unit1.html" class="btn">View detailed mind map</a>
             </div>
 
             <!-- Unit 2 Card -->
             <div class="hub-card">
-                <h2>Unit 2: Problems with substance dualism</h2>
-                <a href="unit2.html" class="btn">View detailed mind map</a>
+                <h2>Unit 2: Theories of perception</h2>
+                <a href="epistemology-unit2.html" class="btn">View detailed mind map</a>
             </div>
 
             <!-- Unit 3 Card -->
             <div class="hub-card">
-                <h2>Unit 3: Property dualism and epiphenomenalism</h2>
-                <a href="#" class="btn disabled">Coming soon</a>
+                <h2>Unit 3: Sources of knowledge</h2>
+                <a href="epistemology-unit3.html" class="btn">View detailed mind map</a>
             </div>
 
             <!-- Unit 4 Card -->
             <div class="hub-card">
-                <h2>Unit 4: Physicalism</h2>
-                <a href="#" class="btn disabled">Coming soon</a>
+                <h2>Unit 4: Limits of knowledge</h2>
+                <a href="epistemology-unit4.html" class="btn">View detailed mind map</a>
             </div>
 
         </div>
     </div>
 
     <footer>
-        Metaphysics of mind &bull; Designed for teaching and revision
+        Epistemology hub &bull; Designed for teaching and revision
     </footer>
 
 </body>
