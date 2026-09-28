@@ -38,6 +38,32 @@
             text-align: center;
             border-bottom: 1px solid #cbd5e1;
             background: #ffffff;
+            position: relative;
+        }
+
+        .nav-container {
+            position: absolute;
+            top: 1.5rem;
+            left: 2rem;
+            display: flex;
+            gap: 10px;
+        }
+
+        .nav-btn {
+            background-color: #ffffff;
+            color: var(--accent-header);
+            border: 1px solid var(--card-border);
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            font-weight: 600;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: background-color 0.2s ease, border-color 0.2s ease;
+        }
+
+        .nav-btn:hover {
+            background-color: var(--hover-bg);
+            border-color: var(--accent-primary);
         }
 
         header h1 {
@@ -253,14 +279,23 @@
                 display: none;
             }
         }
+
+        @media (max-width: 768px) {
+            .nav-container {
+                position: static;
+                justify-content: center;
+                margin-bottom: 1rem;
+            }
+        }
     </style>
 </head>
 <body>
 
-    <div class="nav-container">
+    <header>
+        <div class="nav-container">
             <a href="index.html" class="nav-btn">🏠 Home</a>
             <a href="mind-hub.html" class="nav-btn">← Back</a>
-    <header>
+        </div>
         <h1>MoM Unit 2: Problems with substance dualism</h1>
     </header>
 
@@ -318,7 +353,7 @@
                                                 <li>Therefore, it is rational to infer that other minds exist as the best available explanation.</li>
                                             </ol>
                                         </li>
-                                        <li><strong>Criticisms (Alvin Plantinga & Bertrand Russell):</strong> In *God and Other Minds*, Plantinga attacks the idea that other minds can be treated as a scientific hypothesis, showing that science tracks only objective, physical data and can never empirically observe or measure qualia in another person. Russell noted that to inject real qualia into the hypothesis, one is forced to look inward using one's own private experiences, undermining its purely third-person status.</li>
+                                        <li><strong>Criticisms (Alvin Plantinga & Bertrand Russell):</strong> In <em>God and Other Minds</em>, Plantinga attacks the idea that other minds can be treated as a scientific hypothesis, showing that science tracks only objective, physical data and can never empirically observe or measure qualia in another person. Russell noted that to inject real qualia into the hypothesis, one is forced to look inward using one's own private experiences, undermining its purely third-person status.</li>
                                         <li><strong>Defence (Robert Pargetter):</strong> Pargetter argued in a 1984 paper that scientific hypotheses successfully explain hidden unobserved entities (like electrons, atoms, or a heated piece of metal's atomic structure) without personal experience of them. Furthermore, the existence of a mind allows us to predict human actions perfectly, whereas rival sceptical ideas like philosophical zombies are empty concepts that explain nothing.</li>
                                     </ul>
                                 </div>
@@ -334,7 +369,7 @@
                         </div>
                         <div class="sub-nodes-container">
                             <p style="font-size: 0.95rem; color: var(--text-muted); line-height: 1.4;">
-                                Gilbert Ryle argued in *The Concept of Mind* (1949) that substance dualism is not merely an assemblage of particular errors, but "one big mistake and a mistake of a special kind" known as a category mistake.
+                                Gilbert Ryle argued in <em>The Concept of Mind</em> (1949) that substance dualism is not merely an assemblage of particular errors, but "one big mistake and a mistake of a special kind" known as a category mistake.
                             </p>
                             <div class="sub-node" onclick="toggleNode(this)">
                                 <h4>The category mistake concept <span></span></h4>
@@ -344,9 +379,9 @@
                                         <li><strong>The official doctrine:</strong> Ryle targeted what he called the "dogma of the Ghost in the Machine"—the official dualist view that every human has a physical body subject to mechanical laws and a private, non-physical mind existing in a parallel realm.</li>
                                         <li><strong>Ryle's illustrations:</strong> 
                                             <ul>
-                                                <li>*The University Tour:* A visitor tours the libraries, labs, and offices of Oxford, then asks to see "the University", treating it as an extra building alongside the colleges.</li>
-                                                <li>*The Military Parade:* A child watches marching battalions and artillery, then asks "When is the Division going to appear?", treating the division as an additional troop unit.</li>
-                                                <li>*The Cricket Match:* A spectator sees batsmen, bowlers, and fielders, then asks who is contributing the "team-spirit", treating team-spirit as another player on the field.</li>
+                                                <li><em>The University Tour:</em> A visitor tours the libraries, labs, and offices of Oxford, then asks to see "the University", treating it as an extra building alongside the colleges.</li>
+                                                <li><em>The Military Parade:</em> A child watches marching battalions and artillery, then asks "When is the Division going to appear?", treating the division as an additional troop unit.</li>
+                                                <li><em>The Cricket Match:</em> A spectator sees batsmen, bowlers, and fielders, then asks who is contributing the "team-spirit", treating team-spirit as another player on the field.</li>
                                             </ul>
                                         </li>
                                         <li><strong>Formal deductive formulation:</strong>
@@ -395,8 +430,8 @@
                                                 <li>Therefore, causal interaction between the mind and body is conceptually impossible.</li>
                                             </ol>
                                         </li>
-                                        <li><strong>Descartes' replies:</strong> Descartes introduced "primitive notions"—arguing that the mind is known through pure understanding, the body through imagination, and their union is known directly through experience. He later dedicated *The Passions of the Soul* (1649) to Elisabeth, proposing the pineal gland in the centre of the brain as the "principal seat of the soul" where animal spirits mediate mental and physical states.</li>
-                                        <li><strong>Elisabeth's persistence:</strong> Elisabeth remained unconvinced, writing that while the senses show her that the soul moves the body, they fail to explain *the manner* in which it does so, noting it would be easier to attribute extension to the soul than to accept unintelligible immaterial causation.</li>
+                                        <li><strong>Descartes' replies:</strong> Descartes introduced "primitive notions"—arguing that the mind is known through pure understanding, the body through imagination, and their union is known directly through experience. He later dedicated <em>The Passions of the Soul</em> (1649) to Elisabeth, proposing the pineal gland in the centre of the brain as the "principal seat of the soul" where animal spirits mediate mental and physical states.</li>
+                                        <li><strong>Elisabeth's persistence:</strong> Elisabeth remained unconvinced, writing that while the senses show her that the soul moves the body, they fail to explain <em>the manner</em> in which it does so, noting it would be easier to attribute extension to the soul than to accept unintelligible immaterial causation.</li>
                                     </ul>
                                 </div>
                             </div>
