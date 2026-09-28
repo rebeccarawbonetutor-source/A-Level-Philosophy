@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en-GB">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Philosophy of Mind: Dualism Comprehensive Revision Map</title>
+    <title>Overview of dualism</title>
     <style>
         :root {
             --bg-color: #f8fafc;
@@ -38,33 +38,6 @@
             text-align: center;
             border-bottom: 1px solid #cbd5e1;
             background: #ffffff;
-            position: relative;
-        }
-
-        .nav-container {
-            position: absolute;
-            top: 1.5rem;
-            left: 2rem;
-            display: flex;
-            gap: 10px;
-        }
-
-        .nav-btn {
-            background-color: #ffffff;
-            color: var(--accent-header);
-            border: 1px solid var(--card-border);
-            padding: 0.5rem 1rem;
-            border-radius: 6px;
-            font-weight: 600;
-            text-decoration: none;
-            font-size: 0.9rem;
-            transition: background-color 0.2s ease, border-color 0.2s ease;
-            cursor: pointer;
-        }
-
-        .nav-btn:hover {
-            background-color: var(--hover-bg);
-            border-color: var(--accent-primary);
         }
 
         header h1 {
@@ -74,7 +47,7 @@
         }
 
         .container {
-            max-width: 1800px;
+            max-width: 2200px;
             margin: 0 auto;
             padding: 3rem 2rem;
             display: flex;
@@ -108,22 +81,11 @@
 
         .branches-wrapper {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2.5rem;
             width: 100%;
-            max-width: 1600px;
+            max-width: 2000px;
             position: relative;
-        }
-
-        .branches-wrapper::before {
-            content: '';
-            position: absolute;
-            top: -40px;
-            left: 50%;
-            width: 3px;
-            height: 40px;
-            background-color: var(--line-color);
-            transform: translateX(-50%);
         }
 
         .branch-column {
@@ -253,12 +215,12 @@
         }
 
         ol {
-            margin-left: 1.2rem;
+            margin-left: 1.5rem;
             margin-top: 0.3rem;
         }
 
         ol li {
-            margin-bottom: 0.3rem;
+            margin-bottom: 0.4rem;
         }
 
         footer {
@@ -271,21 +233,10 @@
             margin-top: 3rem;
         }
 
-        @media (max-width: 1024px) {
+        @media (max-width: 1400px) {
             .branches-wrapper {
                 grid-template-columns: 1fr;
                 gap: 2rem;
-            }
-            .branches-wrapper::before {
-                display: none;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .nav-container {
-                position: static;
-                justify-content: center;
-                margin-bottom: 1rem;
             }
         }
     </style>
@@ -293,38 +244,250 @@
 <body>
 
     <header>
-        <div class="nav-container">
-            <span class="nav-btn">🏠 Home</span>
-            <span class="nav-btn">← Back</span>
-        </div>
-        <h1>Philosophy of Mind: Complete Dualism Master Map</h1>
+        <h1>Overview of dualism</h1>
     </header>
 
     <div class="container">
         <div class="mindmap">
-            <div class="root-node">Dualism: Positions, Arguments & Issues</div>
+            <div class="root-node">Overview of dualism</div>
             
             <div class="branches-wrapper">
 
-                <!-- LEFT COLUMN: POSITIONS & CORE ARGUMENTS -->
+                <!-- Column 1: Substance Dualism & Property Dualism -->
                 <div class="branch-column">
-                    <div class="branch-group-header">Dualism Theories & Arguments</div>
+                    <div class="branch-group-header">Core dualist theories</div>
 
-                    <!-- Substance Dualism Nature of Mind -->
+                    <!-- Substance dualism -->
                     <div class="node-card">
                         <div class="node-header">
-                            <h3>Nature of Mind & Frameworks</h3>
-                            <span class="badge">Foundations & Comparison</span>
+                            <h3>Substance dualism</h3>
+                            <span class="badge">Unit 1</span>
                         </div>
                         <div class="sub-nodes-container">
+                            <p style="font-size: 0.95rem; color: var(--text-muted); line-height: 1.4;">
+                                Minds exist and are not identical to bodies or to parts of bodies.
+                            </p>
                             <div class="sub-node" onclick="toggleNode(this)">
-                                <h4>Mental States & Frameworks</h4>
+                                <h4>The indivisibility argument for substance dualism (Descartes) <span></span></h4>
+                                <div class="sub-content">
+                                    <ol>
+                                        <li>The body is spatially extended and divisible.</li>
+                                        <li>The mind is unextended and indivisible.</li>
+                                        <li>By Leibniz's law, if entities have different properties, they are distinct.</li>
+                                        <li>Therefore, the mind is not identical to the body.</li>
+                                    </ol>
+                                </div>
+                            </div>
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>Responses, including: <span></span></h4>
                                 <div class="sub-content">
                                     <ul>
-                                        <li><strong>Foundations:</strong> Incorporates conscious and unconscious states, intentionality, phenomenal properties (qualia), and introspective access.</li>
-                                        <li><strong>Substance Dualism:</strong> Minds exist and are distinct from bodies (Mind = thinking/unextended; Body = extended/unthinking). Replaced historically by frameworks like Plato's dualism (immortal soul vs mortal body using the Argument from Recollection).</li>
-                                        <li><strong>Property Dualism:</strong> Physical substances have irreducibly non-physical mental properties.</li>
-                                        <li><strong>Physicalism:</strong> Rejects non-physical substances.</li>
+                                        <li><strong>The mental is divisible in some sense:</strong> Psychological studies and split-brain cases indicate division within mental phenomena.</li>
+                                        <li><strong>Not everything thought of as physical is divisible:</strong> Fundamental physical properties or forces may not be divisible parts.</li>
                                     </ul>
                                 </div>
                             </div>
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>The conceivability argument for substance dualism (expressed without reference to God) (Descartes) <span></span></h4>
+                                <div class="sub-content">
+                                    <ol>
+                                        <li>If I can clearly and distinctly conceive of the mind existing without the body, it is metaphysically possible.</li>
+                                        <li>I can clearly and distinctly conceive of my mind existing without my physical body.</li>
+                                        <li>Therefore, it is metaphysically possible for the mind to exist without the body.</li>
+                                        <li>If the mind and body can exist independently, they are distinct substances.</li>
+                                    </ol>
+                                </div>
+                            </div>
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>Responses including: <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>Mind without body is not conceivable:</strong> Logical behaviourism or verificationist frameworks reject disembodied mind concepts as incoherent.</li>
+                                        <li><strong>What is conceivable may not be metaphysically possible:</strong> Conceivability fails to guarantee metaphysical possibility due to hidden essential natures (such as water necessarily being H2O).</li>
+                                        <li><strong>What is metaphysically possible tells us nothing about the actual world:</strong> Possibility in the abstract does not entail actual physical structures in our universe.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Property dualism -->
+                    <div class="node-card">
+                        <div class="node-header">
+                            <h3>Property dualism</h3>
+                            <span class="badge">Unit 3</span>
+                        </div>
+                        <div class="sub-nodes-container">
+                            <p style="font-size: 0.95rem; color: var(--text-muted); line-height: 1.4;">
+                                There are at least some mental properties that are neither reducible to nor supervenient upon physical properties.
+                            </p>
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>The ‘philosophical zombies’ argument for property dualism (David Chalmers) <span></span></h4>
+                                <div class="sub-content">
+                                    <ol>
+                                        <li>It is conceivable that there could be a being physically identical to a human but lacking consciousness (a zombie world).</li>
+                                        <li>If something is conceivable without contradiction, then it is metaphysically possible.</li>
+                                        <li>A zombie world is conceivable—a universe physically identical to ours but without consciousness.</li>
+                                        <li>If a metaphysically possible world can be physically identical to ours yet lack consciousness, physical facts alone do not entail consciousness.</li>
+                                        <li>Therefore, consciousness must be a non-physical component of reality.</li>
+                                    </ol>
+                                </div>
+                            </div>
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>Responses including: <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>A 'philosophical zombie' / a 'zombie' world is not conceivable:</strong> Dennett argues that removing consciousness while keeping function intact is conceptually incoherent.</li>
+                                        <li><strong>What is conceivable may not be metaphysically possible:</strong> Conceivability is constrained by hidden metaphysical necessities.</li>
+                                        <li><strong>What is metaphysically possible tells us nothing about the actual world:</strong> Papineau argues abstract possibility does not refute actual physicalism.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>The ‘knowledge/Mary’ argument for property dualism (Frank Jackson) <span></span></h4>
+                                <div class="sub-content">
+                                    <ol>
+                                        <li>Mary has complete physical information about colour vision while confined to her black-and-white environment.</li>
+                                        <li>When released, Mary learns something new about the phenomenal properties of colour vision.</li>
+                                        <li>Therefore, her previous physical knowledge was incomplete.</li>
+                                        <li>Therefore, reductive physicalism is false.</li>
+                                    </ol>
+                                </div>
+                            </div>
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>Responses including: <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>Mary does not gain new propositional knowledge but does gain ability knowledge:</strong> Lewis argues she acquires "know-how" rather than new facts.</li>
+                                        <li><strong>Mary does not gain new propositional knowledge but does gain acquaintance knowledge:</strong> She gains direct familiarity with redness rather than non-physical facts.</li>
+                                        <li><strong>Mary gains new propositional knowledge, but this is knowledge of physical facts that she already knew in a different way:</strong> Papineau's old fact / new phenomenal concept response.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Column 2: Issues facing dualism & substance dualism problems -->
+                <div class="branch-column">
+                    <div class="branch-group-header">Issues facing dualism</div>
+
+                    <!-- Issues facing dualism (Other Minds & Category Mistake) -->
+                    <div class="node-card">
+                        <div class="node-header">
+                            <h3>Issues facing dualism, including:</h3>
+                            <span class="badge">Unit 2</span>
+                        </div>
+                        <div class="sub-nodes-container">
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>The problem of other minds <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>Core challenge:</strong> First-person priority makes inferring hidden internal mental states from third-person physical behavior problematic[cite: 1].</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>Responses including: <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>The argument from analogy:</strong> Inferring others have minds because their behavior resembles our own[cite: 1].</li>
+                                        <li><strong>The existence of other minds is the best hypothesis:</strong> Abductive reasoning where mindedness best explains physical behavior[cite: 1].</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>Dualism makes a "category mistake" (Gilbert Ryle) <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>Core criticism:</strong> Treating mental states as non-physical occult objects ("ghost in the machine") miscategorises dispositional concepts into wrong logical types[cite: 1].</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Issues facing interactionist dualism -->
+                    <div class="node-card">
+                        <div class="node-header">
+                            <h3>Issues facing interactionist dualism, including:</h3>
+                            <span class="badge">Interaction</span>
+                        </div>
+                        <div class="sub-nodes-container">
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>The conceptual interaction problem (as articulated by Elisabeth, Princess of Bohemia) <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>Core challenge:</strong> Causation requires contact and extension through physical impulsion, which an unextended mind lacks[cite: 1].</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>The empirical interaction problem <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>Core challenge:</strong> Non-physical mental inputs causing physical brain changes would violate conservation of mass-energy laws[cite: 1].</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Column 3: Issues facing epiphenomenalist dualism -->
+                <div class="branch-column">
+                    <div class="branch-group-header">Issues facing epiphenomenalism</div>
+
+                    <!-- Issues facing epiphenomenalist dualism -->
+                    <div class="node-card">
+                        <div class="node-header">
+                            <h3>Issues facing epiphenomenalist dualism, including:</h3>
+                            <span class="badge">Epiphenomenalism</span>
+                        </div>
+                        <div class="sub-nodes-container">
+                            <p style="font-size: 0.95rem; color: var(--text-muted); line-height: 1.4;">
+                                Challenges arising from the causal impotence of mental properties[cite: 1].
+                            </p>
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>The challenge posed by introspective self-knowledge <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>Core challenge:</strong> If mental states are causally impotent, phenomenal feelings cannot cause thoughts or speech about them, making genuine self-knowledge impossible.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>The challenge posed by the phenomenology of our mental life (ie as involving causal connections, both psychological and psycho-physical) <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>Core challenge:</strong> Lived experience presents continuous causal interactions (physical-to-mental and mental-to-physical), which epiphenomenalism reduces to an illusion.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>The challenge posed by natural selection/evolution <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>Core challenge:</strong> Natural selection only tracks survival traits; epiphenomenal traits with zero physical survival impact cannot be selected for by evolution.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        Overview of dualism &bull; Comprehensive Specification Mind Map
+    </footer>
+
+    <script>
+        function toggleNode(element) {
+            element.classList.toggle('active');
+        }
+    </script>
+</body>
+</html>
