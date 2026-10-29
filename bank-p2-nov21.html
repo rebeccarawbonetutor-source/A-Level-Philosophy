@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Paper 2 November 2021 — Question & Markscheme Bank</title>
+<title>Paper 2 November 2021 &mdash; Question &amp; Markscheme Bank</title>
 <style>
   :root { font-family: "Century Gothic", "CenturyGothic", "AppleGothic", sans-serif; }
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -56,15 +56,13 @@
 </style>
 </head>
 <body>
-<div class="topbar"><a class="navbtn" href="index.html">&#8962; Home</a><a class="navbtn" href="bank-p2-nov20.html">Paper 2 November 2020 &rarr;</a><a class="navbtn" href="bank-p2-jun22.html">Paper 2 June 2022 &rarr;</a></div>
+<div class="topbar"><a class="navbtn" href="index.html">&#8962; Home</a><a class="navbtn" href="past-questions-hub.html">Past questions hub &rarr;</a></div>
 <div class="wrap">
 <h1>Paper 2 &mdash; 2021</h1>
-  
+
 <div class="panel"><p><b>Filter by main topic:</b></p>
 <div id="section-buttons">
 <button class="active" data-f="all" onclick="setSectionFilter('all', this)">All</button>
-<button data-f="Epistemology" onclick="setSectionFilter('Epistemology', this)">Epistemology</button>
-<button data-f="Moral philosophy" onclick="setSectionFilter('Moral philosophy', this)">Moral philosophy</button>
 <button data-f="Metaphysics of God" onclick="setSectionFilter('Metaphysics of God', this)">Metaphysics of God</button>
 <button data-f="Metaphysics of mind" onclick="setSectionFilter('Metaphysics of mind', this)">Metaphysics of mind</button>
 </div></div>
@@ -118,7 +116,7 @@ return out;}
 function buildTopicButtons(){var h=document.getElementById("topic-buttons");var html="<button class='active' data-t='all' onclick=\"setTopicFilter('all', this)\">All</button>";
 for(var i=0;i<TOPIC_BUTTONS.length;i++){var t=TOPIC_BUTTONS[i];html+="<button data-t='"+t+"' onclick=\"setTopicFilter('"+t+"', this)\">"+t+"</button>";}
 h.innerHTML=html;}
-function esc(s){return s.replace(/&/g,"&").replace(/</g,"<").replace(/>/g,">");}
+function esc(s){return s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");}
 function key(idx){return PAGEKEY+"-"+DATA[idx].qref;}
 function attemptHtml(d,idx){var k=key(idx);var h="<div class='attempt'>";
 if(d.marks===25){
