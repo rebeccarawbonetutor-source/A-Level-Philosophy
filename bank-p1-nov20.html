@@ -9,8 +9,10 @@
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body { font-family: "Century Gothic","CenturyGothic","AppleGothic",sans-serif; background:#f2f1ec; color:#1a1a1a; font-size:1.0rem; line-height:1.6; padding:0 16px 56px; }
   .topbar { max-width:1100px; margin:0 auto; padding:18px 0 0; }
-  .navbtn { display:inline-block; font-family:inherit; font-size:0.9rem; font-weight:bold; background:#23486b; color:#fff; text-decoration:none; border:1.5px solid #23486b; border-radius:999px; padding:6px 18px; margin-right:8px; }
+  .navbtn { display:inline-block; font-family:inherit; font-size:0.9rem; font-weight:bold; background:#23486b; color:#fff; text-decoration:none; border:1.5px solid #23486b; border-radius:999px; padding:6px 18px; margin:0 8px 8px 0; }
   .navbtn:hover { background:#2f5d87; }
+  .navbtn.alt { background:#fff; color:#23486b; }
+  .navbtn.alt:hover { background:#e8eef5; color:#23486b; }
   .wrap { max-width: 1100px; margin: 0 auto; }
   h1 { font-size:1.4rem; margin:14px 0 4px; color:#23486b; }
   .sub { font-size:0.9rem; margin-bottom:18px; color:#555; }
@@ -23,7 +25,7 @@
   .qcard { background:#fff; border-radius:10px; box-shadow:0 1px 4px rgba(0,0,0,0.08); padding:16px 20px; margin-bottom:14px; }
   .qhead { display:flex; flex-wrap:wrap; gap:8px 14px; align-items:baseline; margin-bottom:6px; }
   .qref { font-weight:bold; color:#23486b; white-space:nowrap; }
-  .badge { display:inline-block; font-size:0.75rem; font-weight:bold; padding:2px 10px; border-radius:999px; white-space:nowrap; }
+  .badge { display:inline-block; font-size:0.8rem; font-weight:bold; padding:2px 10px; border-radius:999px; white-space:nowrap; }
   .b-ao1 { background:#dde7f6; color:#28518c; }
   .b-ao2 { background:#e6def6; color:#5b3a99; }
   .topic { font-size:0.85rem; color:#7a5c2e; }
@@ -31,9 +33,9 @@
   .qcard button { font-family:inherit; font-size:0.85rem; font-weight:bold; background:#f2f1ec; color:#23486b; border:1.5px solid #23486b; border-radius:8px; padding:5px 14px; cursor:pointer; }
   .qcard button:hover { background:#e8eef5; }
   .detail { border:1.5px solid #d8e2ec; border-radius:8px; background:#fbfcfe; padding:14px 16px; margin-top:12px; }
-  .d-label { font-size:0.75rem; font-weight:bold; letter-spacing:0.8px; text-transform:uppercase; color:#23486b; margin:12px 0 5px; }
+  .d-label { font-size:0.8rem; font-weight:bold; letter-spacing:0.8px; text-transform:uppercase; color:#23486b; margin:12px 0 5px; }
   .d-label:first-child { margin-top:0; }
-  .attempt label { display:block; font-size:0.75rem; font-weight:bold; color:#23486b; margin:8px 0 4px; text-transform:uppercase; letter-spacing:0.5px; }
+  .attempt label { display:block; font-size:0.8rem; font-weight:bold; color:#23486b; margin:8px 0 4px; text-transform:uppercase; letter-spacing:0.5px; }
   .attempt textarea { width:100%; min-height:70px; padding:0.6rem; border:1px solid #c9c6bd; border-radius:6px; font-family:inherit; font-size:0.95rem; resize:vertical; background:#fff; }
   .attempt textarea:focus { outline:none; border-color:#23486b; }
   .attempt .threadgrid { display:grid; grid-template-columns:repeat(3,1fr); gap:0.75rem; background:#f2f6fb; border:1px solid #d8e2ec; border-radius:8px; padding:0.75rem; margin-bottom:0.75rem; }
@@ -43,7 +45,7 @@
   .attempt button { font-family:inherit; font-size:0.85rem; font-weight:bold; background:#23486b; color:#fff; border:none; border-radius:8px; padding:7px 14px; cursor:pointer; margin:10px 8px 0 0; }
   .attempt button.ghost { background:#fff; color:#23486b; border:2px solid #23486b; }
   .attempt button:hover { background:#2f5d87; }
-  .savednote { font-size:0.75rem; color:#2c5e33; margin-top:8px; }
+  .savednote { font-size:0.8rem; color:#2c5e33; margin-top:8px; }
   .ms { border-top:2px solid #23486b; margin-top:14px; padding-top:6px; }
   .ms h3 { font-size:0.95rem; color:#23486b; margin:12px 0 6px; }
   .ms p { margin-bottom:10px; font-size:0.9rem; color:#2a2a2a; }
@@ -56,18 +58,15 @@
 </style>
 </head>
 <body>
-<div class="topbar"><a class="navbtn" href="index.html">&#8962; Home</a><a class="navbtn" href="bank-p1-sam19.html">Paper 1 2019 specimen &rarr;</a><a class="navbtn" href="bank-p1-nov21.html">Paper 1 November 2021 &rarr;</a></div>
+<div class="topbar">
+<a class="navbtn" href="./index.html">&#8962; Home</a><a class="navbtn alt" href="./past-questions-hub.html">&#8592; Past questions hub</a><a class="navbtn alt" href="./bank-p1-sam.html">&#8592; Specimen set</a><a class="navbtn alt" href="./bank-p1-nov21.html">November 2021 &rarr;</a>
+</div>
 <div class="wrap">
-<h1>Paper 1 &mdash; 2020</h1>
-  
+<h1>Paper 1 &mdash; November 2020</h1>
+<div class="sub">Epistemology and moral philosophy &middot; 7172/1</div>
+
 <div class="panel"><p><b>Filter by main topic:</b></p>
-<div id="section-buttons">
-<button class="active" data-f="all" onclick="setSectionFilter('all', this)">All</button>
-<button data-f="Epistemology" onclick="setSectionFilter('Epistemology', this)">Epistemology</button>
-<button data-f="Moral philosophy" onclick="setSectionFilter('Moral philosophy', this)">Moral philosophy</button>
-<button data-f="Metaphysics of God" onclick="setSectionFilter('Metaphysics of God', this)">Metaphysics of God</button>
-<button data-f="Metaphysics of mind" onclick="setSectionFilter('Metaphysics of mind', this)">Metaphysics of mind</button>
-</div></div>
+<div id="section-buttons"></div></div>
 
 <div class="panel"><p><b>Filter by sub topic:</b></p>
 <div id="topic-buttons"></div></div>
@@ -85,6 +84,11 @@
 </div>
 
 <script>
+/* TEMPLATE NOTE
+   Paper 1 pages: SECTIONS = ["Epistemology","Moral philosophy"]
+   Paper 2 pages: SECTIONS = ["Metaphysics of God","Metaphysics of mind"]
+   Change PAGEKEY, SECTIONS and TOPIC_BUTTONS for each page; leave the rest alone. */
+
 var LEVELS_3 = ["3 A full and correct answer, given precisely, with little or no redundancy.","2 The substantive content of the answer is correct, but there may be some redundancy or minor imprecision.","1 Relevant, but fragmented, points.","0 Nothing written worthy of credit."];
 var LEVELS_5 = ["5 A full, clear and precise explanation. The student makes logical links between precisely identified points, with no redundancy.","4 A clear explanation, with logical links, but some imprecision/redundancy.","3 The substantive content of the explanation is present and there is an attempt at logical linking, but the explanation is not full and/or precise.","2 One or two relevant points made, but not precisely. The logic is unclear.","1 Fragmented points, with no logical structure.","0 Nothing written worthy of credit."];
 var LEVELS_12 = ["10\u201312 The answer is set out in a precise, fully-integrated and logical form. The content is correct and demonstrates detailed understanding. Points are made clearly and precisely. Relevance is sustained, with very little or no redundancy. Philosophical language is used precisely throughout.","7\u20139 The answer is set out in a clear, integrated and logical form. The content of the answer is correct and demonstrates detailed understanding. The content is clearly relevant and points are made clearly and precisely. Any lack of clarity with respect to particular points is not sufficient to detract from the answer. Relevance is largely sustained. There may be some redundancy, though not sufficient to detract from the answer. Philosophical language is used correctly throughout.","4\u20136 The answer is clear and set out in a coherent form, with logical/causal links identified. The content of the answer is largely correct and most points are made clearly. Relevance is not always sustained and there is some redundancy. Philosophical language is used correctly, with any minor errors not detracting from the response.","1\u20133 There are some relevant points made, but no integration. Some points are clear, but there is a lack of precision \u2013 with possibly insufficient material that is relevant or too much that is irrelevant. Philosophical language is used, though not always consistently or appropriately.","0 Nothing written worthy of credit."];
@@ -103,11 +107,14 @@ var DATA = [
 {qref:"10",marks:25,ao:"AO2",section:"Moral philosophy",topic:"Virtue ethics",tags:["Virtue ethics"],question:"How convincing is Aristotelian virtue ethics?",cap:"",content:["Aristotle's ethical view, in general, is based around the development of good moral character: it is agent centred rather than act centred. When explaining Aristotle's views students are likely to make reference to one or more of the following:","'The good' for human beings: the meaning of eudaimonia (living well and doing well) as the 'final end' for human beings (and the relationship between eudaimonia and pleasure). The function argument (with rationality understood as the distinctive characteristic of human beings (or rational activity as the characteristic activity - \u201ca life of reason in accordance with virtue.\u201d)) and the relationship between virtue/excellence and function/ergon. Aristotle's account of virtues and vices: virtues as character traits/dispositions and the importance of feelings (virtue may perhaps be distinguished from mere continence); the role of education/habituation in the development of moral character (perhaps including reference to the state and to family/role-models); the skill analogy; doctrine of the mean and its application to particular virtues; the relationship between virtues, actions and reasons and the role of practical reasoning/practical wisdom; Moral responsibility: voluntary, involuntary, and non-voluntary actions.","It is likely that students will focus primarily on Aristotle, but the word \u201cAristotelian\u201d in the question allows for the whole essay to be focused on those writing in the virtue ethics tradition. If the student does this, there is no problem with this. It is possible that students may decide to focus quite specifically and in detail on certain of these features of Aristotle's theory, perhaps because their preferred lines of argument relate specifically to them (eg that in emphasising the importance of education/habituation Aristotle leaves too much to chance in the development of good character).","Some students may mention that Aristotelian virtue ethics can be situated in metaethical discussions as an example of moral realism and ethical naturalism: the truths of ethics are derived from (or reducible/identical to) facts about human nature that are discoverable through observation. They may do this in order to then evaluate this approach by applying arguments for or against moral realism and/or ethical naturalism.","The overarching positions adopted could be among the following: YES: it is (very) convincing \u2013 ie the student may support and/or defend an Aristotelian account. NO: it is not (very) convincing \u2013 ie the student may argue that it cannot be adequately supported and/or that there are (fatal) issues with the account. YES and NO: it is convincing in some respects but not in others \u2013 this may end up still meaning it is rejected, or alternatively it may be accepted but with some qualification. YES and NO: it is convincing but incomplete in some way.","Support for Aristotelian virtue ethics: Eudaimonia (whether understood as 'happiness' or 'living well' or 'doing well') is a common (if not universal) aspiration of humankind and therefore an appropriate goal for the moral life. Anscombe supports an Aristotelian approach by noting that rigid laws/rules (as in Kantian deontological ethics) do not make sense in the absence of a law/rule-giver (eg God). Moral philosophers should therefore focus on the well-being/flourishing of a human life with all its dimensions working in harmony (holism). In the light of all that we know about the human species (eg through evolutionary biology and anthropology) human beings are still best understood in Aristotelian terms: eg as 'rational animals' (eg Geach). Students may therefore defend Aristotelian virtue ethics through the function argument, based as it is on this reputedly essential characteristic of human nature (ie rationality).","Students may qualify the latter with an acknowledgment that our modern understanding of human biology and psychology make Aristotle's own views on women and slaves indefensible today, but his insights into the nature of 'man' can and should be expanded to be inclusive of all human beings and (possibly) some non-human animals (eg MacIntyre). Students may argue that the importance of education and habituation in the cultivation of moral virtue is empirically demonstrable (in those we admire as moral exemplars); by contrast, we do not (typically) attribute admirable moral decisions to the application of abstract universal principles or speculative consequential calculations. Furthermore, we recognise the truth that we are not born moral - so, no one is evil by nature. The 'doctrine of the mean' \u2014 properly understood to mean registering the appropriate feeling/emotion, at the appropriate time, motivating the appropriate action \u2014 is applicable to practical moral education with the potential to develop moral character throughout a lifetime. \u201cSo too anyone can get angry, or give and spend money - these are easy; but doing them in relation to the right person, in the right amount, at the right time, with the right aim in view, and in the right way. \u2013 that is not something anyone can do, nor is it easy.\u201d II.9 Nicomachean Ethics. Some students may argue that virtue ethics rightly places greater emphasis on how moral agents feel about their morally good action \u2013 eg commending those who take pleasure in acting for the good of others rather than seeing this as a form of self-interest without moral worth.","Criticism of Aristotelian virtue ethics: Aristotelian virtue ethics cannot give sufficiently clear guidance about how to act: the doctrine of the mean is too vague (given that it depends on the person, the circumstance, and seems unmeasurable). The issue of clashing/competing virtues (eg might kindness clash with courage?). The possibility of circularity involved in defining virtuous acts and virtuous persons in terms of each other: virtuous acts as acts performed by virtuous people, and virtuous people as those who perform (or are disposed to perform) virtuous acts. The relationship between the good for the individual and (wider) moral good: Must a trait really contribute to eudaimonia in order to be a virtue? There may be virtues relating to our treatment of the environment and wider society which do not contribute to our eudaimonia. Aristotle's account of ethics leaves too much down to luck (and yet, perhaps in tension with this, Aristotle holds people responsible for their ignorance of virtue). The application of Mackie's argument from relativity: If there are moral facts (eg about the virtues), then why is there not more agreement about them? Objections to the function argument: Humans do not have a function: there cannot be a function without a function-giver (Sartre's point that, without God, \u201cexistence precedes essence\u201d). Even if something is our unique function this does not imply that we should fulfil it - this could be linked to Hume's is-ought gap. (Some) animals share the functions that Aristotle sees as uniquely human (reasoning, deliberation, language). Aristotle wrongly excludes animals from moral consideration and contribution. There are other unique human functions (some being morally suspect/bad) which are ignored in Aristotle's account. Application of Moore's 'open question argument' to insist that goodness (of a person) cannot be reduced to the possession of certain virtues.","NB: Students are free to advocate one or more rival moral theories (eg Kant's deontological ethics) over Aristotle's virtue ethics. They may also critically compare Aristotle's position with one or more rival moral theories (eg act and rule utilitarianism). But discussion of these alternative theories is only credit worthy to the extent that it is used to analyse and evaluate Aristotelian virtue ethics.","Notes: Students should not be unduly penalised for misattributing arguments: the focus is on AO2 (evaluation). Persistent misattribution of arguments would be an imprecision that would justify not awarding an argument full marks, but it should not be regarded as a reason for excluding it from the top band (assuming everything else meets the requirements of the level descriptors). This indicative content is not exhaustive; other creditworthy responses should be awarded marks as appropriate."]}
 ];
 
+/* ---- PAGE SETTINGS: change these three lines for each page ---- */
+var PAGEKEY = "p1-nov20";
+var SECTIONS = ["Epistemology","Moral philosophy"];             /* Paper 2: ["Metaphysics of God","Metaphysics of mind"] */
 var TOPIC_BUTTONS = ["Definition of knowledge","Perception as a source of knowledge","Sources of knowledge","Limits of knowledge","Meta-ethics","Utilitarianism","Kantian ethics","Virtue ethics"];
+
 var sectionFilter="all",topicFilter="all",aoFilter="all";
 var expanded={};
 var atext={};
-var PAGEKEY="p1-nov20";
 function stripTags(s){var d=document.createElement("div");d.innerHTML=s;return(d.textContent||"").toLowerCase();}
 function getFiltered(){var out=[];for(var i=0;i<DATA.length;i++){var d=DATA[i];
 if(sectionFilter!=="all"&&d.section!==sectionFilter)continue;
@@ -115,10 +122,14 @@ if(aoFilter!=="all"){var parts=aoFilter.split("-");if(d.ao!==parts[0]||String(d.
 if(topicFilter!=="all"){var m=false;for(var t=0;t<d.tags.length;t++){if(stripTags(d.tags[t])===stripTags(topicFilter)){m=true;break;}}if(!m)continue;}
 out.push(d);}
 return out;}
+function buildSectionButtons(){var h=document.getElementById("section-buttons");
+var html="<button class='active' data-f='all' onclick=\"setSectionFilter('all', this)\">All</button>";
+for(var i=0;i<SECTIONS.length;i++){var s=SECTIONS[i];html+="<button data-f='"+s+"' onclick=\"setSectionFilter('"+s+"', this)\">"+s+"</button>";}
+h.innerHTML=html;}
 function buildTopicButtons(){var h=document.getElementById("topic-buttons");var html="<button class='active' data-t='all' onclick=\"setTopicFilter('all', this)\">All</button>";
 for(var i=0;i<TOPIC_BUTTONS.length;i++){var t=TOPIC_BUTTONS[i];html+="<button data-t='"+t+"' onclick=\"setTopicFilter('"+t+"', this)\">"+t+"</button>";}
 h.innerHTML=html;}
-function esc(s){return s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");}
+function esc(s){return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");}
 function key(idx){return PAGEKEY+"-"+DATA[idx].qref;}
 function attemptHtml(d,idx){var k=key(idx);var h="<div class='attempt'>";
 if(d.marks===25){
@@ -177,6 +188,7 @@ document.getElementById("note-"+k).textContent="Attempt saved in this browser.";
 function revealMs(k,idx){collectAttempt(k,idx);atext["shown-"+k]=true;try{localStorage.setItem("aqabank",JSON.stringify(atext));}catch(e){}
 render();}
 try{var saved=localStorage.getItem("aqabank");if(saved)atext=JSON.parse(saved);}catch(e){}
+buildSectionButtons();
 buildTopicButtons();
 render();
 </script>
