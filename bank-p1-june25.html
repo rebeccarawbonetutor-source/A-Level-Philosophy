@@ -9,8 +9,10 @@
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body { font-family: "Century Gothic","CenturyGothic","AppleGothic",sans-serif; background:#f2f1ec; color:#1a1a1a; font-size:1.0rem; line-height:1.6; padding:0 16px 56px; }
   .topbar { max-width:1100px; margin:0 auto; padding:18px 0 0; }
-  .navbtn { display:inline-block; font-family:inherit; font-size:0.9rem; font-weight:bold; background:#23486b; color:#fff; text-decoration:none; border:1.5px solid #23486b; border-radius:999px; padding:6px 18px; margin-right:8px; }
+  .navbtn { display:inline-block; font-family:inherit; font-size:0.9rem; font-weight:bold; background:#23486b; color:#fff; text-decoration:none; border:1.5px solid #23486b; border-radius:999px; padding:6px 18px; margin:0 8px 8px 0; }
   .navbtn:hover { background:#2f5d87; }
+  .navbtn.alt { background:#fff; color:#23486b; }
+  .navbtn.alt:hover { background:#e8eef5; color:#23486b; }
   .wrap { max-width: 1100px; margin: 0 auto; }
   h1 { font-size:1.4rem; margin:14px 0 4px; color:#23486b; }
   .sub { font-size:0.9rem; margin-bottom:18px; color:#555; }
@@ -23,7 +25,7 @@
   .qcard { background:#fff; border-radius:10px; box-shadow:0 1px 4px rgba(0,0,0,0.08); padding:16px 20px; margin-bottom:14px; }
   .qhead { display:flex; flex-wrap:wrap; gap:8px 14px; align-items:baseline; margin-bottom:6px; }
   .qref { font-weight:bold; color:#23486b; white-space:nowrap; }
-  .badge { display:inline-block; font-size:0.75rem; font-weight:bold; padding:2px 10px; border-radius:999px; white-space:nowrap; }
+  .badge { display:inline-block; font-size:0.8rem; font-weight:bold; padding:2px 10px; border-radius:999px; white-space:nowrap; }
   .b-ao1 { background:#dde7f6; color:#28518c; }
   .b-ao2 { background:#e6def6; color:#5b3a99; }
   .topic { font-size:0.85rem; color:#7a5c2e; }
@@ -31,9 +33,9 @@
   .qcard button { font-family:inherit; font-size:0.85rem; font-weight:bold; background:#f2f1ec; color:#23486b; border:1.5px solid #23486b; border-radius:8px; padding:5px 14px; cursor:pointer; }
   .qcard button:hover { background:#e8eef5; }
   .detail { border:1.5px solid #d8e2ec; border-radius:8px; background:#fbfcfe; padding:14px 16px; margin-top:12px; }
-  .d-label { font-size:0.75rem; font-weight:bold; letter-spacing:0.8px; text-transform:uppercase; color:#23486b; margin:12px 0 5px; }
+  .d-label { font-size:0.8rem; font-weight:bold; letter-spacing:0.8px; text-transform:uppercase; color:#23486b; margin:12px 0 5px; }
   .d-label:first-child { margin-top:0; }
-  .attempt label { display:block; font-size:0.75rem; font-weight:bold; color:#23486b; margin:8px 0 4px; text-transform:uppercase; letter-spacing:0.5px; }
+  .attempt label { display:block; font-size:0.8rem; font-weight:bold; color:#23486b; margin:8px 0 4px; text-transform:uppercase; letter-spacing:0.5px; }
   .attempt textarea { width:100%; min-height:70px; padding:0.6rem; border:1px solid #c9c6bd; border-radius:6px; font-family:inherit; font-size:0.95rem; resize:vertical; background:#fff; }
   .attempt textarea:focus { outline:none; border-color:#23486b; }
   .attempt .threadgrid { display:grid; grid-template-columns:repeat(3,1fr); gap:0.75rem; background:#f2f6fb; border:1px solid #d8e2ec; border-radius:8px; padding:0.75rem; margin-bottom:0.75rem; }
@@ -43,7 +45,7 @@
   .attempt button { font-family:inherit; font-size:0.85rem; font-weight:bold; background:#23486b; color:#fff; border:none; border-radius:8px; padding:7px 14px; cursor:pointer; margin:10px 8px 0 0; }
   .attempt button.ghost { background:#fff; color:#23486b; border:2px solid #23486b; }
   .attempt button:hover { background:#2f5d87; }
-  .savednote { font-size:0.75rem; color:#2c5e33; margin-top:8px; }
+  .savednote { font-size:0.8rem; color:#2c5e33; margin-top:8px; }
   .ms { border-top:2px solid #23486b; margin-top:14px; padding-top:6px; }
   .ms h3 { font-size:0.95rem; color:#23486b; margin:12px 0 6px; }
   .ms p { margin-bottom:10px; font-size:0.9rem; color:#2a2a2a; }
@@ -56,31 +58,37 @@
 </style>
 </head>
 <body>
-<div class="topbar"><a class="navbtn" href="index.html">&#8962; Home</a><a class="navbtn" href="bank-p1-jun24.html">&larr; Paper 1 June 2024</a><a class="navbtn" href="bank-p2-sam19.html">Paper 2 2019 specimen &rarr;</a></div>
+<div class="topbar">
+<a class="navbtn" href="./index.html">&#8962; Home</a><a class="navbtn alt" href="./past-questions-hub.html">&#8592; Past questions hub</a><a class="navbtn alt" href="./bank-p1-jun24.html">&#8592; June 2024</a>
+</div>
 <div class="wrap">
 <h1>Paper 1 &mdash; 2025</h1>
-  
-<div class="panel"><p><b>Filter by section:</b></p>
-<div id="section-buttons">
-<button class="active" data-f="all" onclick="setSectionFilter('all', this)">All</button>
-<button data-f="Epistemology" onclick="setSectionFilter('Epistemology', this)">Epistemology</button>
-<button data-f="Moral philosophy" onclick="setSectionFilter('Moral philosophy', this)">Moral philosophy</button>
-</div></div>
+<div class="sub">Epistemology and moral philosophy &middot; 7172/1</div>
 
-<div class="panel"><p><b>Filter by topic:</b></p>
+<div class="panel"><p><b>Filter by main topic:</b></p>
+<div id="section-buttons"></div></div>
+
+<div class="panel"><p><b>Filter by sub topic:</b></p>
 <div id="topic-buttons"></div></div>
 
-<div class="panel"><p><b>Filter by AO:</b></p>
+<div class="panel"><p><b>Filter by AO and marks:</b></p>
 <div id="ao-buttons">
 <button class="active" data-f="all" onclick="setAoFilter('all', this)">All</button>
-<button data-f="AO1" onclick="setAoFilter('AO1', this)">AO1</button>
-<button data-f="AO2" onclick="setAoFilter('AO2', this)">AO2 (25-mark)</button>
+<button data-f="AO1-3" onclick="setAoFilter('AO1-3', this)">AO1 &bull; 3 marks</button>
+<button data-f="AO1-5" onclick="setAoFilter('AO1-5', this)">AO1 &bull; 5 marks</button>
+<button data-f="AO1-12" onclick="setAoFilter('AO1-12', this)">AO1 &bull; 12 marks</button>
+<button data-f="AO2-25" onclick="setAoFilter('AO2-25', this)">AO2 &bull; 25 marks</button>
 </div></div>
 
 <div class="qlist" id="qlist"></div>
 </div>
 
 <script>
+/* TEMPLATE NOTE
+   Paper 1 pages: SECTIONS = ["Epistemology","Moral philosophy"]
+   Paper 2 pages: SECTIONS = ["Metaphysics of God","Metaphysics of mind"]
+   Change PAGEKEY, SECTIONS and TOPIC_BUTTONS for each page; leave the rest alone. */
+
 var LEVELS_3 = ["3 A full and correct answer, given precisely, with little or no redundancy.","2 The substantive content of the answer is correct, but there may be some redundancy or minor imprecision.","1 Relevant, but fragmented, points.","0 Nothing written worthy of credit."];
 var LEVELS_5 = ["5 A full, clear and precise explanation. The student makes logical links between precisely identified points, with no redundancy.","4 A clear explanation, with logical links, but some imprecision/redundancy.","3 The substantive content of the explanation is present and there is an attempt at logical linking, but the explanation is not full and/or precise.","2 One or two relevant points made, but not precisely. The logic is unclear.","1 Fragmented points, with no logical structure.","0 Nothing written worthy of credit."];
 var LEVELS_12 = ["10\u201312 The answer is set out in a precise, fully-integrated and logical form. The content is correct and demonstrates detailed understanding. Points are made clearly and precisely. Relevance is sustained, with very little or no redundancy. Philosophical language is used precisely throughout.","7\u20139 The answer is set out in a clear, integrated and logical form. The content of the answer is correct and demonstrates detailed understanding. The content is clearly relevant and points are made clearly and precisely. Any lack of clarity with respect to particular points is not sufficient to detract from the answer. Relevance is largely sustained. There may be some redundancy, though not sufficient to detract from the answer. Philosophical language is used correctly throughout.","4\u20136 The answer is clear and set out in a coherent form, with logical/causal links identified. The content of the answer is largely correct and most points are made clearly. Relevance is not always sustained and there is some redundancy. Philosophical language is used correctly, with any minor errors not detracting from the response.","1\u20133 There are some relevant points made, but no integration. Some points are clear, but there is a lack of precision \u2013 with possibly insufficient material that is relevant or too much that is irrelevant. Philosophical language is used, though not always consistently or appropriately.","0 Nothing written worthy of credit."];
@@ -99,22 +107,29 @@ var DATA = [
 {qref:"10",marks:25,ao:"AO2",section:"Moral philosophy",topic:"Meta-ethics",tags:["Meta-ethics"],question:"Are moral realists right to claim that mind-independent moral facts/properties exist?",cap:"",content:["Students are likely to contextualise the question into a wider meta-ethical debate related to moral language. Eg mind-independent moral properties exist, and moral language is therefore truth-apt and can be used to make true claims that affirm the existence of them. Eg mind-independent moral properties exist, and moral judgements are made true or false by them.","There are many theories that might be considered to argue in favour of the existence of mind-independent moral properties, and it is possible that students might give them as examples: Eg naturalist realist views (eg some versions of utilitarianism and virtue ethics) and non-naturalist views (eg intuitionism, divine command theory (arguably), Platonism). There may also be versions of contractarian views which defend the existence of mind-independent moral properties.","Conclusions: YES: mind-independent moral properties exist. This may be done by, in the end, supporting/defending a particular version (or some versions) of moral realism; or by defending it in general but with particular versions being employed as examples of how moral realists might fill out their account; or by defending it in general with no reference to any particular versions of moral realism.","Conclusions: NO: mind-independent moral properties do not exist. This may be done by arguing that prominent versions of moral realism fail to adequately respond to issues; and/or by arguing that a particular version of moral anti-realism succeeds (either a cognitivist version (eg error theory) or a non-cognitivist version (eg emotivism)); or by arguing that there are general issues that cannot (in general) be responded to by moral realists.","Arguments against the existence of mind-independent moral properties: Mackie's argument from relativity: widespread and intractable moral disagreement (and a lack of a procedure by which we can resolve it) is best explained by the falsity of moral realism (and therefore moral realism is (probably) false). In response, one might argue that: there is more agreement than Mackie implies; the disagreement is about the non-moral facts rather than the moral facts; there is disagreement in other areas that we may be realists about (eg scientific disagreement); that disagreement can be explained by people having inferior access to mind-independent moral properties.","Mackie's argument/s from queerness: mind-independent moral properties, if they existed, would be metaphysically 'queer' (and knowledge of them would therefore require such an epistemologically 'queer' faculty) - ie they would be completely different to any other property that we have reason to believe exist \u2013 and so it is implausible that they exist (and so implausible that moral realism is true). In response one might argue that: this would also support a non-naturalist realist position; this would also support the view that there must be natural moral properties of a 'queer' sort that cannot be reduced to non-moral natural properties (ie non-reductive moral naturalism); there are other properties that have similar characteristics, eg painfulness/pleasurableness.","Hume's Fork: moral propositions are neither relations of ideas nor matters of fact, therefore moral knowledge is impossible (and so moral realism is false).","A J Ayer's verification principle: moral sentences are neither analytically true (or false) nor can they be verified by experience, therefore they are not cognitively meaningful (and so moral realism, a cognitivist view, is false).","Hume's 'is-ought' gap: propositions about morality ('ought' statements) cannot be legitimately deduced from propositions about what is the case ('is' statements) (and so moral realism is false, assuming that propositions about facts/properties are all 'is' statements).","Hume's argument that moral judgements are not beliefs since beliefs alone could not motivate us (arguably) opposes cognitivism (and so opposes any cognitivist forms of moral realism). In response, one could be an externalist about moral motivation.","Arguments supporting the existence of mind-independent properties: The existence of mind-independent moral properties is that which best explains the ways in which we use moral language, including moral reasoning, persuading, disagreeing etc \u2013 ie it is unlikely that such widespread commitments and practices would exist if there were no truth to moral claims (eg when people disagree it is because they think there are facts that would settle the disagreement).","To deny the existence of mind-independent moral properties is to deny implausibly that there can be such a thing as moral progress (eg that it is not morally better if there is less prejudice against women).","One might argue (pace Mackie) that there is agreement about moral claims and that this counts in favour of the existence of mind-independent moral properties: very many common basic moral principles exist across societies.","Phenomenology: one might argue that we perceive that certain acts (eg torture) are wrong.","Notes: Students should not be unduly penalised for misattributing arguments/views (where it does not confuse the point they are trying to make): the primary focus is on understanding (AO1) and evaluation (AO2). Eg persistent misattribution of arguments/views would be a form of inaccuracy that would justify not awarding an answer full marks, but it should not be regarded as a reason for excluding it from the top band (assuming everything else meets the requirements of the level descriptors).","Note: This indicative content is not exhaustive: other creditworthy responses should be rewarded with reference to the generic mark scheme."]}
 ];
 
+/* ---- PAGE SETTINGS: change these three lines for each page ---- */
+var PAGEKEY = "p1-jun25";
+var SECTIONS = ["Epistemology","Moral philosophy"];             /* Paper 2: ["Metaphysics of God","Metaphysics of mind"] */
 var TOPIC_BUTTONS = ["Definition of knowledge","Perception as a source of knowledge","Sources of knowledge","Limits of knowledge","Meta-ethics","Utilitarianism","Kantian ethics","Virtue ethics"];
+
 var sectionFilter="all",topicFilter="all",aoFilter="all";
 var expanded={};
 var atext={};
-var PAGEKEY="p1-jun25";
 function stripTags(s){var d=document.createElement("div");d.innerHTML=s;return(d.textContent||"").toLowerCase();}
 function getFiltered(){var out=[];for(var i=0;i<DATA.length;i++){var d=DATA[i];
 if(sectionFilter!=="all"&&d.section!==sectionFilter)continue;
-if(aoFilter!=="all"&&d.ao!==aoFilter)continue;
+if(aoFilter!=="all"){var parts=aoFilter.split("-");if(d.ao!==parts[0]||String(d.marks)!==parts[1])continue;}
 if(topicFilter!=="all"){var m=false;for(var t=0;t<d.tags.length;t++){if(stripTags(d.tags[t])===stripTags(topicFilter)){m=true;break;}}if(!m)continue;}
 out.push(d);}
 return out;}
+function buildSectionButtons(){var h=document.getElementById("section-buttons");
+var html="<button class='active' data-f='all' onclick=\"setSectionFilter('all', this)\">All</button>";
+for(var i=0;i<SECTIONS.length;i++){var s=SECTIONS[i];html+="<button data-f='"+s+"' onclick=\"setSectionFilter('"+s+"', this)\">"+s+"</button>";}
+h.innerHTML=html;}
 function buildTopicButtons(){var h=document.getElementById("topic-buttons");var html="<button class='active' data-t='all' onclick=\"setTopicFilter('all', this)\">All</button>";
 for(var i=0;i<TOPIC_BUTTONS.length;i++){var t=TOPIC_BUTTONS[i];html+="<button data-t='"+t+"' onclick=\"setTopicFilter('"+t+"', this)\">"+t+"</button>";}
 h.innerHTML=html;}
-function esc(s){return s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");}
+function esc(s){return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");}
 function key(idx){return PAGEKEY+"-"+DATA[idx].qref;}
 function attemptHtml(d,idx){var k=key(idx);var h="<div class='attempt'>";
 if(d.marks===25){
@@ -173,6 +188,7 @@ document.getElementById("note-"+k).textContent="Attempt saved in this browser.";
 function revealMs(k,idx){collectAttempt(k,idx);atext["shown-"+k]=true;try{localStorage.setItem("aqabank",JSON.stringify(atext));}catch(e){}
 render();}
 try{var saved=localStorage.getItem("aqabank");if(saved)atext=JSON.parse(saved);}catch(e){}
+buildSectionButtons();
 buildTopicButtons();
 render();
 </script>
