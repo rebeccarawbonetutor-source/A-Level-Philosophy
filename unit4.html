@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MoM Unit 4: Physicalist theories</title>
+    <style>
+        :root {
+            --bg-color: #f8fafc;
+            --card-bg: #ffffff;
+            --card-border: #94a3b8;
+            --text-main: #0f172a;
+            --text-muted: #1e293b;
+            --accent-primary: #0369a1;
+            --accent-header: #075985;
+            --hover-bg: #f1f5f9;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: auto;
+        }
+
+        .nav-container {
+            padding: 1rem 2rem 0;
+            display: flex;
+            gap: 1rem;
+            background: #ffffff;
+        }
+
+        .nav-btn {
+            text-decoration: none;
+            color: var(--accent-primary);
+            font-weight: 600;
+            font-size: 1rem;
+            padding: 0.4rem 0.8rem;
+            border: 1px solid #cbd5e1;
+            border-radius: 6px;
+            background: var(--bg-color);
+            transition: background-color 0.2s ease;
+        }
+
+        .nav-btn:hover {
+            background-color: var(--hover-bg);
+        }
+
+        header {
+            padding: 1.5rem 1rem 1rem;
+            text-align: center;
+            border-bottom: 1px solid #cbd5e1;
+            background: #ffffff;
+        }
+
+        header h1 {
+            font-size: 2.2rem;
+            color: var(--accent-header);
+            font-weight: 700;
+        }
+
+        .container {
+            max-width: 1800px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            flex: 1;
+            width: 100%;
+        }
+
+        .mindmap {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            position: relative;
+        }
+
+        .root-node {
+            background-color: var(--accent-header);
+            color: #ffffff;
+            padding: 1.2rem 3rem;
+            border-radius: 12px;
+            font-weight: bold;
+            font-size: 1.8rem;
+            box-shadow: 0 10px 15px -3px rgba(3, 105, 161, 0.2);
+            z-index: 2;
+            text-align: center;
+            margin-bottom: 3rem;
+            letter-spacing: 0.5px;
+        }
+
+        .top-definition-card {
+            width: 100%;
+            max-width: 1600px;
+            background-color: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-left: 5px solid var(--accent-primary);
+            border-radius: 8px;
+            padding: 1.25rem;
+            margin-bottom: 3rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.04);
+        }
+
+        .branches-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            width: 100%;
+            max-width: 1600px;
+            position: relative;
+        }
+
+        .branch-column {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            position: relative;
+        }
+
+        .branch-group-header {
+            background-color: #e0f2fe;
+            border: 2px solid var(--accent-primary);
+            color: var(--accent-header);
+            padding: 1rem 1.5rem;
+            border-radius: 10px;
+            font-size: 1.4rem;
+            font-weight: bold;
+            text-align: center;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        }
+
+        .node-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-left: 5px solid var(--accent-primary);
+            border-radius: 8px;
+            padding: 1.25rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.04);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .node-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 12px -3px rgba(3, 105, 161, 0.15);
+        }
+
+        .sub-nodes-container {
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+        }
+
+        .sub-node {
+            background-color: #f8fafc;
+            border: 1px solid #cbd5e1;
+            border-left: 3px solid var(--accent-primary);
+            padding: 0.75rem;
+            border-radius: 0 6px 6px 0;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+
+        .sub-node:hover {
+            background-color: var(--hover-bg);
+        }
+
+        .sub-node h4 {
+            font-size: 1.05rem;
+            color: var(--text-main);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+        }
+
+        .sub-node h4::after {
+            content: '+';
+            color: var(--accent-primary);
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        .sub-node.active h4::after {
+            content: '-';
+        }
+
+        .sub-content {
+            display: none;
+            margin-top: 0.5rem;
+            color: var(--text-muted);
+            font-size: 1rem;
+            line-height: 1.5;
+            border-top: 1px dashed #cbd5e1;
+            padding-top: 0.5rem;
+            padding-left: 1rem;
+        }
+
+        .sub-node.active .sub-content {
+            display: block;
+        }
+
+        .nested-sub-node {
+            background-color: #ffffff;
+            border: 1px solid #cbd5e1;
+            border-left: 3px solid #0284c7;
+            padding: 0.6rem;
+            border-radius: 0 4px 4px 0;
+            font-size: 1rem;
+            margin-top: 0.5rem;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+
+        .nested-sub-node:hover {
+            background-color: #f1f5f9;
+        }
+
+        .nested-sub-node h5 {
+            font-size: 1rem;
+            color: var(--accent-header);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+        }
+
+        .nested-sub-node h5::after {
+            content: '+';
+            color: var(--accent-primary);
+            font-weight: bold;
+            font-size: 1rem;
+        }
+
+        .nested-sub-node.active h5::after {
+            content: '-';
+        }
+
+        .nested-content {
+            display: none;
+            margin-top: 0.4rem;
+            color: var(--text-muted);
+            font-size: 1rem;
+            line-height: 1.5;
+            border-top: 1px dashed #cbd5e1;
+            padding-top: 0.4rem;
+            padding-left: 0.75rem;
+        }
+
+        .nested-sub-node.active .nested-content {
+            display: block;
+        }
+
+        ul {
+            margin-left: 1.5rem;
+            margin-top: 0.3rem;
+            list-style-type: disc;
+        }
+
+        ul li {
+            margin-bottom: 0.4rem;
+        }
+
+        ol {
+            margin-left: 1.5rem;
+            margin-top: 0.3rem;
+        }
+
+        ol li {
+            margin-bottom: 0.4rem;
+        }
+
+        .full-width-section {
+            width: 100%;
+            max-width: 1600px;
+            margin-top: 3rem;
+        }
+
+        @media (max-width: 1024px) {
+            .branches-wrapper {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="nav-container">
+        <a href="index.html" class="nav-btn">Home</a>
+        <a href="mind-hub.html" class="nav-btn">Back</a>
+    </div>
+
+    <header>
+        <h1>MoM Unit 4: Physicalist theories</h1>
+    </header>
+
+    <div class="container">
+        <div class="mindmap">
+            <div class="root-node">Physicalist theories</div>
+            
+            <!-- Top Definition Card for Physicalism as a Dropdown -->
+            <div class="top-definition-card">
+                <div class="sub-node" onclick="toggleNode(this)" style="background: transparent; border: none; padding: 0;">
+                    <h4 style="font-size: 1.3rem; color: var(--accent-header);">Physicalism <span></span></h4>
+                    <div class="sub-content" style="border-top: none; padding-left: 0;">
+                        <p style="margin-bottom: 0.5rem;">
+                            Everything is physical or material, or it is reducible to the physical or material.
+                        </p>
+                        <p style="margin-bottom: 0.5rem;">
+                            In the philosophy of mind, this refers to a family of positions rejecting non-physical mental substances or properties.
+                        </p>
+                        <p>
+                            Supervenience is a relationship of dependence between facts or properties of one kind and another, such that there can be no change in one without a change in the other. For example, mental states supervene on brain states because you cannot have a change in a mental state without a corresponding change in the underlying brain state.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="branches-wrapper">
+
+                <!-- Left Column: Philosophical Behaviourism -->
+                <div class="branch-column">
+                    <div class="branch-group-header">Philosophical behaviourism</div>
+
+                    <!-- Philosophical Behaviourism Overview -->
+                    <div class="node-card">
+                        <div class="sub-nodes-container">
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>Definition of philosophical behaviourism <span></span></h4>
+                                <div class="sub-content">
+                                    <p style="margin-bottom: 0.5rem;">
+                                        A family of physicalist theories claiming that language about the mind or mental states can be analysed in terms of language about behaviour and or behavioural dispositions.
+                                    </p>
+                                    <p style="margin-bottom: 0.5rem;">
+                                        Our mental concepts acquire their meaning by virtue of their reference to or relationship with behaviour. For example, saying someone is angry is analysed in terms of their observable actions, such as raising their voice or slamming a door.
+                                    </p>
+                                    <p>
+                                        Analytic reduction means that a certain language or way of speaking about a phenomenon can be translated without loss of meaning into some other language or way of speaking. For instance, translating psychological sentences into physical behavioural sentences without losing any of their original meaning.
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>Hard and soft behaviourism <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>'Hard' behaviourism (Carl Hempel):</strong> All propositions about mental states can be reduced without loss of meaning to propositions that exclusively use the language of physics to talk about bodily states and movements. For example, Hempel analysed Paul having a toothache by translating it into physical and biological verification conditions like weeping, verbal utterances, blood pressure changes, and central nervous system processes.</li>
+                                        <li><strong>'Soft' behaviourism (Gilbert Ryle):</strong> Propositions about mental states are propositions about behavioural dispositions that use ordinary language. Ryle used everyday examples like the brittleness of glass or the solubility of sugar, explaining that being brittle means it would shatter if struck, rather than assuming it is constantly shattering at every moment. Similarly, having a mental disposition means someone is likely to react in specific ways under certain conditions, such as an umbrella being disposed to open if it rains. Another example is solubility, where saying salt is soluble means it would dissolve if placed in water, even if it is currently sitting dry in a shaker on a table.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>Issues with philosophical behaviourism <span></span></h4>
+                                <div class="sub-content">
+                                    <!-- Issue 1: Dualist arguments -->
+                                    <div class="nested-sub-node" onclick="event.stopPropagation(); toggleNode(this)">
+                                        <h5>Dualist arguments applied to philosophical behaviourism <span></span></h5>
+                                        <div class="nested-content">
+                                            <p style="margin-bottom: 0.5rem;">Students can apply Descartes argument regarding conceivability or the philosophical zombie argument by arguing that if a human can be physically and behaviourally identical to another yet lack inner conscious mental states, then mental states cannot simply be identical to behavioural dispositions.</p>
+                                            <p style="margin-bottom: 0.8rem;">Dualist arguments highlight that inner qualitative experience has a private, subjective dimension that escapes public behavioural definitions.</p>
+                                            <div class="nested-sub-node" onclick="event.stopPropagation(); toggleNode(this)">
+                                                <h5>Responses <span></span></h5>
+                                                <div class="nested-content">
+                                                    <p style="margin-bottom: 0.5rem;">Ryle dismisses substance dualism as a category mistake, arguing that treating the mind as a separate non-physical thing inside the machine is a logical error.</p>
+                                                    <p style="margin-bottom: 0.5rem;">For instance, treating the mind as a hidden non-physical ghost inside a physical machine mistakes the organisational principles and dispositions of a person for an extra ghostly entity. Ryle maintains that mental terms describe how bodies behave and are disposed to act, meaning dualists are misled by grammar into inventing non-existent non-physical entities.</p>
+                                                    <p>Furthermore, philosophical behaviourists argue that ordinary language about the mind is entirely public and learnable precisely because it refers to observable behaviour, rendering private dualist realms philosophically incoherent and empirically redundant.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Issue 2: Distinctness of mental states from behaviour -->
+                                    <div class="nested-sub-node" onclick="event.stopPropagation(); toggleNode(this)">
+                                        <h5>The distinctness of mental states from behaviour <span></span></h5>
+                                        <div class="nested-content">
+                                            <!-- Super Spartans Sub-issue -->
+                                            <div class="nested-sub-node" onclick="event.stopPropagation(); toggleNode(this)">
+                                                <h5>Hillary Putnam's super spartans <span></span></h5>
+                                                <div class="nested-content">
+                                                    <p style="margin-bottom: 0.5rem;">Hilary Putnam proposed the Super Spartans, which is a hypothetical community who feel pain just like normal humans, but who have trained themselves to suppress all outward pain behaviour entirely.</p>
+                                                    <p style="margin-bottom: 0.8rem;">This shows that mental states can occur without any corresponding behaviour.</p>
+                                                    <div class="nested-sub-node" onclick="event.stopPropagation(); toggleNode(this)">
+                                                        <h5>Responses <span></span></h5>
+                                                        <div class="nested-content">
+                                                            <p style="margin-bottom: 0.5rem;">Ryle and soft behaviourism attempt to respond by arguing that members of this community still possess a disposition to behave in certain ways, even if that behaviour is currently suppressed. For example, someone might successfully hide their pain at a formal dinner party by biting their lip, yet still retain the latent disposition to wince or groan if the strict social pressure were removed.</p>
+                                                            <p style="margin-bottom: 0.5rem;">Putnam then replied by introducing Super Super Spartans, who have suppressed pain behaviour so completely through generations of ideological training that they do not even possess any disposition left to emit pain behaviour.</p>
+                                                            <p>Hempel also replied by arguing that mental concepts must connect to empirical verification conditions, maintaining that any concealed internal states or suppressed reactions would in principle be detected through thorough scientific investigations of central nervous system processes.</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- Perfect Actors Sub-issue -->
+                                            <div class="nested-sub-node" onclick="event.stopPropagation(); toggleNode(this)" style="margin-top: 0.5rem;">
+                                                <h5>Hillary Putnam's perfect actors <span></span></h5>
+                                                <div class="nested-content">
+                                                    <p style="margin-bottom: 0.5rem;">It is conceivable that a perfect actor would be able to simulate any mental state such that there would be no observable difference between someone actually in that mental state and the perfect actor.</p>
+                                                    <p style="margin-bottom: 0.8rem;">For example, someone might act as if they are deeply aggrieved or in agony in a courtroom to mislead a judge, shedding tears and wringing their hands, while feeling completely calm and unaffected inside. This shows that behaviour can be present without the inner mental state.</p>
+                                                    <div class="nested-sub-node" onclick="event.stopPropagation(); toggleNode(this)">
+                                                        <h5>Responses <span></span></h5>
+                                                        <div class="nested-content">
+                                                            <p>Hempel argued that someone might act as if they are in pain or ill, but a more thorough examination of their bodily behaviour and physical background over time would eventually reveal that they are not genuinely in that state.</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Issue 3: Issues defining mental states satisfactorily -->
+                                    <div class="nested-sub-node" onclick="event.stopPropagation(); toggleNode(this)">
+                                        <h5>Issues defining mental states satisfactorily <span></span></h5>
+                                        <div class="nested-content">
+                                            <!-- Circularity Sub-issue -->
+                                            <div class="nested-sub-node" onclick="event.stopPropagation(); toggleNode(this)">
+                                                <h5>A. Circularity <span></span></h5>
+                                                <div class="nested-content">
+                                                    <p style="margin-bottom: 0.5rem;">Circularity happens because defining a mental state like belief requires mentioning other mental states like desires.</p>
+                                                    <p style="margin-bottom: 0.8rem;">For example, trying to define the belief that ice is thin by saying a person is disposed to avoid walking on it only works if we assume they do not desire an icy plunge. But if we try to define that desire, we have to mention their beliefs again, creating a circular loop.</p>
+                                                    <div class="nested-sub-node" onclick="event.stopPropagation(); toggleNode(this)">
+                                                        <h5>Responses <span></span></h5>
+                                                        <div class="nested-content">
+                                                            <p>Behaviourists argued that mental states are clusters of observable signs or multi-track sets of dispositional conditionals rather than single isolated causes.</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- Multiple realisability Sub-issue -->
+                                            <div class="nested-sub-node" onclick="event.stopPropagation(); toggleNode(this)" style="margin-top: 0.5rem;">
+                                                <h5>B. Multiple realisability <span></span></h5>
+                                                <div class="nested-content">
+                                                    <p style="margin-bottom: 0.5rem;">Multiple realisability means a single mental state can be expressed in an open-ended variety of different behaviours.</p>
+                                                    <p style="margin-bottom: 0.8rem;">For instance, being afraid can manifest as screaming and running away, freezing completely still, or laughing nervously, making it impossible to pin down a fixed set of behaviours.</p>
+                                                    <div class="nested-sub-node" onclick="event.stopPropagation(); toggleNode(this)">
+                                                        <h5>Responses <span></span></h5>
+                                                        <div class="nested-content">
+                                                            <p>Behaviourists responded that a mental state does not require a single rigid behaviour, but can be captured by a complex, flexible cluster of various possible physical manifestations.</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Issue 4: Asymmetry -->
+                                    <div class="nested-sub-node" onclick="event.stopPropagation(); toggleNode(this)">
+                                        <h5>The asymmetry between self-knowledge and knowledge of other people’s mental states <span></span></h5>
+                                        <div class="nested-content">
+                                            <p style="margin-bottom: 0.5rem;">We have direct, certain first-person access to our own minds, whereas knowledge of other minds is indirect and inferred from behaviour.</p>
+                                            <p style="margin-bottom: 0.8rem;">For example, someone knows they are in pain directly without observing themselves, but must watch someone else wince to know they are in pain.</p>
+                                            <div class="nested-sub-node" onclick="event.stopPropagation(); toggleNode(this)">
+                                                <h5>Responses <span></span></h5>
+                                                <div class="nested-content">
+                                                    <p>Ryle argued that this difference is grammatical rather than epistemological, meaning first-person utterances like saying I am in pain are expressive verbal symptoms rather than reports of private inner episodes.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Right Column: Mind-Brain Type Identity & Eliminative Materialism -->
+                <div class="branch-column">
+                    <div class="branch-group-header">Mind-brain type identity theory</div>
+
+                    <!-- Mind-Brain Type Identity Theory -->
+                    <div class="node-card">
+                        <div class="sub-nodes-container">
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>Definition of mind-brain type identity theory <span></span></h4>
+                                <div class="sub-content">
+                                    <p style="margin-bottom: 0.5rem;">
+                                        All mental states are identical to brain states although mental state and brain state are not synonymous, so it is not an analytic reduction.
+                                    </p>
+                                    <p style="margin-bottom: 0.5rem;">
+                                        For example, J. J. C. Smart argued that sensations are identical to brain processes, just as lightning is identical to an electrical discharge.
+                                    </p>
+                                    <p>
+                                        Ontological reduction means that some phenomenon X is ontologically reducible to some phenomenon Y, which is just to say that they are in fact the same type or kind of phenomenon. For example, water is ontologically reduced to H2O molecules.
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>Issues for mind-brain type identity theory <span></span></h4>
+                                <div class="sub-content">
+                                    <div class="nested-sub-node" onclick="event.stopPropagation(); toggleNode(this)">
+                                        <h5>Common objection: peasants and neurophysiology <span></span></h5>
+                                        <div class="nested-content">
+                                            <p style="margin-bottom: 0.8rem;">Smart noted a common objection that ordinary peasants can talk perfectly well about their aches and pains without knowing anything about neurophysiology, which seems to show that sensations cannot be brain processes.</p>
+                                            <div class="nested-sub-node" onclick="event.stopPropagation(); toggleNode(this)">
+                                                <h5>Responses <span></span></h5>
+                                                <div class="nested-content">
+                                                    <p style="margin-bottom: 0.5rem;">Using the lightning analogy, Smart argued that people referred to lightning for centuries before knowing about electrical discharges, yet lightning was an electrical discharge all along.</p>
+                                                    <p>An identity is a scientific discovery rather than a definition.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="nested-sub-node" onclick="event.stopPropagation(); toggleNode(this)">
+                                        <h5>Dualist arguments applied to mind-brain type identity theory: The Mary knowledge argument <span></span></h5>
+                                        <div class="nested-content">
+                                            <p style="margin-bottom: 0.5rem;">Frank Jackson and the knowledge Mary argument features Mary, a brilliant neurophysiologist confined to a black and white room who knows every physical and neurophysiological fact about colour vision.</p>
+                                            <p style="margin-bottom: 0.5rem;">When she leaves and sees red for the first time, she learns something new about what red looks like in terms of qualia. If physicalism or type identity were true, knowing all physical brain facts should have given her all knowledge of colour, but it did not.</p>
+                                            <p style="margin-bottom: 0.8rem;">Therefore, mental states and qualia cannot be identical to physical brain states.</p>
+                                            <div class="nested-sub-node" onclick="event.stopPropagation(); toggleNode(this)">
+                                                <h5>Responses <span></span></h5>
+                                                <div class="nested-content">
+                                                    <p style="margin-bottom: 0.5rem;">Smart argued that qualia talk reflects topic-neutral ways of describing experiences rather than non-physical properties.</p>
+                                                    <p>Furthermore, the ability knowledge response suggests Mary gains practical know-how rather than new propositional facts.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="nested-sub-node" onclick="event.stopPropagation(); toggleNode(this)">
+                                        <h5>Dualist arguments applied to mind-brain type identity theory: Conceivability and zombie arguments <span></span></h5>
+                                        <div class="nested-content">
+                                            <p style="margin-bottom: 0.5rem;">Conceivability arguments, such as David Chalmers and the philosophical zombie argument, claim that we can coherently conceive of a being physically and biologically identical to a human down to every neuron and brain state, yet lacking any conscious experience or qualia.</p>
+                                            <p style="margin-bottom: 0.5rem;">Because a zombie world is conceivable, it is held to be metaphysically possible.</p>
+                                            <p style="margin-bottom: 0.8rem;">If a physical brain state can exist without consciousness, then consciousness cannot be identical to a brain state.</p>
+                                            <div class="nested-sub-node" onclick="event.stopPropagation(); toggleNode(this)">
+                                                <h5>Responses <span></span></h5>
+                                                <div class="nested-content">
+                                                    <p style="margin-bottom: 0.5rem;">Identity theorists respond that conceivability does not entail metaphysical possibility.</p>
+                                                    <p>Just as people once found it conceivable that heat was not molecular motion, conceivability often only reflects the limits of our concepts rather than what can actually exist in reality.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="nested-sub-node" onclick="event.stopPropagation(); toggleNode(this)">
+                                        <h5>Issues with providing the type identities (multiple realisability) <span></span></h5>
+                                        <div class="nested-content">
+                                            <p style="margin-bottom: 0.5rem;">The claim that the same type of mental state can be instantiated by different physical processes across different biological organisms, making a universal type-type identity rule impossible.</p>
+                                            <p style="margin-bottom: 0.5rem;">For instance, human pain might be realised by C-fibre firing, but an octopus or a Martian experiencing the exact same mental state of pain might have an entirely different neurophysiological structure and neural process.</p>
+                                            <p style="margin-bottom: 0.8rem;">Because pain can be realised by multiple different physical substrates, pain cannot be identical to any single brain state type like C-fibre firing.</p>
+                                            
+                                            <div class="nested-sub-node" onclick="event.stopPropagation(); toggleNode(this)">
+                                                <h5>Responses 1: Disjunctive physical realisers <span></span></h5>
+                                                <div class="nested-content">
+                                                    <p style="margin-bottom: 0.5rem;">Defining pain as a disjunctive physical state, meaning pain is human C-fibre firing or octopus neural process P or Martian neural process Q.</p>
+                                                    <p>The issue with this response is that a disjunction is not a genuine physical kind, making the physical side of the theory artificial and ad hoc.</p>
+                                                </div>
+                                            </div>
+                                            <div class="nested-sub-node" onclick="event.stopPropagation(); toggleNode(this)" style="margin-top: 0.4rem;">
+                                                <h5>Responses 2: Local type identities <span></span></h5>
+                                                <div class="nested-content">
+                                                    <p style="margin-bottom: 0.5rem;">Jaegwon Kim proposed splitting mental states into restricted, species-relative types, such as pain in humans identified with human neural realisers and pain in octopuses identified with octopus neural realisers.</p>
+                                                    <p>The issue here is that if realisability varies widely, the restricted types keep shrinking until the view collapses entirely into token identity.</p>
+                                                </div>
+                                            </div>
+                                            <div class="nested-sub-node" onclick="event.stopPropagation(); toggleNode(this)" style="margin-top: 0.4rem;">
+                                                <h5>Responses 3: Token identity <span></span></h5>
+                                                <div class="nested-content">
+                                                    <p style="margin-bottom: 0.5rem;">Abandoning type identity entirely in favour of token identity with Donald Davidson, where every individual mental event token is identical to some physical event token, even if there are no strict law-like psychophysical type correlations. For example, this particular human pain is identical to this C-fibre firing, and that octopus pain is identical to that neural process.</p>
+                                                    <p style="margin-bottom: 0.5rem;">A token is a single, particular instance of an event happening at a specific time and place, whereas a type is the general category or classification that instances belong to.</p>
+                                                    <p style="margin-bottom: 0.5rem;">Token identity means every individual mental event token is identical to a physical event token, but there is no uniform physical type that maps onto every mental type across different organisms.</p>
+                                                    <p>The issue with this response is that type identity theory is given up entirely, and mental explanation is left outside strict scientific laws.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Eliminative Materialism -->
+                    <div class="branch-group-header" style="margin-top: 1rem;">Eliminative materialism</div>
+                    <div class="node-card">
+                        <div class="sub-nodes-container">
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>Definition of eliminative materialism <span></span></h4>
+                                <div class="sub-content">
+                                    <p style="margin-bottom: 0.5rem;">
+                                        Some or all common-sense folk-psychological mental states, such as beliefs and desires, do not exist because our everyday framework is radically mistaken, as defended by Patricia Churchland and Paul Churchland.
+                                    </p>
+                                    <p style="margin-bottom: 0.5rem;">
+                                        Eliminativists argue that folk psychology is a stagnant pre-scientific theory that has failed to progress or integrate with neuroscience.
+                                    </p>
+                                    <p>
+                                        <strong>Elimination versus reduction:</strong> In a successful reduction, such as hurricanes being explained as low-pressure systems, the old concept is retained within science. In elimination, folk psychology will be entirely discarded and replaced by a completed neuroscience. For example, historical science once used the pre-scientific concept of miasma or bad air to explain diseases like cholera and malaria. Rather than reducing miasma to modern chemistry, science completely eliminated miasma, replacing it entirely with rat-borne bacterial infections and germ theory.
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>Issues for eliminative materialism <span></span></h4>
+                                <div class="sub-content">
+                                    <div class="nested-sub-node" onclick="event.stopPropagation(); toggleNode(this)">
+                                        <h5>Our certainty about the existence of our mental states takes priority over other considerations <span></span></h5>
+                                        <div class="nested-content">
+                                            <p style="margin-bottom: 0.8rem;">Rooted in Cartesian insights like the cogito, we possess an immediate, powerful introspective certainty that we have conscious thoughts, feelings, and qualitative states (qualia) that cannot simply be dismissed.</p>
+                                            <div class="nested-sub-node" onclick="event.stopPropagation(); toggleNode(this)">
+                                                <h5>Responses <span></span></h5>
+                                                <div class="nested-content">
+                                                    <p style="margin-bottom: 0.5rem;">Paul Churchland and David Hume challenge this introspective certainty by arguing via Hume bundle theory that introspection reveals only a flux of perceptions with no fixed self watching the show.</p>
+                                                    <p>Just as people once felt certain that the sun orbited the earth based on direct visual experience, uncritical introspective certainty is not a reliable guide to ontological reality.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="nested-sub-node" onclick="event.stopPropagation(); toggleNode(this)">
+                                        <h5>Folk-psychology has good predictive and explanatory power (and so is the best hypothesis) <span></span></h5>
+                                        <div class="nested-content">
+                                            <p style="margin-bottom: 0.8rem;">Folk psychology provides a practical way to explain and predict everyday human behaviour. For example, it explains why a friend was late to meet me by concluding that they wanted to finish work and believed it mattered, which successfully predicts that they are going to apologise for it and rearrange the dates.</p>
+                                            <div class="nested-sub-node" onclick="event.stopPropagation(); toggleNode(this)">
+                                                <h5>Responses <span></span></h5>
+                                                <div class="nested-content">
+                                                    <p style="margin-bottom: 0.5rem;">Patricia Churchland and Paul Churchland reply that historical folk theories like miasma also possessed apparent everyday explanatory and predictive power for centuries before being eliminated by superior sciences.</p>
+                                                    <p>Furthermore, folk psychology is static and fails to explain mental illness, sleep, or learning, showing it is not a robust long-term hypothesis.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="nested-sub-node" onclick="event.stopPropagation(); toggleNode(this)">
+                                        <h5>The articulation of eliminative materialism as a theory is self-refuting <span></span></h5>
+                                        <div class="nested-content">
+                                            <p style="margin-bottom: 0.8rem;">
+                                                Critics such as Lynne Rudder Baker argue that if eliminative materialism claims beliefs do not exist, then stating and arguing for the theory is meaningless because a person cannot truly express a belief or an intention to communicate.
+                                            </p>
+                                            <div class="nested-sub-node" onclick="event.stopPropagation(); toggleNode(this)">
+                                                <h5>Responses <span></span></h5>
+                                                <div class="nested-content">
+                                                    <p>Paul Churchland responds that ordinary folk-psychological terms are used provisionally, pending their future replacement and reconstitution within the conceptual framework of a completed neuroscience. Mutual understanding and introspection will eventually be reframed within that more powerful scientific vocabulary.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- Bottom Full-Width Section: Functionalism -->
+            <div class="full-width-section">
+                <div class="branch-group-header" style="margin-bottom: 1.5rem;">Functionalism</div>
+                <div class="node-card">
+                    <div class="sub-nodes-container">
+                        <div class="sub-node" onclick="toggleNode(this)">
+                            <h4>Definition of functionalism <span></span></h4>
+                            <div class="sub-content">
+                                <p style="margin-bottom: 0.5rem;">
+                                    All mental states can be characterised in terms of functional roles which can be multiply realised. Advanced by philosopher Hilary Putnam, functionalism states that to be in a certain mental state is to be in a state that plays a given causal role involving environmental inputs, behavioural outputs, and internal state transitions.
+                                </p>
+                                <p>
+                                    Consider a simple mousetrap. It is defined entirely by its function of catching mice rather than what physical material it is made of. Similarly, functionalism defines mental states like pain through their causal role, where environmental inputs interact with internal states to produce behavioural outputs. Pain is defined by its causal function rather than physical makeup, meaning it can be multiply realised in humans, dogs, or alien life forms with completely different physical constitutions.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="sub-node" onclick="toggleNode(this)">
+                            <h4>Issues for functionalism <span></span></h4>
+                            <div class="sub-content">
+                                <!-- Issue 1: Inverted qualia -->
+                                <div class="nested-sub-node" onclick="event.stopPropagation(); toggleNode(this)">
+                                    <h5>The possibility of a functional duplicate with different qualia (inverted qualia) <span></span></h5>
+                                    <div class="nested-content">
+                                        <p style="margin-bottom: 0.5rem;">
+                                            Proposed by Ned Block, this thought experiment features two subjects who are completely functionally identical, processing environmental inputs, making decisions, and using language in exactly the same way.
+                                        </p>
+                                        <p style="margin-bottom: 0.8rem;">
+                                            However, their internal qualitative experiences or qualia are systematically inverted. For example, when looking at a ripe tomato, Person A experiences normal redness, whereas Person B experiences greenness. Both subjects call the tomato red because their functional training and linguistic outputs are identical. Because two systems can be functionally indistinguishable while having radically different qualia, functionalism fails to account for all mental states.
+                                        </p>
+                                        <div class="nested-sub-node" onclick="event.stopPropagation(); toggleNode(this)">
+                                            <h5>Responses <span></span></h5>
+                                            <div class="nested-content">
+                                                <p style="margin-bottom: 0.5rem;">Daniel Dennett defends functionalism against this objection through his influential essay Quining Qualia from 1988.</p>
+                                                <p style="margin-bottom: 0.5rem;">Dennett argues that the very concept of qualia as traditionally understood as being intrinsic, ineffable, private, and directly apprehended with absolute certainty is fundamentally incoherent and relies on an unsustainable philosophical illusion.</p>
+                                                <p>When we try to pin down what an inverted spectrum would actually mean in practice, Dennett shows that any genuine, complete inversion would necessarily scramble our functional reactions, memory associations, and behavioural relational webs. If someone's internal experience of green were truly swapped with red, it would disrupt their pattern of responses, aesthetic preferences, and linguistic associations. Therefore, the idea of an undetectable, pure inversion of qualia that leaves functional capacities entirely untouched is conceptually impossible, meaning functionalism remains secure against this objection.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Issue 2: China brain -->
+                                <div class="nested-sub-node" onclick="event.stopPropagation(); toggleNode(this)">
+                                    <h5>The possibility of a functional duplicate with no mentality or qualia (Ned Block China thought experiment) <span></span></h5>
+                                    <div class="nested-content">
+                                        <p style="margin-bottom: 0.5rem;">
+                                            A hypothetical scenario proposed by Ned Block where the population of China is hooked up using two-way radios and satellites so that their collective interactions functionally duplicate the causal machine table operations of a human brain.
+                                        </p>
+                                        <p style="margin-bottom: 0.8rem;">
+                                            Functionalism is logically committed to claiming that this massive system of radios and people possesses conscious mental states and qualia. It is counterintuitive and absurd to think a country connected by radios feels pain or sees colours, so machine functionalism must be false.
+                                        </p>
+                                        <div class="nested-sub-node" onclick="event.stopPropagation(); toggleNode(this)">
+                                            <h5>Responses 1: Hilary Putnam restriction <span></span></h5>
+                                            <div class="nested-content">
+                                                <p>Putnam argued that a system can only possess authentic mental states if its individual physical parts are appropriately constituted to carry out sub-personal cognitive processes. In the China brain scenario, the individual citizens are functioning as isolated communication relay units rather than integrated micro-cognitive processors with the right biological or microstructural properties, meaning the system fails to meet the physical requirements for true mental life.</p>
+                                            </div>
+                                        </div>
+                                        <div class="nested-sub-node" onclick="event.stopPropagation(); toggleNode(this)" style="margin-top: 0.4rem;">
+                                            <h5>Responses 2: Daniel Dennett zombie hunch <span></span></h5>
+                                            <div class="nested-content">
+                                                <p>Dennett dismisses the intuition that the China brain lacks conscious experience by calling the zombie hunch. He explains that our disbelief is merely a psychological illusion caused by our unfamiliarity with such a colossal organisational scale. Because the system does not look like a familiar biological brain, observers mistakenly assume it cannot think or feel, which represents an unreliable prejudice rather than valid philosophical evidence.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Issue 3: Knowledge Mary argument -->
+                                <div class="nested-sub-node" onclick="event.stopPropagation(); toggleNode(this)">
+                                    <h5>The knowledge Mary argument can be applied to functional facts <span></span></h5>
+                                    <div class="nested-content">
+                                        <p style="margin-bottom: 0.5rem;">
+                                            Frank Jackson and the knowledge Mary argument can be directed against functionalism as well as reductive physicalism. Imagine Mary is locked in a black and white room, but instead of just learning neurophysiology, she learns every single functional fact about human visual processing, covering every input, output, causal relation, and state transition rule under all conceivable circumstances.
+                                        </p>
+                                        <p style="margin-bottom: 0.8rem;">
+                                            When she leaves her room and sees a red tomato for the first time, she still learns something new about what red looks like in terms of qualia. She learns something new despite already knowing all functional facts, meaning pure functionalism is incomplete and fails to explain subjective qualitative experience.
+                                        </p>
+                                        <div class="nested-sub-node" onclick="event.stopPropagation(); toggleNode(this)">
+                                            <h5>Responses <span></span></h5>
+                                            <div class="nested-content">
+                                                <p>Daniel Dennett argues that if Mary truly knew all physical and functional facts about information processing and nervous system responses, she would not be surprised by colour and would not learn any new non-physical facts.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        function toggleNode(element) {
+            element.classList.toggle('active');
+        }
+    </script>
+</body>
+</html>
