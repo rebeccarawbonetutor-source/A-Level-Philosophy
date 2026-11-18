@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Philosophy of religion unit: the design argument</title>
+    <style>
+        :root {
+            --bg-color: #f8fafc;
+            --card-bg: #ffffff;
+            --card-border: #94a3b8;
+            --text-main: #0f172a;
+            --text-muted: #475569;
+            --accent-primary: #0369a1;
+            --accent-header: #075985;
+            --hover-bg: #f1f5f9;
+            --line-color: #0369a1;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: auto;
+        }
+
+        header {
+            padding: 1.5rem 1rem 1rem;
+            text-align: center;
+            border-bottom: 1px solid #cbd5e1;
+            background: #ffffff;
+            position: relative;
+        }
+
+        .nav-container {
+            position: absolute;
+            top: 1.5rem;
+            left: 2rem;
+            display: flex;
+            gap: 10px;
+        }
+
+        .nav-btn {
+            background-color: #ffffff;
+            color: var(--accent-header);
+            border: 1px solid var(--card-border);
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            font-weight: 600;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: background-color 0.2s ease, border-color 0.2s ease;
+        }
+
+        .nav-btn:hover {
+            background-color: var(--hover-bg);
+            border-color: var(--accent-primary);
+        }
+
+        header h1 {
+            font-size: 2.2rem;
+            color: var(--accent-header);
+            font-weight: 700;
+        }
+
+        .container {
+            max-width: 1800px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            flex: 1;
+            width: 100%;
+        }
+
+        .mindmap {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            position: relative;
+        }
+
+        .root-node {
+            background-color: var(--accent-header);
+            color: #ffffff;
+            padding: 1.2rem 3rem;
+            border-radius: 12px;
+            font-weight: bold;
+            font-size: 1.5rem;
+            box-shadow: 0 10px 15px -3px rgba(3, 105, 161, 0.2);
+            z-index: 2;
+            text-align: center;
+            margin-bottom: 4rem;
+            letter-spacing: 0.5px;
+        }
+
+        .branches-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            width: 100%;
+            max-width: 1600px;
+            position: relative;
+        }
+
+        .branches-wrapper::before {
+            content: '';
+            position: absolute;
+            top: -40px;
+            left: 50%;
+            width: 3px;
+            height: 40px;
+            background-color: var(--line-color);
+            transform: translateX(-50%);
+        }
+
+        .branch-column {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            position: relative;
+        }
+
+        .branch-group-header {
+            background-color: #e0f2fe;
+            border: 2px solid var(--accent-primary);
+            color: var(--accent-header);
+            padding: 1rem 1.5rem;
+            border-radius: 10px;
+            font-size: 1.25rem;
+            font-weight: bold;
+            text-align: center;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        }
+
+        .node-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-left: 5px solid var(--accent-primary);
+            border-radius: 8px;
+            padding: 1.25rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.04);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .node-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 12px -3px rgba(3, 105, 161, 0.15);
+        }
+
+        .node-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #e2e8f0;
+            padding-bottom: 0.5rem;
+        }
+
+        .node-header h3 {
+            font-size: 1.1rem;
+            color: var(--accent-header);
+            font-weight: 700;
+        }
+
+        .badge {
+            background-color: rgba(3, 105, 161, 0.1);
+            color: var(--accent-primary);
+            font-size: 0.75rem;
+            padding: 0.25rem 0.6rem;
+            border-radius: 9999px;
+            font-weight: 600;
+        }
+
+        .sub-nodes-container {
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+        }
+
+        .sub-node {
+            background-color: #f8fafc;
+            border: 1px solid #cbd5e1;
+            border-left: 3px solid var(--accent-primary);
+            padding: 0.75rem;
+            border-radius: 0 6px 6px 0;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+
+        .sub-node:hover {
+            background-color: #f1f5f9;
+        }
+
+        .sub-node h4 {
+            font-size: 1rem;
+            color: var(--text-main);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+        }
+
+        .sub-node h4::after {
+            content: '+';
+            color: var(--accent-primary);
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        .sub-node.active h4::after {
+            content: '-';
+        }
+
+        .sub-content {
+            display: none;
+            margin-top: 0.5rem;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            line-height: 1.5;
+            border-top: 1px dashed #cbd5e1;
+            padding-top: 0.5rem;
+        }
+
+        .sub-node.active .sub-content {
+            display: block;
+        }
+
+        ul {
+            margin-left: 1.2rem;
+            margin-top: 0.3rem;
+            list-style-type: disc;
+        }
+
+        ul li {
+            margin-bottom: 0.4rem;
+        }
+
+        @media (max-width: 1024px) {
+            .branches-wrapper {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            .branches-wrapper::before {
+                display: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-container {
+                position: static;
+                justify-content: center;
+                margin-bottom: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="nav-container">
+            <a href="index.html" class="nav-btn">🏠 Home</a>
+            <a href="God-hub.html" class="nav-btn">← Back</a>
+        </div>
+        <h1>The design argument</h1>
+    </header>
+
+    <div class="container">
+        <div class="mindmap">
+            <div class="root-node">The Design Argument</div>
+            
+            <div class="branches-wrapper">
+
+                <!-- Left Column: Core Concepts, Spatial & Temporal Order -->
+                <div class="branch-column">
+                    <div class="branch-group-header">Core concepts, spatial & temporal order</div>
+
+                    <!-- Introduction and Definitions -->
+                    <div class="node-card">
+                        <div class="node-header">
+                            <h3>Teleological/design argument & logic</h3>
+                            <span class="badge">Foundations</span>
+                        </div>
+                        <div class="sub-nodes-container">
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>Definitions, logical forms and key quotes <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>Teleological/design argument:</strong> A family of *a posteriori* arguments for the existence of a designing intelligence (God) as the explanation for anything in the world which suggests purpose, order, or regularity.</li>
+                                        <li><strong>Deductive form:</strong> Premises are intended to guarantee the truth of the conclusion, making it logically impossible for the conclusion to be false if premises are true and structure is valid.</li>
+                                        <li><strong>Inductive form:</strong> Premises provide probable support or evidence for the conclusion rather than guaranteeing its truth.</li>
+                                        <li><strong>Abductive form (Inference to the Best Explanation):</strong> Moves from an observation to the hypothesis that provides the simplest and most likely explanation for that evidence.</li>
+                                        <li><strong>Analogical form:</strong> Infers that because two things are similar in some known respects, they are likely to be similar in another, further respect.</li>
+                                        <li><strong>Cicero quote:</strong> *"What could be more clear or obvious when we look up to the sky and contemplate the heavens, than that there is some divinity of superior intelligence?"*</li>
+                                        <li><strong>Kant quote (Critique of Pure Reason):</strong> *"This proof always deserves to be mentioned with respect. It is the oldest, the clearest, and the most accordant with the common reason of mankind."*</li>
+                                        <li><strong>Darwin reflection:</strong> *"I cannot persuade myself that a beneficent and omnipotent God would have designedly created Ichneumonidae with the express intention of their feeding within the living bodies of caterpillars."*</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Spatial Order: Hume's Cleanthes -->
+                    <div class="node-card">
+                        <div class="node-header">
+                            <h3>Spatial order: Hume's argument from analogy</h3>
+                            <span class="badge">Analogy</span>
+                        </div>
+                        <div class="sub-nodes-container">
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>Cleanthes' argument (Dialogues 1779) <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>Spatial order / regularities of co-presence:</strong> Parts seemingly organised for a purpose in the natural world.</li>
+                                        <li><strong>Like effects have like causes:</strong> Cleanthes argues that the universe consists of many machine-like systems with 'means fitted to ends'.</li>
+                                        <li><strong>Cleanthes quote:</strong> *"The intricate fitting of means to ends throughout all nature is just like (though more wonderful than) the fitting of means to ends in things that have been produced by us... we are led to infer by all the rules of analogy that the causes are also alike..."*</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Spatial Order: Paley's Argument -->
+                    <div class="node-card">
+                        <div class="node-header">
+                            <h3>Spatial order: Paley's argument</h3>
+                            <span class="badge">Paley</span>
+                        </div>
+                        <div class="sub-nodes-container">
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>The watchmaker analogy (Natural Theology 1802) <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>Stone vs. Watch:</strong> A stone on a heath could have lain there forever, but finding a watch reveals that its parts are framed and put together for a purpose (to produce motion and point out the hour).</li>
+                                        <li><strong>Parts organised for a purpose:</strong> If the different parts were differently shaped, sized, or ordered, no motion or useful function would be carried out.</li>
+                                        <li><strong>Paley quote:</strong> *"...the inference, we think, is inevitable, that the watch must have had a maker: ... an artificer or artificers who formed it for the purpose which we find it actually to answer..."*</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Temporal Order: Swinburne's Argument -->
+                    <div class="node-card">
+                        <div class="node-header">
+                            <h3>Temporal order: Swinburne's argument</h3>
+                            <span class="badge">Swinburne</span>
+                        </div>
+                        <div class="sub-nodes-container">
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>Regularities of succession (The Existence of God 1979) <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>Temporal order:</strong> Patterns in events and behaviours over time, termed 'regularities of succession' (such as the laws of physics).</li>
+                                        <li><strong>Scientific limits:</strong> Science cannot explain why the most fundamental laws of nature are as they are, because explaining them requires appealing to yet more fundamental laws.</li>
+                                        <li><strong>Personal explanation:</strong> Just as a singer sings a song or a dancer moves, temporal regularities are produced by an agent. By analogy, a personal explanation (an agent of immense power acting directly on the universe) is the most probable explanation for temporal order.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Right Column: Hume's Criticisms with встроенные replies -->
+                <div class="branch-column">
+                    <div class="branch-group-header">Hume's criticisms & responses</div>
+
+                    <!-- 1. Hume's criticism of analogy -->
+                    <div class="node-card">
+                        <div class="node-header">
+                            <h3>1. Hume's criticism of analogy</h3>
+                            <span class="badge">Analogy critique</span>
+                        </div>
+                        <div class="sub-nodes-container">
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>Weak analogy and responses from Paley and Swinburne <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>Philo's objection (Dialogues Part II):</strong> *"But surely you will not affirm, that the universe bears such a resemblance to a house, that we can with the same certainty infer a similar cause... The dissimilitude is so striking, that the utmost you can here pretend to is a guess, a conjecture..."*</li>
+                                        <li><strong>Paley's response:</strong> Paley responds that *"Nor would it, I apprehend, weaken the conclusion, that we had never seen a watch made; that we had never known an artist capable of making one; that we were altogether incapable of executing such a piece of workmanship ourselves..."*</li>
+                                        <li><strong>Swinburne's response:</strong> Swinburne acknowledges the challenge, stating: *"If someone says that the analogy between God's action on the world and man's action on his body is so remote that the argument is very weak, I can only say that it does not seem so to me."*</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 2. Existence of God may not be the best hypothesis -->
+                    <div class="node-card">
+                        <div class="node-header">
+                            <h3>2. Existence of God may not be the best hypothesis</h3>
+                            <span class="badge">Hypothesis critique</span>
+                        </div>
+                        <div class="sub-nodes-container">
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>Alternative explanations, Kant, Darwin & Swinburne's replies <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>Vegetation / Generation (Hume Part VII):</strong> *"The world plainly resembles more an animal or vegetable, than it does a watch or a knitting-loom. Its cause, therefore, it is more probable, resembles the cause of the former. The cause of the former is generation or vegetation."*</li>
+                                        <li><strong>Polytheism (Hume Part V):</strong> *"A great number of men join in building a house or ship... why may not several deities combine in contriving and framing a world?"*</li>
+                                        <li><strong>Epicurean hypothesis (Hume Part VIII):</strong> A finite number of particles in a finite space over infinite time means every possible order of particles must occur an infinite number of times naturally.</li>
+                                        <li><strong>Kant's critique (Critique of Pure Reason 1781):</strong> *"The proof could at most establish a highest architect of the world, who would always be very much limited by the suitability of the material in which he works, not a creator of the world..."*</li>
+                                        <li><strong>Darwin's natural selection (1860):</strong> *"The old argument from design in nature, as given by Paley... fails now that the law of natural selection has been discovered... There seems to be no more design in the variability of organic beings... than in the course which the wind blows."*</li>
+                                        <li><strong>Swinburne's responses:</strong> Swinburne argues that there could be no simpler explanation than one which postulated only one cause, and that the Epicurean hypothesis does not apply to the more fundamental laws of physics.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 3. The argument from the unique case criticism -->
+                    <div class="node-card">
+                        <div class="node-header">
+                            <h3>3. The argument from the unique case criticism</h3>
+                            <span class="badge">Unique case</span>
+                        </div>
+                        <div class="sub-nodes-container">
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>Unique case objection and responses from Paley and Swinburne <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>Hume's objection:</strong> Because the universe is single, individual, and without parallel, we cannot infer a cause by custom as we do with observed pairs. *"Have worlds been formed under your eye? And have you the leisure to observe the whole phenomenon [of world-making] from the first appearance of order to its final consummation?"*</li>
+                                        <li><strong>Paley's response:</strong> Paley maintains that never having seen a watch made or never knowing an artist capable of making one does not weaken the conclusion of design.</li>
+                                        <li><strong>Swinburne's response:</strong> Swinburne argues that *"Cosmologists and historians reach very well-justified conclusions about unique events... There is no reason why we should not reach a well-justified conclusion about the cause of the universe."*</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 4. The spatial disorder criticism -->
+                    <div class="node-card">
+                        <div class="node-header">
+                            <h3>4. The spatial disorder criticism</h3>
+                            <span class="badge">Spatial disorder</span>
+                        </div>
+                        <div class="sub-nodes-container">
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>Spatial disorder objection and responses from Paley and Swinburne <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>Hume's objection (Book 10):</strong> *"The whole earth is cursed and polluted. A perpetual war is kindled amongst all living creatures. Necessity, hunger, want stimulate the strong and courageous; fear, anxiety, terror agitate the weak and infirm."*</li>
+                                        <li><strong>Paley's response:</strong> Paley counters that *"Neither, secondly, would it invalidate our conclusion, that the watch sometimes went wrong, or that it seldom went exactly right."*</li>
+                                        <li><strong>Swinburne's response:</strong> Swinburne acknowledges that *"Although the universe contains many striking regularities... it also contains many examples of spatial disorder."* To bypass this problem entirely, Swinburne constructs his design argument from **temporal order** rather than spatial order.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleNode(element) {
+            element.classList.toggle('active');
+        }
+    </script>
+</body>
+</html>
